@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	var DOMAIN = "http://localhost/inv_project/public_html";
 
-	//Mange Category
+	//Manage Category
 	manageCategory(1);
 	function manageCategory(pn){
 		$.ajax({
@@ -13,6 +13,7 @@ $(document).ready(function(){
 			}
 		})
 	}
+       
 
 	$("body").delegate(".page-link","click",function(){
 		var pn = $(this).attr("pn");
@@ -28,12 +29,11 @@ $(document).ready(function(){
 				data : {deleteCategory:1,id:did},
 				success : function(data){
 					if (data == "DEPENDENT_CATEGORY") {
-						alert("Sorry ! this Category is dependent on other sub categories");
+						alert("Pardon ! cette catégorie dépend d'autres sous-catégories");
 					}else if(data == "CATEGORY_DELETED"){
-						alert("Category Deleted Successfully..! happy");
+						alert("Catégorie supprimée avec succès.!");
 						manageCategory(1);
-					}else if(data == "DELETED"){
-						alert("Deleted Successfully");
+					
 					}else{
 						alert(data);
 					}
@@ -53,7 +53,7 @@ $(document).ready(function(){
 			method : "POST",
 			data : {getCategory:1},
 			success : function(data){
-				var root = "<option value='0'>Root</option>";
+				var root = "<option value='0'>None</option>";
 				var choose = "<option value=''>Choose Category</option>";
 				$("#parent_cat").html(root+data);
 				$("#select_cat").html(choose+data);
@@ -174,8 +174,12 @@ $(document).ready(function(){
 				method : "POST",
 				data  : $("#update_brand_form").serialize(),
 				success : function(data){
-					alert(data);
+                                    if (data == "DELETED"){
+					alert("L'Type est modifier avec succès.!");
 					window.location.href = "";
+                                    }
+                                    else
+                                        alert(data);
 				}
 			})
 		}
@@ -202,14 +206,14 @@ $(document).ready(function(){
 
 	$("body").delegate(".del_product","click",function(){
 		var did = $(this).attr("did");
-		if (confirm("Are you sure ? You want to delete..!")) {
+		if (confirm("Êtes-vous sûr ? Vous voulez supprimer!")) {
 			$.ajax({
 				url : DOMAIN+"/includes/process.php",
 				method : "POST",
 				data : {deleteProduct:1,id:did},
 				success : function(data){
 					if (data == "DELETED") {
-						alert("Product is deleted");
+						alert("Le produit est supprimé avec succès");
 						manageProduct(1);
 					}else{
 						alert(data);
@@ -249,7 +253,159 @@ $(document).ready(function(){
 				data : $("#update_product_form").serialize(),
 				success : function(data){
 					if (data == "UPDATED") {
+						alert("Le produit est modifier avec succès.!");
+						window.location.href = "";
+					}else{
+						alert(data);
+					}
+				}
+			})
+	})
+        
+        
+        //---------------------Invoice-----------------
+	manageInvoice(1);
+	function manageInvoice(pn){
+		$.ajax({
+			url : DOMAIN+"/includes/process.php",
+			method : "POST",
+			data : {manageInvoice:1,pageno:pn},
+			success : function(data){
+				$("#get_invoice").html(data);		
+			}
+		})
+	}
+
+	$("body").delegate(".page-link","click",function(){
+		var pn = $(this).attr("pn");
+		manageInvoice(pn);
+	})
+/*
+	$("body").delegate(".del_invoice","click",function(){
+		var did = $(this).attr("did");
+		if (confirm("Are you sure ? You want to delete..!")) {
+			$.ajax({
+				url : DOMAIN+"/includes/process.php",
+				method : "POST",
+				data : {deleteProduct:1,id:did},
+				success : function(data){
+					if (data == "DELETED") {
+						alert("Product is deleted");
+						manageProduct(1);
+					}else{
+						alert(data);
+					}
+						
+				}
+			})
+		}
+	})
+
+	//Update Invoice
+	$("body").delegate(".edit_invoice","click",function(){
+		var eid = $(this).attr("eid");
+		$.ajax({
+			url : DOMAIN+"/includes/process.php",
+			method : "POST",
+			dataType : "json",
+			data : {updateProduct:1,id:eid},
+			success : function(data){
+				console.log(data);
+				$("#pid").val(data["pid"]);
+				$("#update_product").val(data["product_name"]);
+				$("#select_cat").val(data["cid"]);
+				$("#select_brand").val(data["bid"]);
+				$("#product_price").val(data["product_price"]);
+				$("#product_qty").val(data["product_stock"]);
+
+			}
+		})
+	})
+
+	//Update Invoice
+	$("#update_Invoice_form").on("submit",function(){
+		$.ajax({
+				url : DOMAIN+"/includes/process.php",
+				method : "POST",
+				data : $("#update_product_form").serialize(),
+				success : function(data){
+					if (data == "UPDATED") {
 						alert("Product Updated Successfully..!");
+						window.location.href = "";
+					}else{
+						alert(data);
+					}
+				}
+			})
+	})
+        */
+        //---------------------Users-----------------
+	manageUser(1);
+	function manageUser(pn){
+		$.ajax({
+			url : DOMAIN+"/includes/process.php",
+			method : "POST",
+			data : {manageUser:1,pageno:pn},
+			success : function(data){
+				$("#get_user").html(data);		
+			}
+		})
+	}
+
+	$("body").delegate(".page-link","click",function(){
+		var pn = $(this).attr("pn");
+		manageUser(pn);
+	})
+
+	$("body").delegate(".del_user","click",function(){
+		var did = $(this).attr("did");
+		if (confirm("Êtes-vous sûr ? Vous voulez supprimer!")) {
+			$.ajax({
+				url : DOMAIN+"/includes/process.php",
+				method : "POST",
+				data : {deleteUser:1,id:did},
+				success : function(data){
+					if (data == "DELETED") {
+						alert("L'utilisateur est supprimé");
+						manageUser(1);
+					}else{
+						alert(data);
+					}
+						
+				}
+			})
+		}
+	})
+
+	//Update User
+	$("body").delegate(".edit_user","click",function(){
+		var eid = $(this).attr("eid");
+		$.ajax({
+			url : DOMAIN+"/includes/process.php",
+			method : "POST",
+			dataType : "json",
+			data : {updateUser:1,id:eid},
+			success : function(data){
+				console.log(data);
+				$("#id").val(data["id"]);
+				$("#user").val(data["username"]);
+				$("#email").val(data["email"]);
+				$("#usertype").val(data["usertype"]);
+				
+
+			}
+		})
+	})
+
+	//Update User
+	$("#update_user_form").on("submit",function(){
+		$.ajax({
+				url : DOMAIN+"/includes/process.php",
+				method : "POST",
+				data : $("#update_user_form").serialize(),
+				success : function(data){
+					if (data == "UPDATED") {
+						alert("L'Utilisateur est modifier avec succès.!");
 						window.location.href = "";
 					}else{
 						alert(data);

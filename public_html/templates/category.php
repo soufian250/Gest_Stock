@@ -3,7 +3,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter Categorie</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -11,19 +11,19 @@
       <div class="modal-body">
         <form id="category_form" onsubmit="return false">
           <div class="form-group">
-            <label>Category Name</label>
-            <input type="text" class="form-control" name="category_name" id="category_name" aria-describedby="emailHelp" placeholder="Enter email">
+            <label>Nom de Categorie</label>
+            <input type="text" class="form-control" name="category_name" id="category_name"  placeholder="Donner Le Nom ">
             <small id="cat_error" class="form-text text-muted"></small>
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Parent Category</label>
+            <label for="exampleInputPassword1">Categorie Superieur</label>
             <select class="form-control" id="parent_cat" name="parent_cat">
               
 
               
             </select>
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Ajouter</button>
         </form>
       </div>
       <div class="modal-footer">

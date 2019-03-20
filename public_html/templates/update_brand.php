@@ -3,7 +3,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New Brand Entry</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier Type</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -11,12 +11,12 @@
       <div class="modal-body">
         <form id="update_brand_form" onsubmit="return false">
           <div class="form-group">
-            <label>Brand Name</label>
+            <label>Le nom de Type</label>
             <input type="hidden" name="bid" id="bid" value=""/>
-            <input type="text" class="form-control" name="update_brand" id="update_brand" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="text" class="form-control" name="update_brand" id="update_brand" placeholder="Entrer Le nom de type">
             <small id="brand_error" class="form-text text-muted"></small>
           </div>
-          <button type="submit" class="btn btn-primary">Update Brand</button>
+          <button type="submit" class="btn btn-primary">Modifier</button>
       </form>
       </div>
       <div class="modal-footer">
