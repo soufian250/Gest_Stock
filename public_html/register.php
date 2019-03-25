@@ -47,7 +47,7 @@
                             <select name="usertype" class="form-control" id="usertype">
                                 <option value="">Sélectionner le type de l'utilisateur</option>
                                 <option value="Admin">Admin</option>
-                                <option value="Other">Employer</option>
+                                <option value="Employe">Employe</option>
                             </select>
                             <small id="t_error" class="form-text text-muted"></small>
                         </div>

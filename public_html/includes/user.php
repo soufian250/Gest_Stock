@@ -82,7 +82,7 @@ class User {
     }
 
     public function userLogin($email, $password) {
-        $pre_stmt = $this->con->prepare("SELECT id,username,password,last_login FROM user WHERE email = ?");
+        $pre_stmt = $this->con->prepare("SELECT id,email,username,usertype,password,last_login FROM user WHERE email = ?");
         $pre_stmt->bind_param("s", $email);
         $pre_stmt->execute() or die($this->con->error);
         $result = $pre_stmt->get_result();
@@ -93,11 +93,13 @@ class User {
             $row = $result->fetch_assoc();
             if (password_verify($password, $row["password"])) {
                 $_SESSION["userid"] = $row["id"];
+                $_SESSION["email"] = $row["email"];
                 $_SESSION["username"] = $row["username"];
+                $_SESSION["role"] = $row["usertype"];
                 $_SESSION["last_login"] = $row["last_login"];
 
                 //Here we are updating user last login time when he is performing login
-                $last_login = date("Y-m-d h:m:s");
+                $last_login = date("Y-m-d h:i:s");
                 $pre_stmt = $this->con->prepare("UPDATE user SET last_login = ? WHERE email = ?");
                 $pre_stmt->bind_param("ss", $last_login, $email);
                 $result = $pre_stmt->execute() or die($this->con->error);

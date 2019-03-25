@@ -114,7 +114,7 @@ if (!isset($_SESSION["userid"])) {
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="due" class="col-sm-3 col-form-label" align="right">Religion</label>
+                                    <label for="due" class="col-sm-3 col-form-label" align="right">Reste</label>
                                     <div class="col-sm-6">
                                         <input type="text" readonly name="due" class="form-control form-control-sm" id="due" required/>
                                     </div>
@@ -131,7 +131,7 @@ if (!isset($_SESSION["userid"])) {
                                 </div>
 
                                 <center>
-                                    <input type="submit" id="order_form" style="width:160px;" class="btn btn-info" value="Facturer">
+                                    <input type="submit" id="order_form" style="width:160px;" class="btn btn-info" value="Facturer" title="Passer une Facture">
                                     <button id="print_invoice" style="width:160px;" class="btn btn-success d-none"><i class="fas fa-print">&nbsp;</i>Imprimer facture</button>
                                 </center>
 

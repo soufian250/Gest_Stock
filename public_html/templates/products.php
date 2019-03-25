@@ -9,10 +9,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" id="product_form" onsubmit="return false" enctype="multipart/form-data">
-                    <!--<input type="hidden" name="size" value="1000000">
-                    <div class="form-group">
+                <form action="dashboard.php" method="POST" id="product_form" onsubmit="return false;" enctype="multipart/form-data">
+                    <input type="hidden" name="size" value="1000000">
+                    <!--<div class="form-group text-center">
                         <label>Produit Picture</label>
+                        <div id="my_Btn" name="my_Btn" onclick="getFile()">Cliquer pour choisir un fichier</div>
+                        <div style='height: 0px;width: 0px; overflow:hidden;'><input id="upfile" name="upfile" type="file" value="upload" onchange="sub(this)"/> <input type="text" id="image" name="image"></div>
                         <input type="file" id="image" name="image" class="form-control">
                     </div>-->
                     <div class="form-row">

@@ -46,13 +46,13 @@ if ($_GET["order_date"] && $_GET["invoice_no"]) {
 	$pdf->Cell(50,10,"Remise ",0,0);
 	$pdf->Cell(50,10,":     ".$_GET["discount"],0,1);
         $pdf->Cell(60,10,"",0,0);
-	$pdf->Cell(50,10,"Prix Totale :",0,0);
+	$pdf->Cell(50,10,"Prix Totale ",0,0);
 	$pdf->Cell(50,10,":     ".$_GET["net_total"],0,1);
         $pdf->Cell(60,10,"",0,0);
 	$pdf->Cell(50,10,"Montant Paie ",0,0);
 	$pdf->Cell(50,10,":     ".$_GET["paid"],0,1);
         $pdf->Cell(60,10,"",0,0);
-	$pdf->Cell(50,10,"Montant de Religion ",0,0);
+	$pdf->Cell(50,10,"Reste à payer ",0,0);
 	$pdf->Cell(50,10,":     ".$_GET["due"],0,1);
         $pdf->Cell(60,10,"",0,0);
 	$pdf->Cell(50,10,"Type de paiement ",0,0);

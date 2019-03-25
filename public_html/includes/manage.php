@@ -20,11 +20,10 @@ class Manage {
         } else if ($table == "products") {
             $sql = "SELECT p.pid,p.picture,p.product_name,c.category_name,b.brand_name,p.product_price,p.product_stock,p.added_date,p.p_status FROM products p,brands b,categories c WHERE p.bid = b.bid AND p.cid = c.cid " . $a["limit"];
         } else if ($table == "invoice") {
-            $sql = "SELECT  invoice_no,customer_name, order_date, net_total, paid, due, payment_type from invoice " . $a["limit"];
-        } else if($table == "user"){
-            $sql = "SELECT id,username,email,usertype,register_date,last_login from user where username not like 'HamzaAq' " . $a["limit"];
-        }
-        else {
+            $sql = "SELECT  invoice_no,customer_name, order_date, net_total, paid, due, payment_type from invoice ";
+        } else if ($table == "user") {
+            $sql = "SELECT id,username,email,usertype,register_date,last_login from user where email not like 'hamza@gmail.com' " . $a["limit"];
+        } else {
             $sql = "SELECT * FROM " . $table . " " . $a["limit"];
         }
         $result = $this->con->query($sql) or die($this->con->error);
@@ -36,19 +35,12 @@ class Manage {
         }
         return ["rows" => $rows, "pagination" => $a["pagination"]];
     }
-    
-    public function showInvoices($table, $pno) {
-        $a = $this->pagination($this->con, $table, $pno, 10);
-        if ($table == "categories") {
-            $sql = "SELECT p.cid,p.category_name as category, c.category_name as parent, p.status FROM categories p LEFT JOIN categories c ON p.parent_cat=c.cid " . $a["limit"];
-        } else if ($table == "products") {
-            $sql = "SELECT p.pid,p.product_name,c.category_name,b.brand_name,p.product_price,p.product_stock,p.added_date,p.p_status FROM products p,brands b,categories c WHERE p.bid = b.bid AND p.cid = c.cid " . $a["limit"];
-        } else if ($table == "invoice") {
-            $sql = "SELECT  invoice_no,customer_name, order_date, net_total, paid, due, payment_type from invoice " . $a["limit"];
-        } else if($table == "user"){
-            $sql = "SELECT username,email,usertype,register_date,last_login from user where username not like 'HamzaAq' " . $a["limit"];
-        }
-        else {
+
+    public function manageUsers($table, $pno , $email) {
+        $a = $this->pagination($this->con, $table, $pno, 5);
+        if ($table == "user") {
+            $sql = "SELECT id,username,email,usertype,register_date,last_login from user where email not like '$email'  " . $a["limit"];
+        } else {
             $sql = "SELECT * FROM " . $table . " " . $a["limit"];
         }
         $result = $this->con->query($sql) or die($this->con->error);
@@ -86,7 +78,7 @@ class Manage {
             $pagination .= "<li class='page-item'><a class='page-link' pn='" . $pageno . "' href='#' style='color:#333;'> $pageno </a></li>";
             for ($i = $pageno + 1; $i <= $last; $i++) {
                 $pagination .= "<li class='page-item'><a class='page-link' pn='" . $i . "' href='#'> " . $i . " </a></li>";
-                if ($i > $pageno + $numberOfRecordsPerPage-1) {
+                if ($i > $pageno + $numberOfRecordsPerPage - 1) {
                     break;
                 }
             }
@@ -97,7 +89,7 @@ class Manage {
         }
         //LIMIT 0,10
         //LIMIT 20,10
-        $limit = "LIMIT " . ($pageno-1) * $numberOfRecordsPerPage . "," . $numberOfRecordsPerPage;
+        $limit = "LIMIT " . ($pageno - 1) * $numberOfRecordsPerPage . "," . $numberOfRecordsPerPage;
 
         return ["pagination" => $pagination, "limit" => $limit];
     }

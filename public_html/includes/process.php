@@ -4,6 +4,8 @@ include_once("user.php");
 include_once("DBOperation.php");
 include_once("manage.php");
 
+$email = $_SESSION["email"];
+
 //For Registration Processsing
 if (isset($_POST["username"]) AND isset($_POST["email"])) {
     $user = new User();
@@ -74,7 +76,7 @@ if (isset($_POST["added_date"]) AND isset($_POST["product_name"])) {
     //$image = $_FILES['image']['name'];
     //$target = "images/data/".basename($image);
     $obj = new DBOperation();
-    $result = $obj->addProduct($_POST["select_cat"], $_POST["select_brand"], "Image", $_POST["product_name"], $_POST["product_price"], $_POST["product_qty"], $_POST["added_date"]);
+    $result = $obj->addProduct($_POST["select_cat"], $_POST["select_brand"], "image" , $_POST["product_name"], $_POST["product_price"], $_POST["product_qty"], $_POST["added_date"]);
     echo $result;
     //move_uploaded_file($_FILES['image']['tmp_name'], $target);
     exit();
@@ -323,15 +325,15 @@ if (isset($_POST["order_date"]) AND isset($_POST["cust_name"])) {
 
 if (isset($_POST["manageInvoice"])) {
     $m = new Manage();
-    $result = $m->showInvoices("invoice", $_POST["pageno"]);
+    $result = $m->manageRecordWithPagination("invoice", $_POST["pageno"]);
     $rows = $result["rows"];
     $pagination = $result["pagination"];
     if (count($rows) > 0) {
-        $n = (($_POST["pageno"] - 1) * 10) + 1;
+        //$n = (($_POST["pageno"] - 1) * 10) + 1;
         foreach ($rows as $row) {
             ?>
             <tr>
-                <td><?php echo $n; ?></td>
+                <!--<td><?php //echo $n; ?></td>-->
                 <td><?php echo $row["customer_name"]; ?></td>
                 <td><?php echo $row["order_date"]; ?></td>
                 <td><?php echo $row["net_total"]; ?></td>
@@ -344,10 +346,10 @@ if (isset($_POST["manageInvoice"])) {
                 </td>-->
             </tr>
             <?php
-            $n++;
+            //$n++;
         }
         ?>
-        <tr><td colspan="8"><?php echo $pagination; ?></td></tr>
+        <!--<tr><td colspan="8"><?php //echo $pagination; ?></td></tr>-->
         <?php
         exit();
     }
@@ -386,7 +388,7 @@ if (isset($_POST["update_Invoice"])) {
 
 if (isset($_POST["manageUser"])) {
     $m = new Manage();
-    $result = $m->manageRecordWithPagination("user", $_POST["pageno"]);
+    $result = $m->manageUsers("user", $_POST["pageno"],$email);
     $rows = $result["rows"];
     $pagination = $result["pagination"];
     if (count($rows) > 0) {

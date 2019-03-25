@@ -291,9 +291,10 @@ $(document).ready(function () {
         }
     })
 
-    //add product
+    //Add product
     $("#product_form").on("submit", function () {
         var status = false;
+        //var image = $("#image");
         var name = $("#product_name");
         var selectProduit = $("#select_cat");
         var selectType = $("#select_Type");
@@ -361,6 +362,7 @@ $(document).ready(function () {
                         $("#product_price").val("");
                         $("#product_qty").val("");
                         window.location.href = encodeURI(DOMAIN + "/dashboard.php?msg=Le Produit ajouter Avec Succès");
+                        //alert("Le Produit ajouter Avec Succès");
 
                     } else {
                         console.log(data);
@@ -372,8 +374,11 @@ $(document).ready(function () {
         }
     })
 
+    //Edit profile
     $("#profil_form").on("submit", function () {
 
+        var statuse = false;
+        var statusn = false;
         var status = false;
         var email = $("#pemail");
         var name = $("#usernamen");
@@ -386,20 +391,20 @@ $(document).ready(function () {
         if (!e_patt.test(email.val())) {
             email.addClass("border-danger");
             $("#pe_error").html("<span class='text-danger'>Veuillez entrer une adresse email valide</span>");
-            status = false;
+            statuse = false;
         } else {
             email.removeClass("border-danger");
             $("#pe_error").html("");
-            status = true;
+            statuse = true;
         }
         if (name.val() == "" || name.val().length < 6) {
             name.addClass("border-danger");
             $("#pu_error").html("<span class='text-danger'>S'il vous plaît entrer le nom et le nom doit être plus de 6 caractères</span>");
-            status = false;
+            statusn = false;
         } else {
             name.removeClass("border-danger");
             $("#pu_error").html("");
-            status = true;
+            statusn = true;
         }
         if (pass1.val() == "" || pass1.val().length < 9) {
             pass1.addClass("border-danger");
@@ -429,32 +434,34 @@ $(document).ready(function () {
             $("#pp2_error").html("");
             status = true;
         }
-        if ((passn.val() == pass2.val()) && status == true) {
-
-            $(".overlay").show();
-            $.ajax({
-                url: DOMAIN + "/includes/process.php",
-                method: "POST",
-                data: $("#profil_form").serialize(),
-                success: function (data) {
-                    if (data == "EMAIL_NOT_MATCHED") {
-                        $(".overlay").hide();
-                        alert("L'Email donner est Inccorect!");
-                    } else if (data == "PASSWORD_NOT_EXISTS") {
-                        $(".overlay").hide();
-                        alert("L'ancien mot de passe est invalide");
-                    } else {
-                        //alert(data);
-                        $(".overlay").hide();
-                        window.location.href = encodeURI(DOMAIN + "/dashboard.php?msg=Employe Ajouté Avec Succès");
+        if (status == true && statuse == true && statusn == true) {
+            if (passn.val() == pass2.val()) {
+                $(".overlay").show();
+                $.ajax({
+                    url: DOMAIN + "/includes/process.php",
+                    method: "POST",
+                    data: $("#profil_form").serialize(),
+                    success: function (data) {
+                        if (data == "EMAIL_NOT_MATCHED") {
+                            $(".overlay").hide();
+                            alert("L'Email donner est Inccorect!");
+                        } else if (data == "PASSWORD_NOT_EXISTS") {
+                            $(".overlay").hide();
+                            alert("L'ancien mot de passe est invalide");
+                        } else {
+                            //alert(data);
+                            $(".overlay").hide();
+                            window.location.href = encodeURI(DOMAIN + "/dashboard.php?msg=Modification effectuer");
+                        }
                     }
-                }
-            })
-        } else {
-            pass2.addClass("border-danger");
-            $("#pp2_error").html("<span class='text-danger'>Le mot de passe n'est pas similaire à l'autre</span>");
-            status = true;
+                })
+            } else {
+                pass2.addClass("border-danger");
+                $("#pp2_error").html("<span class='text-danger'>Le mot de passe n'est pas similaire à l'autre</span>");
+                status = true;
+            }
         }
+        else alert("Il ya des errors dans votre entries!");
     })
 
 //Fetch Product Stat

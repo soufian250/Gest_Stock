@@ -7,8 +7,7 @@ if (!isset($_SESSION["userid"])) {
 
 /* $db = mysqli_connect("localhost", "root", "", "project_inv");
 
-  if (isset($_POST['upload'])) {
-  $image = $_FILES['image']['name'];
+  if (isset($_POST['image'])) {
   $nom = $_POST["product_name"];
   $cat = $_POST["select_cat"];
   $type = $_POST["select_brand"];
@@ -16,7 +15,9 @@ if (!isset($_SESSION["userid"])) {
   $quantite = $_POST["product_qty"];
   $date = $_POST["added_date"];
 
-  $target = "images/" . basename($image);
+  $image = $_FILES['upfile']['name'];
+
+  $target = "images/data/" . basename($image);
 
 
   $sql = "INSERT INTO `products`
@@ -26,8 +27,8 @@ if (!isset($_SESSION["userid"])) {
 
   mysqli_query($db, $sql);
 
-  move_uploaded_file($_FILES['image']['tmp_name'], $target);
-  } */
+  move_uploaded_file($_FILES['upfile']['tmp_name'], $target);
+ }*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,6 +44,33 @@ if (!isset($_SESSION["userid"])) {
         <script type="text/javascript" src="./js/main.js"></script>
         <link rel="stylesheet" type="text/css" href="./Clock/clockCSS.css">
         <script type="text/javascript" src="./Clock/clockJS.js"></script>
+        <!--<style>
+            #my_Btn{
+
+                margin: auto;
+                font-family: calibri;
+                width: 150px;
+                padding: 10px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border: 1px dashed #BBB; 
+                text-align: center;
+                background-color: #DDD;
+                cursor:pointer;
+            }
+        </style>
+        <script type="text/javascript">
+            function getFile() {
+                document.getElementById("upfile").click();
+            }
+            function sub(obj) {
+                var file = obj.value;
+                var fileName = file.split("\\");
+                document.getElementById("my_Btn").innerHTML = fileName[fileName.length - 1];
+                document.getElementById("image").value = fileName[fileName.length - 1];
+                event.preventDefault();
+            }
+        </script>-->
     </head>
     <body>
         <!-- Navbar -->
@@ -71,7 +99,7 @@ if (!isset($_SESSION["userid"])) {
                         <div class="card-body">
                             <h4 class="card-title">Profil Informations</h4>
                             <p class="card-text"><i class="fa fa-user">&nbsp;</i><?php echo $_SESSION["username"] ?></p>
-                            <p class="card-text"><i class="fa fa-user-shield">&nbsp;</i>Admin</p>
+                            <p class="card-text"><i class="fa fa-user-shield">&nbsp;</i><?php echo $_SESSION["role"] ?></p>
                             <p class="card-text"><i class="far fa-calendar-check">&nbsp;</i>Last Login : <?php echo $_SESSION["last_login"]; ?></p>
                             <a href="#" data-toggle="modal" data-target="#form_profil" class="btn btn-primary"><i class="fa fa-edit">&nbsp;</i>Edit Profile</a>
                         </div>
