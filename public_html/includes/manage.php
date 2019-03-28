@@ -18,7 +18,7 @@ class Manage {
         if ($table == "categories") {
             $sql = "SELECT p.cid,p.category_name as category, c.category_name as parent, p.status FROM categories p LEFT JOIN categories c ON p.parent_cat=c.cid " . $a["limit"];
         } else if ($table == "products") {
-            $sql = "SELECT p.pid,p.picture,p.product_name,c.category_name,b.brand_name,p.product_price,p.product_stock,p.added_date,p.p_status FROM products p,brands b,categories c WHERE p.bid = b.bid AND p.cid = c.cid " . $a["limit"];
+            $sql = "SELECT p.pid,p.product_name,c.category_name,p.description,p.purchase_price,p.product_price,p.product_stock,p.added_date,p.p_status,f.fourname FROM products p,fournisseur f,categories c WHERE p.idfour = f.id AND p.cid = c.cid " . $a["limit"];
         } else if ($table == "invoice") {
             $sql = "SELECT  invoice_no,customer_name, order_date, net_total, paid, due, payment_type from invoice ";
         } else if ($table == "user") {
@@ -37,9 +37,9 @@ class Manage {
     }
 
     public function manageUsers($table, $pno , $email) {
-        $a = $this->pagination($this->con, $table, $pno, 5);
+        $a = $this->pagination($this->con, $table, $pno, 6);
         if ($table == "user") {
-            $sql = "SELECT id,username,email,usertype,register_date,last_login from user where email not like '$email'  " . $a["limit"];
+            $sql = "SELECT id,username,email,usertype,register_date,last_login from user where email not like '" . $email . "' " . $a["limit"];
         } else {
             $sql = "SELECT * FROM " . $table . " " . $a["limit"];
         }

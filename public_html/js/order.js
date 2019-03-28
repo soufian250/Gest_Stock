@@ -75,7 +75,7 @@ $(document).ready(function () {
         $(".amt").each(function () {
             sub_total = sub_total + ($(this).html() * 1);
         })
-        gst = 0 * sub_total;
+        gst = 20 * sub_total;
         net_total = gst + sub_total;
         net_total = net_total - discount;
         due = net_total - paid_amt;

@@ -53,12 +53,14 @@ if (!isset($_SESSION["userid"])) {
                     <tr>
                         <th>#</th>
                         <!--<th>Photo</th>-->
-                        <th>Preduit</th>
+                        <th>Produit</th>
                         <th>Categorie</th>
-                        <th>Type</th>
-                        <th>Prix</th>
+                        <th>Description</th>
+                        <th>Prix d'achat</th>
+                        <th>Prix de vente</th>
                         <th>Quantite</th>
                         <th>Date d'Ajout</th>
+                        <th>Fournisseur</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>

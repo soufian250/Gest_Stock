@@ -47,7 +47,7 @@ class User {
             return "EMAIL_ALREADY_EXISTS";
         } else {
             $pass_hash = password_hash($password, PASSWORD_BCRYPT, ["cost" => 8]);
-            $date = date("Y-m-d");
+            $date = date("d/m/Y");
             $notes = "";
             $pre_stmt = $this->con->prepare("INSERT INTO `user`(`username`, `email`, `password`, `usertype`, `register_date`, `last_login`, `notes`)
 			 VALUES (?,?,?,?,?,?,?)");
@@ -68,7 +68,7 @@ class User {
             return "EMAIL_ALREADY_EXISTS";
         } else {
             $pass_hash = password_hash($password, PASSWORD_BCRYPT, ["cost" => 8]);
-            $date = date("Y-m-d");
+            $date = date("d/m/Y");
             $pre_stmt = $this->con->prepare("INSERT INTO `user`(`username`, `email`, `password`, `usertype`, `register_date`, `last_login`, `notes`)
 			 VALUES (?,?,?,?,?,?,?)");
             $pre_stmt->bind_param("sssssss", $username, $email, $pass_hash, $usertype, $date, $date, $notes);
@@ -99,7 +99,7 @@ class User {
                 $_SESSION["last_login"] = $row["last_login"];
 
                 //Here we are updating user last login time when he is performing login
-                $last_login = date("Y-m-d h:i:s");
+                $last_login = date("d/m/Y H:i:s");
                 $pre_stmt = $this->con->prepare("UPDATE user SET last_login = ? WHERE email = ?");
                 $pre_stmt->bind_param("ss", $last_login, $email);
                 $result = $pre_stmt->execute() or die($this->con->error);

@@ -90,7 +90,7 @@ if (!isset($_SESSION["userid"])) {
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="gst" class="col-sm-3 col-form-label" align="right" title="Taxe sur les produits et services">GST (0%)</label>
+                                    <label for="gst" class="col-sm-3 col-form-label" align="right" title="Taxe sur les produits et services">GST (20%)</label>
                                     <div class="col-sm-6">
                                         <input type="text" readonly name="gst" class="form-control form-control-sm" id="gst" required/>
                                     </div>

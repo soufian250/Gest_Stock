@@ -100,7 +100,7 @@ if (!isset($_SESSION["userid"])) {
                             <h4 class="card-title">Profil Informations</h4>
                             <p class="card-text"><i class="fa fa-user">&nbsp;</i><?php echo $_SESSION["username"] ?></p>
                             <p class="card-text"><i class="fa fa-user-shield">&nbsp;</i><?php echo $_SESSION["role"] ?></p>
-                            <p class="card-text"><i class="far fa-calendar-check">&nbsp;</i>Last Login : <?php echo $_SESSION["last_login"]; ?></p>
+                            <p class="card-text"><i class="far fa-calendar-check">&nbsp;</i>Dernière Login : <?php echo $_SESSION["last_login"]; ?></p>
                             <a href="#" data-toggle="modal" data-target="#form_profil" class="btn btn-primary"><i class="fa fa-edit">&nbsp;</i>Edit Profile</a>
                         </div>
                     </div>

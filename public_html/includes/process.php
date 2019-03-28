@@ -30,7 +30,7 @@ if (isset($_POST["log_email"]) AND isset($_POST["log_password"])) {
 //For Edit Profile
 if (isset($_POST["passwordnew"]) AND isset($_POST["passwordf"])) {
     $user = new User();
-    $result = $user->profilEdit($_POST["usernamen"], $_POST["passwordf"],$_POST["passwordnew"],$_POST["pemail"]);
+    $result = $user->profilEdit($_POST["usernamen"], $_POST["passwordf"], $_POST["passwordnew"], $_POST["pemail"]);
     echo $result;
     exit();
 }
@@ -76,12 +76,12 @@ if (isset($_POST["added_date"]) AND isset($_POST["product_name"])) {
     //$image = $_FILES['image']['name'];
     //$target = "images/data/".basename($image);
     $obj = new DBOperation();
-    $result = $obj->addProduct($_POST["select_cat"], $_POST["select_brand"], "image" , $_POST["product_name"], $_POST["product_price"], $_POST["product_qty"], $_POST["added_date"]);
+    $result = $obj->addProduct($_POST["select_cat"], $_POST["select_brand"], "image", $_POST["product_name"], $_POST["product_price"], $_POST["product_qty"], $_POST["added_date"]);
     echo $result;
     //move_uploaded_file($_FILES['image']['tmp_name'], $target);
     exit();
 }
-
+//------------------Category---------------------
 //Manage Category
 if (isset($_POST["manageCategory"])) {
     $m = new Manage();
@@ -206,14 +206,16 @@ if (isset($_POST["manageProduct"])) {
             ?>
             <tr>
                 <td><?php echo $n; ?></td>
-                <!--<td><img class="rounded-circle" src="images/<?php// echo $row["picture"]; ?>" width="50" height="50"></td>-->
+                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];   ?>" width="50" height="50"></td>-->
                 <td><?php echo $row["product_name"]; ?></td>
                 <td><?php echo $row["category_name"]; ?></td>
-                <td><?php echo $row["brand_name"]; ?></td>
+                <td><?php echo $row["description"]; ?></td>
+                <td><?php echo $row["purchase_price"]; ?></td>
                 <td><?php echo $row["product_price"]; ?></td>
                 <td><?php echo $row["product_stock"]; ?></td>
                 <td><?php echo $row["added_date"]; ?></td>
                 <td><a href="#" class="btn btn-success btn-sm">Active</a></td>
+                <td><?php echo $row["fourname"]; ?></td>
                 <td>
                     <a href="#" did="<?php echo $row['pid']; ?>" class="btn btn-danger btn-sm del_product"><i class="fa fa-trash-alt">&nbsp;</i>Delete</a>
                     <a href="#" eid="<?php echo $row['pid']; ?>" data-toggle="modal" data-target="#form_products" class="btn btn-info btn-sm edit_product"><i class="fa fa-pencil-alt">&nbsp;</i>Edit</a>
@@ -223,7 +225,7 @@ if (isset($_POST["manageProduct"])) {
             $n++;
         }
         ?>
-        <tr><td colspan="10"><?php echo $pagination; ?></td></tr>
+        <tr><td colspan="11"><?php echo $pagination; ?></td></tr>
         <?php
         exit();
     }
@@ -269,11 +271,11 @@ if (isset($_POST["getNewOrderItem"])) {
         <td>
             <select name="pid[]" class="form-control form-control-sm pid" required>
                 <option value="">Choisir un produit</option>
-    <?php
-    foreach ($rows as $row) {
-        ?><option value="<?php echo $row['pid']; ?>"><?php echo $row["product_name"]; ?></option><?php
-    }
-    ?>
+                <?php
+                foreach ($rows as $row) {
+                    ?><option value="<?php echo $row['pid']; ?>"><?php echo $row["product_name"]; ?></option><?php
+                }
+                ?>
             </select>
         </td>
         <td><input name="tqty[]" readonly type="text" class="form-control form-control-sm tqty"></td>   
@@ -333,7 +335,7 @@ if (isset($_POST["manageInvoice"])) {
         foreach ($rows as $row) {
             ?>
             <tr>
-                <!--<td><?php //echo $n; ?></td>-->
+                <!--<td><?php //echo $n;   ?></td>-->
                 <td><?php echo $row["customer_name"]; ?></td>
                 <td><?php echo $row["order_date"]; ?></td>
                 <td><?php echo $row["net_total"]; ?></td>
@@ -341,15 +343,15 @@ if (isset($_POST["manageInvoice"])) {
                 <td><?php echo $row["due"]; ?></td>
                 <td><?php echo $row["payment_type"]; ?></td>
                 <!--<td>
-                    <a href="#" did="<?php //echo $row['pid']; ?>" class="btn btn-danger btn-sm del_product">Delete</a>
-                    <a href="#" eid="<?php //echo $row['pid']; ?>" data-toggle="modal" data-target="#form_products" class="btn btn-info btn-sm edit_product">Edit</a>
+                    <a href="#" did="<?php //echo $row['pid'];   ?>" class="btn btn-danger btn-sm del_product">Delete</a>
+                    <a href="#" eid="<?php //echo $row['pid'];   ?>" data-toggle="modal" data-target="#form_products" class="btn btn-info btn-sm edit_product">Edit</a>
                 </td>-->
             </tr>
             <?php
             //$n++;
         }
         ?>
-        <!--<tr><td colspan="8"><?php //echo $pagination; ?></td></tr>-->
+        <!--<tr><td colspan="8"><?php //echo $pagination;   ?></td></tr>-->
         <?php
         exit();
     }
@@ -388,11 +390,11 @@ if (isset($_POST["update_Invoice"])) {
 
 if (isset($_POST["manageUser"])) {
     $m = new Manage();
-    $result = $m->manageUsers("user", $_POST["pageno"],$email);
+    $result = $m->manageUsers("user", $_POST["pageno"], $email);
     $rows = $result["rows"];
     $pagination = $result["pagination"];
     if (count($rows) > 0) {
-        $n = (($_POST["pageno"] - 1) * 5) + 1;
+        $n = (($_POST["pageno"] - 1) * 6) + 1;
         foreach ($rows as $row) {
             ?>
             <tr>
@@ -440,8 +442,8 @@ if (isset($_POST["user"])) {
     $email = $_POST["email"];
     $usertype = $_POST["usertype"];
     $date = $_POST["date"];
-    
-    $result = $m->update_record("user", ["id" => $id], ["username"=>$name, "email" => $email, "usertype" => $usertype,"register_date"=>$date]);
+
+    $result = $m->update_record("user", ["id" => $id], ["username" => $name, "email" => $email, "usertype" => $usertype, "register_date" => $date]);
     echo $result;
 }
 
@@ -450,7 +452,7 @@ if (isset($_POST["user"])) {
 if (isset($_POST["statProduit"])) {
     $obj = new DBOperation();
     $row = $obj->getAllStat("products");
-    
+
     echo $row["Stat"];
 
     exit();
@@ -459,7 +461,7 @@ if (isset($_POST["statProduit"])) {
 if (isset($_POST["statBrand"])) {
     $obj = new DBOperation();
     $row = $obj->getAllStat("brands");
-    
+
     echo $row["Stat"];
 
     exit();
@@ -468,7 +470,7 @@ if (isset($_POST["statBrand"])) {
 if (isset($_POST["statCategory"])) {
     $obj = new DBOperation();
     $row = $obj->getAllStat("categories");
-    
+
     echo $row["Stat"];
 
     exit();
@@ -477,11 +479,9 @@ if (isset($_POST["statCategory"])) {
 if (isset($_POST["statCommand"])) {
     $obj = new DBOperation();
     $row = $obj->getAllStat("invoice");
-    
+
     echo $row["Stat"];
 
     exit();
 }
-
-
 ?>
