@@ -370,13 +370,13 @@ if (isset($_POST["manageInvoice"])) {
                 if ($row["due"] == 0) {
                     ?>
                     <td>
-                        <a id='print_facture' eid="<?php echo $row['pid']; ?>" class="btn btn-success btn-sm"><i class="fas fa-print">&nbsp;</i>Facture</a>
+                        <a href="#" id="print_facture" class="btn btn-success btn-sm"><i class="fas fa-print">&nbsp;</i>Facture</a>
                     </td>
                     <?php
                 } else {
                     ?>
                     <td>
-                        <a id="print_devis" eid="<?php echo $row['pid']; ?>" class="btn btn-success btn-sm"><i class="fas fa-print">&nbsp;</i>Devis</a>
+                        <a href="#" id="print_devis" class="btn btn-success btn-sm"><i class="fas fa-print">&nbsp;</i>Devis</a>
                     </td>
                         <?php
                     }

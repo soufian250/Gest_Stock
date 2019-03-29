@@ -1,5 +1,7 @@
 $(document).ready(function () {
     var DOMAIN = "http://localhost/inv_project/public_html";
+    var invoice;
+    var invoice_id;
 
     addNewRow();
 
@@ -105,7 +107,7 @@ $(document).ready(function () {
 
     $("#order_form").click(function () {
 
-        var invoice = $("#get_order_data").serialize();
+        invoice = $("#get_order_data").serialize();
         var sucess = $("#order_form");
         var print = $("#print_invoice");
         if ($("#cust_name").val() === "") {
@@ -122,6 +124,7 @@ $(document).ready(function () {
                     if (data < 0) {
                         alert(data);
                     } else {
+                        invoice_id = data;
                         $("#get_order_data").trigger("reset");
 
                         if (confirm("Do u want to print invoice ?")) {
@@ -152,10 +155,10 @@ $(document).ready(function () {
 
     });
     $("#print_facture").click(function () {
-        window.location.href = DOMAIN + "/includes/invoice_bill.php?invoice_no=" + data + "&" + invoice;
+        window.location.href = DOMAIN + "/includes/invoice_bill.php?invoice_no=" + invoice_id + "&" + invoice;
     })
     $("#print_devis").click(function () {
-        window.location.href = DOMAIN + "/includes/invoice_bill.php?invoice_no=" + data + "&" + invoice;
+        window.location.href = DOMAIN + "/includes/invoice_bill.php?invoice_no=" + invoice_id + "&" + invoice;
     })
 
 

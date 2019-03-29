@@ -365,7 +365,13 @@ $(document).ready(function () {
 
     //Add product
     $("#product_form").on("submit", function () {
-        var status = false;
+        var statusn = false;
+        var statusc = false;
+        var statusf = false;
+        var statusdes = false;
+        var statuspa = false;
+        var statuspv = false;
+        var statusq = false;
         //var image = $("#image");
         var name = $("#product_name");
         var selectCat = $("#select_cat");
@@ -380,66 +386,66 @@ $(document).ready(function () {
         if (name.val() == "") {
             name.addClass("border-danger");
             $("#np_error").html("<span class='text-danger'>Entrer le nom de la Categorie</span>");
-            status = false;
+            statusn = false;
         } else {
             name.removeClass("border-danger");
             $("#np_error").html("");
-            status = true;
+            statusn = true;
         }
         if (selectCat.val() == "") {
             selectCat.addClass("border-danger");
             $("#cp_error").html("<span class='text-danger'>Veuillez sélectionner la categorie de produit</span>");
-            status = false;
+            statusc = false;
         } else {
             selectCat.removeClass("border-danger");
             $("#cp_error").html("");
-            status = true;
+            statusc = true;
         }
         if (selectFour.val() == "") {
             selectFour.addClass("border-danger");
             $("#fp_error").html("<span class='text-danger'>Veuillez sélectionner un Fournisseurt</span>");
-            status = false;
+            statusf = false;
         } else {
             selectFour.removeClass("border-danger");
             $("#fp_error").html("");
-            status = true;
+            statusf = true;
         }
         if (des.val() == "") {
             des.addClass("border-danger");
-            status = true;
+            statusdes = true;
         } else {
             des.removeClass("border-danger");
-            status = true;
+            statusdes = true;
         }
         if (!e_patt.test(prixachat.val())) {
             prixachat.addClass("border-danger");
             $("#prixpa_error").html("<span class='text-danger'>Le Prix d'achat doit être un entie positive</span>");
-            status = false;
+            statuspa = false;
         } else {
             prixachat.removeClass("border-danger");
             $("#prixpa_error").html("");
-            status = true;
+            statuspa = true;
         }
         if (!e_patt.test(prix.val())) {
             prix.addClass("border-danger");
             $("#prixp_error").html("<span class='text-danger'>Le Prix doit être un entie positive</span>");
-            status = false;
+            statuspv = false;
         } else {
             prix.removeClass("border-danger");
             $("#prixp_error").html("");
-            status = true;
+            statuspv = true;
         }
         if (!e_patt.test(quantite.val())) {
             quantite.addClass("border-danger");
             $("#qp_error").html("<span class='text-danger'>S'il vous plaît entrer une Quantite valide!</span>");
-            status = false;
+            statusq = false;
         } else {
             quantite.removeClass("border-danger");
             $("#qp_error").html("");
-            status = true;
+            statusq = true;
         }
 
-        if (status)
+        if (statusn == trus && statusc == trus && statusnf == trus && statusdes == trus && statuspa == trus && statuspv == trus && statusq == trus)
         {
             $.ajax({
                 url: DOMAIN + "/includes/process.php",
