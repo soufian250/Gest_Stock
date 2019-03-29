@@ -75,7 +75,7 @@ $(document).ready(function () {
         $(".amt").each(function () {
             sub_total = sub_total + ($(this).html() * 1);
         })
-        gst = 20 * sub_total;
+        gst = 0.2 * sub_total;
         net_total = gst + sub_total;
         net_total = net_total - discount;
         due = net_total - paid_amt;
@@ -151,6 +151,12 @@ $(document).ready(function () {
 
 
     });
+    $("#print_facture").click(function () {
+        window.location.href = DOMAIN + "/includes/invoice_bill.php?invoice_no=" + data + "&" + invoice;
+    })
+    $("#print_devis").click(function () {
+        window.location.href = DOMAIN + "/includes/invoice_bill.php?invoice_no=" + data + "&" + invoice;
+    })
 
 
 });

@@ -28,7 +28,7 @@ if (!isset($_SESSION["userid"])) {
   mysqli_query($db, $sql);
 
   move_uploaded_file($_FILES['upfile']['tmp_name'], $target);
- }*/
+  } */
 ?>
 <!DOCTYPE html>
 <html>
@@ -110,9 +110,9 @@ if (!isset($_SESSION["userid"])) {
                         <div class="row">
                             <div class="alert alert-dark col-md-12" role="alert">
                                 <div class="row">
-                                    <div class="col-md-1"><i class="far fa-chart-bar"></i></div>
+                                    <div class="col-md-1"></div>
                                     <div class="col-md-10 text-center"><h4>Statistique</h4></div>
-                                    <div class="col-md-1"><i class="far fa-chart-bar"></i></div>
+                                    <div class="col-md-1"></div>
                                 </div>
                             </div>
                         </div>
@@ -188,23 +188,6 @@ if (!isset($_SESSION["userid"])) {
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body text-center" style="box-shadow:0 0 15px 0 lightgrey;">
-                            <h4 class="card-title">Factures</h4>
-                            <p class="card-text">Ici, vous pouvez aperçu vos factures et les gérer.</p>
-
-                            <!--<div class="row">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-8">-->
-                            <a href="manage_factures.php"  class="btn btn-primary"><i class="fas fa-glasses">&nbsp;</i>Consulter</a>
-                            <a href="#" class="btn btn-secondary"><i class="fa fa-edit">&nbsp;</i>Gérer</a>
-                            <!--</div>
-                            <div class="col-md-2"></div>
-                        </div>-->
-                        </div>
-                    </div>
-                </div>	
-                <div class="col-md-4">
                     <div class="card text-center">
                         <div class="card-body text-center" style="box-shadow:0 0 15px 0 lightgrey;">
                             <h4 class="card-title">Nouvelles commandes</h4>
@@ -218,6 +201,22 @@ if (!isset($_SESSION["userid"])) {
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center" style="box-shadow:0 0 15px 0 lightgrey;">
+                            <h4 class="card-title">Factures</h4>
+                            <p class="card-text">Ici, vous pouvez aperçu vos factures et les gérer.</p>
+
+                            <!--<div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">-->
+                            <a href="manage_factures.php"  class="btn btn-primary"><i class="fas fa-glasses">&nbsp;</i>Consulter</a>
+                            <!--</div>
+                            <div class="col-md-2"></div>
+                        </div>-->
+                        </div>
+                    </div>
+                </div>	
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body text-center" style="box-shadow:0 0 15px 0 lightgrey;">
@@ -293,6 +292,33 @@ if (!isset($_SESSION["userid"])) {
             </div>
         </div>
         <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center text-center">
+                        <div class="card-body" style="box-shadow:0 0 15px 0 lightgrey;">
+                            <h4 class="card-title">Fournisseur</h4>
+                            <p class="card-text">Ici, vous pouvez gérer vos employés ajouter un nouveau supprimer ou mettre à jour.</p>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <a href="#" data-toggle="modal" data-target="#form_fournisseur" class="btn btn-primary"><i class="fa fa-plus">&nbsp;</i>Ajouter</a>
+                                    <a href="manage_fournisseur.php" class="btn btn-secondary"><i class="fa fa-edit">&nbsp;</i>Gérer</a>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+            </div>
+        </div>
+        <br>
         <!--<div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -308,6 +334,10 @@ if (!isset($_SESSION["userid"])) {
         </div>-->
 
 
+        <?php
+        //Employe Form
+        include_once("./templates/fournisseur.php");
+        ?>
         <?php
         //Employe Form
         include_once("./templates/employe.php");

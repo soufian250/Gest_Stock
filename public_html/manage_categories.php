@@ -21,15 +21,15 @@ if (!isset($_SESSION["userid"])) {
         <!-- Navbar -->
         <?php include_once("./templates/header.php"); ?>
         <br/><br/>
-        <div class="container">
+        <div class="container text-center">
             <table class="table table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Categorie</th>
-                        <th>Sup-Categorie</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Categorie</th>
+                        <th class="text-center">Sup-Categorie</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody id="get_category">

@@ -47,7 +47,7 @@ if (!isset($_SESSION["userid"])) {
         <!-- Navbar -->
         <?php include_once("./templates/header.php"); ?>
         <br/><br/>
-        <div class="container">
+        <div class="container text-center" style="max-width: 1340px;">
             <table class="table table-hover table-bordered">
                 <thead>
                     <tr>

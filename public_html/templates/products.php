@@ -20,12 +20,12 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Date</label>
-                            <input type="text" class="form-control" name="added_date" id="added_date" value="<?php echo date("Y-m-d"); ?>" readonly/>
+                            <input type="text" class="form-control" name="added_date" id="added_date" value="<?php echo date("d/m/Y"); ?>" readonly/>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Nom de Produit</label>
                             <input type="text" class="form-control" name="product_name" id="product_name" placeholder="Entrer Le nom de Produit">
-                            <small id="n_error" class="form-text text-muted"></small>
+                            <small id="np_error" class="form-text text-muted"></small>
                         </div>
                     </div>
                     <div class="form-group">
@@ -35,26 +35,35 @@
 
 
                         </select>
-                        <small id="c_error" class="form-text text-muted"></small>
+                        <small id="cp_error" class="form-text text-muted"></small>
                     </div>
                     <div class="form-group">
-                        <label>Type</label>
-                        <select class="form-control" id="select_brand" name="select_brand" />
+                        <label>Fournisseur</label>
+                        <select class="form-control" id="select_four" name="select_four" />
 
 
 
                         </select>
-                        <small id="st_error" class="form-text text-muted"></small>
+                        <small id="fp_error" class="form-text text-muted"></small>
                     </div>
                     <div class="form-group">
-                        <label>Prix de produit</label>
-                        <input type="text" class="form-control" id="product_price" name="product_price" placeholder="Entrer le prix de Produit"/>
-                        <small id="prix_error" class="form-text text-muted"></small>
+                            <label>Description</label>
+                            <input type="text" class="form-control" name="product_des" id="product_des" placeholder="Entrer La description de Produit">
+                        </div>
+                    <div class="form-group">
+                        <label>Prix d'achat</label>
+                        <input type="text" class="form-control" id="product_pprice" name="product_pprice" placeholder="Entrer le prix d'achat de produit"/>
+                        <small id="prixpa_error" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                        <label>Prix de vente</label>
+                        <input type="text" class="form-control" id="product_price" name="product_price" placeholder="Entrer le prix de vente de produit"/>
+                        <small id="prixp_error" class="form-text text-muted"></small>
                     </div>
                     <div class="form-group">
                         <label>Quantite</label>
                         <input type="text" class="form-control" id="product_qty" name="product_qty" placeholder="Entrer La Quantite en Stock"/>
-                        <small id="q_error" class="form-text text-muted"></small>
+                        <small id="qp_error" class="form-text text-muted"></small>
                     </div>
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                 </form>

@@ -13,6 +13,19 @@ class DBOperation {
         $this->con = $db->connect();
     }
 
+    
+    public function addFournisseur($fourname, $email , $telephone) {
+        $pre_stmt = $this->con->prepare("INSERT INTO `fournisseur`(`fourname`, `email`, `telephone`)
+		 VALUES (?,?,?)");
+        $pre_stmt->bind_param("sss", $fourname, $email, $telephone);
+        $result = $pre_stmt->execute() or die($this->con->error);
+        if ($result) {
+            return "FOURNISSEUR_ADDED";
+        } else {
+            return 0;
+        }
+    }
+    
     public function addCategory($parent, $cat) {
         $pre_stmt = $this->con->prepare("INSERT INTO `categories`(`parent_cat`, `category_name`, `status`)
 		 VALUES (?,?,?)");
@@ -39,13 +52,13 @@ class DBOperation {
         }
     }
 
-    public function addProduct($cid, $bid, $picture, $pro_name, $price, $stock, $date) {
+    public function addProduct($cid, $fid, $pro_name, $des, $pprice, $price, $stock, $date) {
         $pre_stmt = $this->con->prepare("INSERT INTO `products`
-			(`cid`, `bid`, `picture` , `product_name`, `product_price`,
+			(`cid`, `idfour` , `product_name`,`description` , `purchase_price` ,`product_price`,
 			 `product_stock`, `added_date`, `p_status`)
-			 VALUES (?,?,?,?,?,?,?,?)");
+			 VALUES (?,?,?,?,?,?,?,?,?)");
         $status = 1;
-        $pre_stmt->bind_param("iissdisi", $cid, $bid, $picture, $pro_name, $price, $stock, $date, $status);
+        $pre_stmt->bind_param("iissddisi", $cid, $fid, $pro_name, $des, $pprice, $price, $stock, $date, $status);
         $result = $pre_stmt->execute() or die($this->con->error);
         if ($result) {
             return "NEW_PRODUCT_ADDED";

@@ -7,7 +7,7 @@ if ($_GET["order_date"] && $_GET["invoice_no"]) {
 	$pdf = new FPDF();
 	$pdf->AddPage();
 	$pdf->setFont("Arial","B",20);
-	$pdf->Cell(190,10,"Gestion de Stock",1,1,"C");
+        $pdf->Cell(190,10,"Facture N°".$_GET["invoice_no"]."",1,1,"C");
         $pdf->Cell(50,10,"",0,1);
 	$pdf->setFont("Arial",null,12);
 

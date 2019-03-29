@@ -211,6 +211,64 @@ $(document).ready(function () {
         }
     })
 
+    // create Fournisseur
+    $("#fournisseur_form").on("submit", function () {
+        var status = true;
+        var name = $("#fusername");
+        var email = $("#femail");
+        var tele = $("#ftele");
+
+        var e_patt = new RegExp(/^[a-z0-9_-]+(\.[a-z0-9_-]+)*@[a-z0-9_-]+(\.[a-z0-9_-]+)*(\.[a-z]{2,4})$/);
+        var t_patt = new RegExp(/^[0]{1}[5,6,7]{1}[0-9]{8}$/);
+
+        if (name.val() == "" || name.val().length < 6) {
+            name.addClass("border-danger");
+            $("#fu_error").html("<span class='text-danger'>S'il vous plaît entrer Le nom de Fournisseur</span>");
+            status = false;
+        } else {
+            name.removeClass("border-danger");
+            $("#fu_error").html("");
+            status = true;
+        }
+        if (!e_patt.test(email.val())) {
+            email.addClass("border-danger");
+            $("#fe_error").html("<span class='text-danger'>Veuillez entrer une adresse email valide</span>");
+            status = false;
+        } else {
+            email.removeClass("border-danger");
+            $("#e_error").html("");
+            status = true;
+        }
+        if (!t_patt.test(tele.val())) {
+            tele.addClass("border-danger");
+            $("#ft_error").html("<span class='text-danger'>Veuillez entrer un numero de telephone valide</span>");
+            status = false;
+        } else {
+            tele.removeClass("border-danger");
+            $("#ft_error").html("");
+            status = true;
+        }
+
+
+        if (status == true) {
+            $(".overlay").show();
+            $.ajax({
+                url: DOMAIN + "/includes/process.php",
+                method: "POST",
+                data: $("#fournisseur_form").serialize(),
+                success: function (data) {
+                    if (data == "FOURNISSEUR_ADDED") {
+                        fetch_four();
+                        window.location.href = encodeURI(DOMAIN + "/dashboard.php?msg=Le Fournisseur est bien Ajouté");
+                    }
+                    else{
+                        alert(data);
+                    }
+                }
+            })
+        }
+    })
+
     //Fetch category
     fetch_category();
     function fetch_category() {
@@ -237,6 +295,20 @@ $(document).ready(function () {
             success: function (data) {
                 var choose = "<option value=''>Choisir un Type</option>";
                 $("#select_brand").html(choose + data);
+            }
+        })
+    }
+
+    //Fetch Fournisseur
+    fetch_four();
+    function fetch_four() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {getFour: 1},
+            success: function (data) {
+                var choose = "<option value=''>Choisir un Fournisseur</option>";
+                $("#select_four").html(choose + data);
             }
         })
     }
@@ -296,55 +368,74 @@ $(document).ready(function () {
         var status = false;
         //var image = $("#image");
         var name = $("#product_name");
-        var selectProduit = $("#select_cat");
-        var selectType = $("#select_Type");
+        var selectCat = $("#select_cat");
+        var selectFour = $("#select_four");
+        var des = $("#product_des");
+        var prixachat = $("#product_pprice");
         var prix = $("#product_price");
         var quantite = $("#product_qty");
+
         var e_patt = new RegExp(/^[1-9]{1}[0-9]*$/);
 
         if (name.val() == "") {
             name.addClass("border-danger");
-            $("#n_error").html("<span class='text-danger'>Entrer le nom de la Categorie</span>");
+            $("#np_error").html("<span class='text-danger'>Entrer le nom de la Categorie</span>");
             status = false;
         } else {
             name.removeClass("border-danger");
-            $("#n_error").html("");
+            $("#np_error").html("");
             status = true;
         }
-        if (selectProduit.val() == "" || selectProduit.val() == "Choisir une Categorie") {
-            selectProduit.addClass("border-danger");
-            $("#c_error").html("<span class='text-danger'>Veuillez sélectionner la categorie de produit</span>");
+        if (selectCat.val() == "") {
+            selectCat.addClass("border-danger");
+            $("#cp_error").html("<span class='text-danger'>Veuillez sélectionner la categorie de produit</span>");
             status = false;
         } else {
-            selectProduit.removeClass("border-danger");
-            $("#c_error").html("");
+            selectCat.removeClass("border-danger");
+            $("#cp_error").html("");
             status = true;
         }
-        if (selectType.val() == "") {
-            selectType.addClass("border-danger");
-            $("#st_error").html("<span class='text-danger'>Veuillez sélectionner le type de produit</span>");
+        if (selectFour.val() == "") {
+            selectFour.addClass("border-danger");
+            $("#fp_error").html("<span class='text-danger'>Veuillez sélectionner un Fournisseurt</span>");
             status = false;
         } else {
-            selectType.removeClass("border-danger");
-            $("#t_error").html("");
+            selectFour.removeClass("border-danger");
+            $("#fp_error").html("");
+            status = true;
+        }
+        if (des.val() == "") {
+            des.addClass("border-danger");
+            status = true;
+        } else {
+            des.removeClass("border-danger");
+            status = true;
+        }
+        if (!e_patt.test(prixachat.val())) {
+            prixachat.addClass("border-danger");
+            $("#prixpa_error").html("<span class='text-danger'>Le Prix d'achat doit être un entie positive</span>");
+            status = false;
+        } else {
+            prixachat.removeClass("border-danger");
+            $("#prixpa_error").html("");
             status = true;
         }
         if (!e_patt.test(prix.val())) {
             prix.addClass("border-danger");
-            $("#prix_error").html("<span class='text-danger'>Le Prix doit être un entie positive</span>");
+            $("#prixp_error").html("<span class='text-danger'>Le Prix doit être un entie positive</span>");
             status = false;
         } else {
             prix.removeClass("border-danger");
-            $("#prix_error").html("");
+            $("#prixp_error").html("");
             status = true;
         }
         if (!e_patt.test(quantite.val())) {
             quantite.addClass("border-danger");
-            $("#q_error").html("<span class='text-danger'>La Quantite doit être un entie positive</span>");
+            $("#qp_error").html("<span class='text-danger'>S'il vous plaît entrer une Quantite valide!</span>");
             status = false;
         } else {
             quantite.removeClass("border-danger");
-            $("#q_error").html("");
+            $("#qp_error").html("");
             status = true;
         }
 
@@ -356,14 +447,15 @@ $(document).ready(function () {
                 data: $("#product_form").serialize(),
                 success: function (data) {
                     if (data == "NEW_PRODUCT_ADDED") {
-                        $("#product_name").val("");
-                        $("#select_cat").val("");
-                        $("#select_brand").val("");
-                        $("#product_price").val("");
-                        $("#product_qty").val("");
+                        /*$("#product_des").val("");
+                         $("#product_name").val("");
+                         $("#select_cat").val("");
+                         $("#select_four").val("");
+                         $("#product_pprice").val("");
+                         $("#product_price").val("");
+                         $("#product_qty").val("");*/
                         window.location.href = encodeURI(DOMAIN + "/dashboard.php?msg=Le Produit ajouter Avec Succès");
                         //alert("Le Produit ajouter Avec Succès");
-
                     } else {
                         console.log(data);
                         alert(data);
@@ -460,8 +552,8 @@ $(document).ready(function () {
                 $("#pp2_error").html("<span class='text-danger'>Le mot de passe n'est pas similaire à l'autre</span>");
                 status = true;
             }
-        }
-        else alert("Il ya des errors dans votre entries!");
+        } else
+            alert("Il ya des errors dans votre entries!");
     })
 
 //Fetch Product Stat

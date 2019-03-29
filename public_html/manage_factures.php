@@ -20,6 +20,7 @@ if (!isset($_SESSION["userid"])) {
         <link rel="stylesheet" href="./DataTable/datatables.min.css" type="text/css">
         <script type="text/javascript" src="./DataTable/datatables.js"></script>
         <script type="text/javascript" src="./DataTable/datatables.min.js"></script>
+        <script type="text/javascript" src="./js/order.js"></script>
     </head>
     <body>
         <!-- Navbar -->
@@ -39,7 +40,8 @@ if (!isset($_SESSION["userid"])) {
                             <th>Payé</th>
                             <th>Reste à payer</th>
                             <th>Type de paiement</th>
-
+                            <th>Modifier</th>
+                            <th>Imprimer</th>
 
                         </tr>
                     </thead>

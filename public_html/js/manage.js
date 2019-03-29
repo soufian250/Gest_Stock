@@ -75,6 +75,19 @@ $(document).ready(function () {
         })
     }
 
+    //Fetch Fournisseur
+    fetch_four();
+    function fetch_four() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {getFour: 1},
+            success: function (data) {
+                var choose = "<option value=''>Choisir un Fournisseur</option>";
+                $("#select_four").html(choose + data);
+            }
+        })
+    }
 
     //Update Category
     $("body").delegate(".edit_cat", "click", function () {
@@ -236,7 +249,9 @@ $(document).ready(function () {
                 $("#pid").val(data["pid"]);
                 $("#update_product").val(data["product_name"]);
                 $("#select_cat").val(data["cid"]);
-                $("#select_brand").val(data["bid"]);
+                $("#select_four").val(data["idfour"]);
+                $("#product_des").val(data["description"]);
+                $("#product_pprice").val(data["purchase_price"]);
                 $("#product_price").val(data["product_price"]);
                 $("#product_qty").val(data["product_stock"]);
 
@@ -263,7 +278,7 @@ $(document).ready(function () {
 
 
     //---------------------Invoice-----------------
-    
+
     manageInvoice(1);
     function manageInvoice(pn) {
         $.ajax({
@@ -414,6 +429,94 @@ $(document).ready(function () {
         })
     })
 
+    //---------------------Fournisseur-----------------
+    manageFour(1);
+    function manageFour(pn) {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {manageFour: 1, pageno: pn},
+            success: function (data) {
+                $("#get_fournisseur").html(data);
+            }
+        })
+    }
+
+    $("body").delegate(".page-link", "click", function () {
+        var pn = $(this).attr("pn");
+        manageFour(pn);
+    })
+
+    $("body").delegate(".del_four", "click", function () {
+        var did = $(this).attr("did");
+        if (confirm("Êtes-vous sûr ? Vous voulez supprimer!")) {
+            $.ajax({
+                url: DOMAIN + "/includes/process.php",
+                method: "POST",
+                data: {deleteFour: 1, id: did},
+                success: function (data) {
+                    if (data == "DELETED") {
+                        alert("Le Fournisseur est supprimé");
+                        manageFour(1);
+                    } else {
+                        alert(data);
+                    }
+
+                }
+            })
+        }
+    })
+
+    //Update Fournisseur data
+    $("body").delegate(".edit_four", "click", function () {
+        var eid = $(this).attr("eid");
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            dataType: "json",
+            data: {updateFour: 1, id: eid},
+            success: function (data) {
+                console.log(data);
+                $("#id").val(data["id"]);
+                $("#fuser").val(data["fourname"]);
+                $("#femail").val(data["email"]);
+                $("#futele").val(data["telephone"]);
+            }
+        })
+    })
+
+    //Update User
+    $("#update_fournisseur_form").on("submit", function () {
+        var tele = $("#futele");
+        var status = true;
+        var t_patt = new RegExp(/^[0]{1}[5,6,7]{1}[0-9]{8}$/);
+
+        if (!t_patt.test(tele.val())) {
+            tele.addClass("border-danger");
+            $("#ft_error").html("<span class='text-danger'>Veuillez entrer un numero de telephone valide</span>");
+            status = false;
+        } else {
+            tele.removeClass("border-danger");
+            $("#ft_error").html("");
+            status = true;
+        }
+        if(status == true)
+        {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: $("#update_fournisseur_form").serialize(),
+            success: function (data) {
+                if (data == "UPDATED") {
+                    alert("L'Utilisateur est modifier avec succès.!");
+                    window.location.href = "";
+                } else {
+                    alert(data);
+                }
+            }
+        })
+    }
+    })
 
 
 })

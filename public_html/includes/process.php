@@ -13,9 +13,18 @@ if (isset($_POST["username"]) AND isset($_POST["email"])) {
     echo $result;
     exit();
 }
+//create Employe
 if (isset($_POST["notes"]) AND isset($_POST["email"])) {
     $user = new User();
     $result = $user->addemployes($_POST["username"], $_POST["email"], $_POST["password1"], $_POST["usertype"], $_POST["notes"]);
+    echo $result;
+    exit();
+}
+
+//create Fournisseur
+if (isset($_POST["ftele"]) AND isset($_POST["femail"])) {
+    $user = new DBOperation();
+    $result = $user->addFournisseur($_POST["fusername"], $_POST["femail"], $_POST["ftele"]);
     echo $result;
     exit();
 }
@@ -55,6 +64,16 @@ if (isset($_POST["getBrand"])) {
     exit();
 }
 
+//Fetch Fournisseur
+if (isset($_POST["getFour"])) {
+    $obj = new DBOperation();
+    $rows = $obj->getAllRecord("fournisseur");
+    foreach ($rows as $row) {
+        echo "<option value='" . $row["id"] . "'>" . $row["fourname"] . "</option>";
+    }
+    exit();
+}
+
 //Add Category
 if (isset($_POST["category_name"]) AND isset($_POST["parent_cat"])) {
     $obj = new DBOperation();
@@ -76,7 +95,7 @@ if (isset($_POST["added_date"]) AND isset($_POST["product_name"])) {
     //$image = $_FILES['image']['name'];
     //$target = "images/data/".basename($image);
     $obj = new DBOperation();
-    $result = $obj->addProduct($_POST["select_cat"], $_POST["select_brand"], "image", $_POST["product_name"], $_POST["product_price"], $_POST["product_qty"], $_POST["added_date"]);
+    $result = $obj->addProduct($_POST["select_cat"], $_POST["select_four"], $_POST["product_name"], $_POST["product_des"], $_POST["product_pprice"], $_POST["product_price"], $_POST["product_qty"], $_POST["added_date"]);
     echo $result;
     //move_uploaded_file($_FILES['image']['tmp_name'], $target);
     exit();
@@ -206,7 +225,7 @@ if (isset($_POST["manageProduct"])) {
             ?>
             <tr>
                 <td><?php echo $n; ?></td>
-                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];   ?>" width="50" height="50"></td>-->
+                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];          ?>" width="50" height="50"></td>-->
                 <td><?php echo $row["product_name"]; ?></td>
                 <td><?php echo $row["category_name"]; ?></td>
                 <td><?php echo $row["description"]; ?></td>
@@ -214,8 +233,8 @@ if (isset($_POST["manageProduct"])) {
                 <td><?php echo $row["product_price"]; ?></td>
                 <td><?php echo $row["product_stock"]; ?></td>
                 <td><?php echo $row["added_date"]; ?></td>
-                <td><a href="#" class="btn btn-success btn-sm">Active</a></td>
                 <td><?php echo $row["fourname"]; ?></td>
+                <td><a href="#" class="btn btn-success btn-sm">Active</a></td>
                 <td>
                     <a href="#" did="<?php echo $row['pid']; ?>" class="btn btn-danger btn-sm del_product"><i class="fa fa-trash-alt">&nbsp;</i>Delete</a>
                     <a href="#" eid="<?php echo $row['pid']; ?>" data-toggle="modal" data-target="#form_products" class="btn btn-info btn-sm edit_product"><i class="fa fa-pencil-alt">&nbsp;</i>Edit</a>
@@ -252,11 +271,13 @@ if (isset($_POST["update_product"])) {
     $id = $_POST["pid"];
     $name = $_POST["update_product"];
     $cat = $_POST["select_cat"];
-    $brand = $_POST["select_brand"];
+    $des = $_POST["product_des"];
+    $four = $_POST["select_four"];
+    $pprice = $_POST["product_pprice"];
     $price = $_POST["product_price"];
     $qty = $_POST["product_qty"];
     $date = $_POST["added_date"];
-    $result = $m->update_record("products", ["pid" => $id], ["cid" => $cat, "bid" => $brand, "product_name" => $name, "product_price" => $price, "product_stock" => $qty, "added_date" => $date]);
+    $result = $m->update_record("products", ["pid" => $id], ["cid" => $cat, "idfour" => $four, "product_name" => $name, "description" => $des, "purchase_price" => $pprice, "product_price" => $price, "product_stock" => $qty, "added_date" => $date]);
     echo $result;
 }
 
@@ -334,24 +355,39 @@ if (isset($_POST["manageInvoice"])) {
         //$n = (($_POST["pageno"] - 1) * 10) + 1;
         foreach ($rows as $row) {
             ?>
-            <tr>
-                <!--<td><?php //echo $n;   ?></td>-->
+            <tr  class="text-center">
+                <!--<td><?php //echo $n;          ?></td>-->
                 <td><?php echo $row["customer_name"]; ?></td>
                 <td><?php echo $row["order_date"]; ?></td>
                 <td><?php echo $row["net_total"]; ?></td>
                 <td><?php echo $row["paid"]; ?></td>
                 <td><?php echo $row["due"]; ?></td>
                 <td><?php echo $row["payment_type"]; ?></td>
-                <!--<td>
-                    <a href="#" did="<?php //echo $row['pid'];   ?>" class="btn btn-danger btn-sm del_product">Delete</a>
-                    <a href="#" eid="<?php //echo $row['pid'];   ?>" data-toggle="modal" data-target="#form_products" class="btn btn-info btn-sm edit_product">Edit</a>
-                </td>-->
+                <td>
+                    <a href="#" eid="<?php echo $row['pid']; ?>" data-toggle="modal" data-target="#form_products" class="btn btn-info btn-sm edit_invoice"><i class="fa fa-pencil-alt">&nbsp;</i>Edit</a>
+                </td>
+                <?php
+                if ($row["due"] == 0) {
+                    ?>
+                    <td>
+                        <a id='print_facture' eid="<?php echo $row['pid']; ?>" class="btn btn-success btn-sm"><i class="fas fa-print">&nbsp;</i>Facture</a>
+                    </td>
+                    <?php
+                } else {
+                    ?>
+                    <td>
+                        <a id="print_devis" eid="<?php echo $row['pid']; ?>" class="btn btn-success btn-sm"><i class="fas fa-print">&nbsp;</i>Devis</a>
+                    </td>
+                        <?php
+                    }
+                    ?>
+
             </tr>
             <?php
             //$n++;
         }
         ?>
-        <!--<tr><td colspan="8"><?php //echo $pagination;   ?></td></tr>-->
+        <!--<tr><td colspan="8"><?php //echo $pagination;          ?></td></tr>-->
         <?php
         exit();
     }
@@ -447,7 +483,64 @@ if (isset($_POST["user"])) {
     echo $result;
 }
 
+//----------------Fournisseur---------------------
 
+if (isset($_POST["manageFour"])) {
+    $m = new Manage();
+    $result = $m->manageRecordWithPagination("fournisseur", $_POST["pageno"]);
+    $rows = $result["rows"];
+    $pagination = $result["pagination"];
+    if (count($rows) > 0) {
+        $n = (($_POST["pageno"] - 1) * 6) + 1;
+        foreach ($rows as $row) {
+            ?>
+            <tr>
+                <td><?php echo $n; ?></td>
+                <td><?php echo $row["fourname"]; ?></td>
+                <td><?php echo $row["email"]; ?></td>
+                <td><?php echo $row["telephone"]; ?></td>
+                <td>
+                    <a href="#" did="<?php echo $row['id']; ?>" class="btn btn-danger btn-sm del_four"><i class="fa fa-user-slash">&nbsp;</i>Delete</a>
+                    <a href="#" eid="<?php echo $row['id']; ?>" data-toggle="modal" data-target="#update_fournisseur" class="btn btn-info btn-sm edit_four"><i class="fa fa-pencil-alt">&nbsp;</i>Edit</a>
+                </td>
+            </tr>
+            <?php
+            $n++;
+        }
+        ?>
+        <tr><td colspan="5"><?php echo $pagination; ?></td></tr>
+        <?php
+        exit();
+    }
+}
+
+//Delete 
+if (isset($_POST["deleteFour"])) {
+    $m = new Manage();
+    $result = $m->deleteRecord("fournisseur", "id", $_POST["id"]);
+    echo $result;
+}
+
+//get data for fournisseur
+if (isset($_POST["updateFour"])) {
+    $m = new Manage();
+    $result = $m->getSingleRecord("fournisseur", "id", $_POST["id"]);
+    echo json_encode($result);
+    exit();
+}
+
+//Update Record after getting data
+if (isset($_POST["fuser"])) {
+    $m = new Manage();
+    $id = $_POST["id"];
+    $name = $_POST["fuser"];
+    $email = $_POST["femail"];
+    $tele = $_POST["futele"];
+
+    $result = $m->update_record("fournisseur", ["id" => $id], ["fourname" => $name, "email" => $email, "telephone" => $tele]);
+    echo $result;
+}
+//----------------Stat------------------
 //Product Stat
 if (isset($_POST["statProduit"])) {
     $obj = new DBOperation();
