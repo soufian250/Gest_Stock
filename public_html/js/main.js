@@ -445,7 +445,7 @@ $(document).ready(function () {
             statusq = true;
         }
 
-        if (statusn == trus && statusc == trus && statusnf == trus && statusdes == trus && statuspa == trus && statuspv == trus && statusq == trus)
+        if (statusn == true && statusc == true && statusnf == true && statusdes == true && statuspa == true && statuspv == true && statusq == true)
         {
             $.ajax({
                 url: DOMAIN + "/includes/process.php",
