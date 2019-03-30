@@ -36,7 +36,7 @@ class Manage {
         return ["rows" => $rows, "pagination" => $a["pagination"]];
     }
 
-    public function manageUsers($table, $pno , $email) {
+    public function manageUsers($table, $pno, $email) {
         $a = $this->pagination($this->con, $table, $pno, 6);
         if ($table == "user") {
             $sql = "SELECT id,username,email,usertype,register_date,last_login from user where email not like '" . $email . "' " . $a["limit"];
@@ -181,6 +181,18 @@ class Manage {
         }
     }
 
+    public function manageInvoice($id) {
+        $sql = "SELECT * FROM `invoice_details` WHERE invoice_no = " . $id . "";
+        $result = $this->con->query($sql) or die($this->con->error);
+        $rows = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+        }
+        return ["rows" => $rows];
+    }
+
 }
 
 //$obj = new Manage();
@@ -189,4 +201,5 @@ class Manage {
 //echo $obj->deleteRecord("categories","cid",14);
 //print_r($obj->getSingleRecord("categories","cid",1));
 //echo $obj->update_record("categories",["cid"=>1],["parent_cat"=>0,"category_name"=>"Electro","status"=>1]);
+//print_r($obj->manageInvoice(6)) ;
 ?>

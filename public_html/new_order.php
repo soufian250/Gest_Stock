@@ -35,7 +35,7 @@ if (!isset($_SESSION["userid"])) {
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label" align="right">Date de commande</label>
                                     <div class="col-sm-6">
-                                        <input type="text" id="order_date" name="order_date" readonly class="form-control form-control-sm" value="<?php echo date("d-m-Y"); ?>">
+                                        <input type="text" id="order_date" name="order_date" readonly class="form-control form-control-sm" value="<?php echo date("d/m/Y"); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -132,7 +132,7 @@ if (!isset($_SESSION["userid"])) {
 
                                 <center>
                                     <input type="submit" id="order_form" style="width:160px;" class="btn btn-info" value="Facturer" title="Passer une Facture">
-                                    <button id="print_invoice" style="width:160px;" class="btn btn-success d-none"><i class="fas fa-print">&nbsp;</i>Imprimer facture</button>
+                                    <button id="print_invoice" style="width:160px;" class="btn btn-success d-none"><i class="fas fa-print">&nbsp;</i>Imprimer Devis</button>
                                 </center>
 
 

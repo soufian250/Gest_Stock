@@ -1,7 +1,5 @@
 $(document).ready(function () {
     var DOMAIN = "http://localhost/inv_project/public_html";
-    var invoice;
-    var invoice_id;
 
     addNewRow();
 
@@ -107,7 +105,7 @@ $(document).ready(function () {
 
     $("#order_form").click(function () {
 
-        invoice = $("#get_order_data").serialize();
+        var invoice = $("#get_order_data").serialize();
         var sucess = $("#order_form");
         var print = $("#print_invoice");
         if ($("#cust_name").val() === "") {
@@ -121,45 +119,27 @@ $(document).ready(function () {
                 data: $("#get_order_data").serialize(),
                 success: function (data) {
 
-                    if (data < 0) {
+                    if (data == "ORDER_FAIL_TO_COMPLETE") {
+                        alert("Quantite Non Disponible ");
+
+                    } else if (data < 0){
                         alert(data);
                     } else {
-                        invoice_id = data;
                         $("#get_order_data").trigger("reset");
 
-                        if (confirm("Do u want to print invoice ?")) {
-                            window.location.href = DOMAIN + "/includes/invoice_bill.php?invoice_no=" + data + "&" + invoice;
-                        }
+                        alert("Facture bien Enregistrer");
+
                         sucess.addClass("d-none");
                         print.removeClass("d-none");
 
                         $("#print_invoice").click(function () {
-                            window.location.href = DOMAIN + "/includes/invoice_bill.php?invoice_no=" + data + "&" + invoice;
+                            window.location.href = DOMAIN + "/includes/devis_in_create.php?invoice_no=" + data + "&" + invoice;
                             sucess.removeClass("d-none");
                             print.addClass("d-none");
                         })
                     }
-
-
-
-
-
-
                 }
             });
         }
-
-
-
-
-
     });
-    $("#print_facture").click(function () {
-        window.location.href = DOMAIN + "/includes/invoice_bill.php?invoice_no=" + invoice_id + "&" + invoice;
-    })
-    $("#print_devis").click(function () {
-        window.location.href = DOMAIN + "/includes/invoice_bill.php?invoice_no=" + invoice_id + "&" + invoice;
-    })
-
-
 });

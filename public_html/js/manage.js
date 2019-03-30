@@ -40,8 +40,6 @@ $(document).ready(function () {
 
                 }
             })
-        } else {
-
         }
     })
 
@@ -316,44 +314,68 @@ $(document).ready(function () {
      }
      })
      
-     //Update Invoice
-     $("body").delegate(".edit_invoice","click",function(){
-     var eid = $(this).attr("eid");
-     $.ajax({
-     url : DOMAIN+"/includes/process.php",
-     method : "POST",
-     dataType : "json",
-     data : {updateProduct:1,id:eid},
-     success : function(data){
-     console.log(data);
-     $("#pid").val(data["pid"]);
-     $("#update_product").val(data["product_name"]);
-     $("#select_cat").val(data["cid"]);
-     $("#select_brand").val(data["bid"]);
-     $("#product_price").val(data["product_price"]);
-     $("#product_qty").val(data["product_stock"]);
-     
-     }
-     })
-     })
-     
-     //Update Invoice
-     $("#update_Invoice_form").on("submit",function(){
-     $.ajax({
-     url : DOMAIN+"/includes/process.php",
-     method : "POST",
-     data : $("#update_product_form").serialize(),
-     success : function(data){
-     if (data == "UPDATED") {
-     alert("Product Updated Successfully..!");
-     window.location.href = "";
-     }else{
-     alert(data);
-     }
-     }
-     })
-     })
      */
+    //Update Invoice
+    $("body").delegate(".edit_invoice", "click", function () {
+        var eid = $(this).attr("eid");
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            dataType: "json",
+            data: {updateInvoice: 1, id: eid},
+            success: function (data) {
+                console.log(data);
+                $("#invoice_id").val(data["invoice_no"]);
+                $("#net_total").val(data["net_total"]);
+                $("#paid").val(data["paid"]);
+                $("#due").val(data["due"]);
+            }
+        })
+    })
+
+    //Update Invoice
+    $("#update_invoice_form").on("submit", function () {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: $("#update_invoice_form").serialize(),
+            success: function (data) {
+                if (data == "UPDATED") {
+                    alert("Le Mis à Jour bien Effectuer ..!");
+                    window.location.href = "";
+                } else {
+                    alert(data);
+                }
+            }
+        })
+    })
+    
+    function calculate(paid) {
+        var paid_amt = 0;
+        var due = 0;
+        var net_total = 0;
+        net_total = $("#net_total").val();
+        var paid_amt = paid;
+        var due = net_total - paid_amt;
+
+        $("#due").val(due);
+
+    }
+    
+    $("#paid").keyup(function () {
+        var paid = $(this).val();
+        calculate(paid);
+    })
+
+    $("body").delegate(".print_facture", "click", function () {
+        var id_facture = $(this).attr("fid");
+        window.location.href = DOMAIN + "/includes/invoice_bill.php?id_facture=" + id_facture;
+    })
+
+    $("body").delegate(".print_devis", "click", function () {
+        var id_devis = $(this).attr("fid");
+        window.location.href = DOMAIN + "/includes/devis_bill.php?id_devis=" + id_devis;
+    })
     //---------------------Users-----------------
     manageUser(1);
     function manageUser(pn) {
@@ -500,22 +522,22 @@ $(document).ready(function () {
             $("#ft_error").html("");
             status = true;
         }
-        if(status == true)
+        if (status == true)
         {
-        $.ajax({
-            url: DOMAIN + "/includes/process.php",
-            method: "POST",
-            data: $("#update_fournisseur_form").serialize(),
-            success: function (data) {
-                if (data == "UPDATED") {
-                    alert("L'Utilisateur est modifier avec succès.!");
-                    window.location.href = "";
-                } else {
-                    alert(data);
+            $.ajax({
+                url: DOMAIN + "/includes/process.php",
+                method: "POST",
+                data: $("#update_fournisseur_form").serialize(),
+                success: function (data) {
+                    if (data == "UPDATED") {
+                        alert("L'Utilisateur est modifier avec succès.!");
+                        window.location.href = "";
+                    } else {
+                        alert(data);
+                    }
                 }
-            }
-        })
-    }
+            })
+        }
     })
 
 

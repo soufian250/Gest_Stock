@@ -364,19 +364,19 @@ if (isset($_POST["manageInvoice"])) {
                 <td><?php echo $row["due"]; ?></td>
                 <td><?php echo $row["payment_type"]; ?></td>
                 <td>
-                    <a href="#" eid="<?php echo $row['pid']; ?>" data-toggle="modal" data-target="#form_products" class="btn btn-info btn-sm edit_invoice"><i class="fa fa-pencil-alt">&nbsp;</i>Edit</a>
+                    <a href="#" eid="<?php echo $row['invoice_no']; ?>" data-toggle="modal" data-target="#form_invoice" class="btn btn-info btn-sm edit_invoice"><i class="fa fa-pencil-alt">&nbsp;</i>Edit</a>
                 </td>
                 <?php
                 if ($row["due"] == 0) {
                     ?>
                     <td>
-                        <a href="#" id="print_facture" class="btn btn-success btn-sm"><i class="fas fa-print">&nbsp;</i>Facture</a>
+                        <a href="#" fid="<?php echo $row['invoice_no']; ?>" class="btn btn-success btn-sm print_facture"><i class="fas fa-print">&nbsp;</i>Facture</a>
                     </td>
                     <?php
                 } else {
                     ?>
                     <td>
-                        <a href="#" id="print_devis" class="btn btn-success btn-sm"><i class="fas fa-print">&nbsp;</i>Devis</a>
+                        <a href="#" fid="<?php echo $row['invoice_no']; ?>" class="btn btn-success btn-sm print_devis"><i class="fas fa-print">&nbsp;</i>Devis</a>
                     </td>
                         <?php
                     }
@@ -396,29 +396,26 @@ if (isset($_POST["manageInvoice"])) {
 //Delete 
 if (isset($_POST["deleteInvoice"])) {
     $m = new Manage();
-    $result = $m->deleteRecord("products", "pid", $_POST["id"]);
+    $result = $m->deleteRecord("invoice", "did", $_POST["id"]);
     echo $result;
 }
 
-//Update Product
+//Get Invoice Data
 if (isset($_POST["updateInvoice"])) {
     $m = new Manage();
-    $result = $m->getSingleRecord("products", "pid", $_POST["id"]);
+    $result = $m->getSingleRecord("invoice", "invoice_no", $_POST["id"]);
     echo json_encode($result);
     exit();
 }
 
 //Update Record after getting data
-if (isset($_POST["update_Invoice"])) {
+if (isset($_POST["invoice_id"])) {
     $m = new Manage();
-    $id = $_POST["pid"];
-    $name = $_POST["update_product"];
-    $cat = $_POST["select_cat"];
-    $brand = $_POST["select_brand"];
-    $price = $_POST["product_price"];
-    $qty = $_POST["product_qty"];
-    $date = $_POST["added_date"];
-    $result = $m->update_record("products", ["pid" => $id], ["cid" => $cat, "bid" => $brand, "product_name" => $name, "product_price" => $price, "product_stock" => $qty, "added_date" => $date]);
+    $id = $_POST["invoice_id"];
+    $total = $_POST["net_total"];
+    $paid = $_POST["paid"];
+    $due = $_POST["due"];
+    $result = $m->update_record("invoice", ["invoice_no" => $id], ["net_total" => $total, "paid" => $paid, "due" => $due]);
     echo $result;
 }
 
