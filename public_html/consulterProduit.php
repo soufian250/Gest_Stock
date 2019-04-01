@@ -21,55 +21,45 @@ if (!isset($_SESSION["userid"])) {
         <script type="text/javascript" src="./DataTable/datatables.js"></script>
         <script type="text/javascript" src="./DataTable/datatables.min.js"></script>
         <link type="text/css" rel="stylesheet" href="./css/titles.css">
+
     </head>
     <body>
         <!-- Navbar -->
         <?php include_once("./templates/header.php"); ?>
         <br/><br/>
-        <h1 align="center" class="titleH1">Liste de Factures</h1>
-        <br/>
         <div class="container">
-            <table id="invoice_table" class="table table-striped table-bordered text-center">
+            <h1 class="titleH1" style="text-align: center;">Liste De Produits</h1>
+            <br>
+            <table class="table table-hover table-bordered text-center" id="produit_table">
                 <thead>
                     <tr>
-                        <!--th>#</th>-->
-                        <th>Nom de Client</th>
-                        <th>Date de commande</th>
-                        <th>Prix Totale</th>
-                        <th>Payé</th>
-                        <th>Reste à payer</th>
-                        <th>Type de paiement</th>
-                        <th>Modifier</th>
-                        <th>Imprimer</th>
-
+                        <th>#</th>
+                        <!--<th>Photo</th>-->
+                        <th>Produit</th>
+                        <th>Categorie</th>
+                        <th>Description</th>
+                        <th>Prix de vente</th>
+                        <th>Quantite</th>
+                        <th>Date d'Ajout</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
-                <tbody id="get_invoice">
-                  <!--<tr>
-                    <td>1</td>
-                    <td>Electronics</td>
-                    <td>Root</td>
-                    <td><a href="#" class="btn btn-success btn-sm">Active</a></td>
-                    <td>
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                            <a href="#" class="btn btn-info btn-sm">Edit</a>
-                    </td>
-                  </tr>-->
+                <tbody id="get_p_consulter">
+
                 </tbody>
             </table>
         </div>
 
 
         <?php
-        include_once("./templates/update_invoice.php");
+        include_once("./templates/update_products.php");
         ?>
 
 
     </body>
-
 </html>
 <script>
     $(document).ready(function () {
-        $('#invoice_table').DataTable();
+        $('#produit_table').DataTable();
     });
 </script>

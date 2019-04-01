@@ -122,15 +122,17 @@ $(document).ready(function () {
                     if (data == "ORDER_FAIL_TO_COMPLETE") {
                         alert("Quantite Non Disponible ");
 
-                    } else if (data < 0){
+                    } else if (data < 0) {
                         alert(data);
                     } else {
                         $("#get_order_data").trigger("reset");
 
                         alert("Facture bien Enregistrer");
-
-                        sucess.addClass("d-none");
-                        print.removeClass("d-none");
+                        
+                        if (confirm("Tu veux imprimer Un Devis!?")) {
+                            sucess.addClass("d-none");
+                            print.removeClass("d-none");
+                        }
 
                         $("#print_invoice").click(function () {
                             window.location.href = DOMAIN + "/includes/devis_in_create.php?invoice_no=" + data + "&" + invoice;

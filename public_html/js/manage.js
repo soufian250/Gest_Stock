@@ -273,7 +273,18 @@ $(document).ready(function () {
             }
         })
     })
-
+//Fetch Products for Employer
+    consulterProduit();
+    function consulterProduit() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {consulterProduct: 1},
+            success: function (data) {
+                $("#get_p_consulter").html(data);
+            }
+        })
+    }
 
     //---------------------Invoice-----------------
 
@@ -349,7 +360,7 @@ $(document).ready(function () {
             }
         })
     })
-    
+
     function calculate(paid) {
         var paid_amt = 0;
         var due = 0;
@@ -361,10 +372,18 @@ $(document).ready(function () {
         $("#due").val(due);
 
     }
-    
+
     $("#paid").keyup(function () {
-        var paid = $(this).val();
-        calculate(paid);
+        var paid = $(this);
+        if (isNaN(paid.val())) {
+            alert("S'il vous plaît entrer un Montant valide");
+            paid.val("");
+        } else if(paid.val() * 1>$("#net_total").val() * 1) {
+            alert("Pardon ! Cet Montant est Invalide!");
+            paid.val("")
+        }else{
+           calculate(paid.val()); 
+        }
     })
 
     $("body").delegate(".print_facture", "click", function () {

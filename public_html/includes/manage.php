@@ -192,6 +192,30 @@ class Manage {
         }
         return ["rows" => $rows];
     }
+    
+        public function consulterProduit() {
+        $sql = "SELECT p.pid,p.product_name,c.category_name,p.description,p.product_price,p.product_stock,p.added_date,p.p_status FROM products p,categories c WHERE p.cid = c.cid ";
+        $result = $this->con->query($sql) or die($this->con->error);
+        $rows = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+        }
+        return ["rows" => $rows];
+    }
+    
+    public function getCatProStat($id) {
+        $pre_stmt = $this->con->prepare("SELECT  C.cid FROM categories C inner JOIN products P on C.cid = P.cid WHERE C.cid = ".$id."");
+        $pre_stmt->execute() or die($this->con->error);
+        $result = $pre_stmt->get_result();
+        if ($result->num_rows > 0) {
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+    
 
 }
 
@@ -202,4 +226,5 @@ class Manage {
 //print_r($obj->getSingleRecord("categories","cid",1));
 //echo $obj->update_record("categories",["cid"=>1],["parent_cat"=>0,"category_name"=>"Electro","status"=>1]);
 //print_r($obj->manageInvoice(6)) ;
+//echo $obj ->getCatProStat(1);
 ?>

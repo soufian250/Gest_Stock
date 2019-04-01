@@ -82,7 +82,7 @@ class User {
     }
 
     public function userLogin($email, $password) {
-        $pre_stmt = $this->con->prepare("SELECT id,email,username,usertype,password,last_login FROM user WHERE email = ?");
+        $pre_stmt = $this->con->prepare("SELECT id,email,username,usertype,password,last_login,notes FROM user WHERE email = ?");
         $pre_stmt->bind_param("s", $email);
         $pre_stmt->execute() or die($this->con->error);
         $result = $pre_stmt->get_result();
@@ -97,6 +97,7 @@ class User {
                 $_SESSION["username"] = $row["username"];
                 $_SESSION["role"] = $row["usertype"];
                 $_SESSION["last_login"] = $row["last_login"];
+                $_SESSION["notes"] = $row["notes"];
 
                 //Here we are updating user last login time when he is performing login
                 $last_login = date("d/m/Y H:i:s");

@@ -15,7 +15,7 @@
                         <div class="form-group col-md-6">
                             <input type="hidden" name="id" id="id" value=""/>
                             <label style='margin-left: 20%;'>Modification Date</label>
-                            <input type="text" class="form-control" name="date" id="added_date" value="<?php echo date("Y-m-d"); ?>" readonly/>
+                            <input type="text" class="form-control text-center" name="date" id="added_date" value="<?php echo date("d/m/Y"); ?>" readonly/>
                         </div>
                         <div class='col-md-3'></div>
                     </div>
@@ -34,8 +34,12 @@
                         <select name="usertype" class="form-control" id="usertype">
                             <option value="">Sélectionner le type de l'utilisateur</option>
                             <option value="Admin">Admin</option>
-                            <option value="Other">Employer</option>
+                            <option value="Employe">Employe</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <textarea id="unotes" name="unotes" class="form-control"></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Modifier</button>

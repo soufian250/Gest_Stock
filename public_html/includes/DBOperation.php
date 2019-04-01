@@ -68,7 +68,12 @@ class DBOperation {
     }
 
     public function getAllRecord($table) {
-        $pre_stmt = $this->con->prepare("SELECT * FROM " . $table);
+        if($table == "categories"){
+            $query = "SELECT * FROM " . $table . " WHERE parent_cat != '' ";
+        }else{
+            $query = "SELECT * FROM " . $table;
+        }
+        $pre_stmt = $this->con->prepare($query);
         $pre_stmt->execute() or die($this->con->error);
         $result = $pre_stmt->get_result();
         $rows = array();

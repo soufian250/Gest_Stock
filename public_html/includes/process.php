@@ -14,9 +14,9 @@ if (isset($_POST["username"]) AND isset($_POST["email"])) {
     exit();
 }
 //create Employe
-if (isset($_POST["notes"]) AND isset($_POST["email"])) {
+if (isset($_POST["notes"]) AND isset($_POST["emailp"])) {
     $user = new User();
-    $result = $user->addemployes($_POST["username"], $_POST["email"], $_POST["password1"], $_POST["usertype"], $_POST["notes"]);
+    $result = $user->addemployes($_POST["usernamep"], $_POST["emailp"], $_POST["password1"], $_POST["usertype"], $_POST["notes"]);
     echo $result;
     exit();
 }
@@ -110,12 +110,27 @@ if (isset($_POST["manageCategory"])) {
     if (count($rows) > 0) {
         $n = (($_POST["pageno"] - 1) * 5) + 1;
         foreach ($rows as $row) {
+            $result = $m->getCatProStat($row['cid']);
             ?>
             <tr>
                 <td><?php echo $n; ?></td>
                 <td><?php echo $row["category"]; ?></td>
                 <td><?php echo $row["parent"]; ?></td>
-                <td><a href="#" class="btn btn-success btn-sm">Active</a></td>
+                <?php
+                if ($row["parent"] == "") {
+                    ?>
+                    <td><a href="#" class="btn btn-warning btn-sm">Sup-Categorie</a></td>
+                    <?php
+                } else if ($result == 1) {
+                    ?>
+                    <td><a href="#" class="btn btn-success btn-sm">Active</a></td>
+                    <?php
+                } else {
+                    ?>
+                    <td><a href="#" class="btn btn-danger btn-sm">Pas Active</a></td>
+                    <?php
+                }
+                ?>
                 <td>
                     <a href="#" did="<?php echo $row['cid']; ?>" class="btn btn-danger btn-sm del_cat"><i class="fa fa-trash-alt">&nbsp;</i>Delete</a>
                     <a href="#" eid="<?php echo $row['cid']; ?>" data-toggle="modal" data-target="#form_category" class="btn btn-info btn-sm edit_cat"><i class="fa fa-pencil-alt">&nbsp;</i>Edit</a>
@@ -225,7 +240,7 @@ if (isset($_POST["manageProduct"])) {
             ?>
             <tr>
                 <td><?php echo $n; ?></td>
-                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];          ?>" width="50" height="50"></td>-->
+                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];              ?>" width="50" height="50"></td>-->
                 <td><?php echo $row["product_name"]; ?></td>
                 <td><?php echo $row["category_name"]; ?></td>
                 <td><?php echo $row["description"]; ?></td>
@@ -234,7 +249,18 @@ if (isset($_POST["manageProduct"])) {
                 <td><?php echo $row["product_stock"]; ?></td>
                 <td><?php echo $row["added_date"]; ?></td>
                 <td><?php echo $row["fourname"]; ?></td>
-                <td><a href="#" class="btn btn-success btn-sm">Active</a></td>
+                <?php
+                if ($row["product_stock"] == 0) {
+                    ?>
+                    <td><a href="#" class="btn btn-danger btn-sm">Indisponible</a></td>
+
+                    <?php
+                } else {
+                    ?>
+                    <td><a href="#" class="btn btn-success btn-sm">Disponible</a></td>
+                    <?php
+                }
+                ?>
                 <td>
                     <a href="#" did="<?php echo $row['pid']; ?>" class="btn btn-danger btn-sm del_product"><i class="fa fa-trash-alt">&nbsp;</i>Delete</a>
                     <a href="#" eid="<?php echo $row['pid']; ?>" data-toggle="modal" data-target="#form_products" class="btn btn-info btn-sm edit_product"><i class="fa fa-pencil-alt">&nbsp;</i>Edit</a>
@@ -279,6 +305,45 @@ if (isset($_POST["update_product"])) {
     $date = $_POST["added_date"];
     $result = $m->update_record("products", ["pid" => $id], ["cid" => $cat, "idfour" => $four, "product_name" => $name, "description" => $des, "purchase_price" => $pprice, "product_price" => $price, "product_stock" => $qty, "added_date" => $date]);
     echo $result;
+}
+
+//Fetch Produit For Employe
+if (isset($_POST["consulterProduct"])) {
+    $m = new Manage();
+    $result = $m->consulterProduit();
+    $rows = $result["rows"];
+    if (count($rows) > 0) {
+        $n = 1;
+        foreach ($rows as $row) {
+            ?>
+            <tr>
+                <td><?php echo $n; ?></td>
+                <td><?php echo $row["product_name"]; ?></td>
+                <td><?php echo $row["category_name"]; ?></td>
+                <td><?php echo $row["description"]; ?></td>
+                <td><?php echo $row["product_price"]; ?></td>
+                <td><?php echo $row["product_stock"]; ?></td>
+                <td><?php echo $row["added_date"]; ?></td>
+                <?php
+                if ($row["product_stock"] == 0) {
+                    ?>
+                    <td><a href="#" class="btn btn-danger btn-sm">Indisponible</a></td>
+
+                    <?php
+                } else {
+                    ?>
+                    <td><a href="#" class="btn btn-success btn-sm">Disponible</a></td>
+                    <?php
+                }
+                ?>
+            </tr>
+            <?php
+            $n++;
+        }
+        ?>
+        <?php
+        exit();
+    }
 }
 
 //-------------------------Order Processing--------------
@@ -356,7 +421,7 @@ if (isset($_POST["manageInvoice"])) {
         foreach ($rows as $row) {
             ?>
             <tr  class="text-center">
-                <!--<td><?php //echo $n;          ?></td>-->
+                <!--<td><?php //echo $n;              ?></td>-->
                 <td><?php echo $row["customer_name"]; ?></td>
                 <td><?php echo $row["order_date"]; ?></td>
                 <td><?php echo $row["net_total"]; ?></td>
@@ -378,16 +443,16 @@ if (isset($_POST["manageInvoice"])) {
                     <td>
                         <a href="#" fid="<?php echo $row['invoice_no']; ?>" class="btn btn-success btn-sm print_devis"><i class="fas fa-print">&nbsp;</i>Devis</a>
                     </td>
-                        <?php
-                    }
-                    ?>
+                    <?php
+                }
+                ?>
 
             </tr>
             <?php
             //$n++;
         }
         ?>
-        <!--<tr><td colspan="8"><?php //echo $pagination;          ?></td></tr>-->
+        <!--<tr><td colspan="8"><?php //echo $pagination;              ?></td></tr>-->
         <?php
         exit();
     }
@@ -475,8 +540,9 @@ if (isset($_POST["user"])) {
     $email = $_POST["email"];
     $usertype = $_POST["usertype"];
     $date = $_POST["date"];
+    $notes = $_POST["unotes"];
 
-    $result = $m->update_record("user", ["id" => $id], ["username" => $name, "email" => $email, "usertype" => $usertype, "register_date" => $date]);
+    $result = $m->update_record("user", ["id" => $id], ["username" => $name, "email" => $email, "usertype" => $usertype, "register_date" => $date, "notes" => $notes]);
     echo $result;
 }
 

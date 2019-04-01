@@ -3,6 +3,8 @@ include_once("./database/constants.php");
 
 if (!isset($_SESSION["userid"])) {
     header("location:" . DOMAIN . "/");
+} else if ($_SESSION["role"] == "Employe") {
+    header("location:" . DOMAIN . "/employeField.php");
 }
 
 /* $db = mysqli_connect("localhost", "root", "", "project_inv");
@@ -98,7 +100,7 @@ if (!isset($_SESSION["userid"])) {
                         <img class="card-img-top mx-auto" style="width:60%;" src="./images/admin.png" alt="Card image cap">
                         <div class="card-body">
                             <h4 class="card-title">Profil Informations</h4>
-                            <p class="card-text"><i class="fa fa-user">&nbsp;</i><?php echo $_SESSION["username"] ?></p>
+                            <p class="card-text"><i class="fa fa-user">&nbsp;&nbsp;</i><?php echo $_SESSION["username"] ?></p>
                             <p class="card-text"><i class="fa fa-user-shield">&nbsp;</i><?php echo $_SESSION["role"] ?></p>
                             <p class="card-text"><i class="far fa-calendar-check">&nbsp;</i>Dernière Login : <?php echo $_SESSION["last_login"]; ?></p>
                             <a href="#" data-toggle="modal" data-target="#form_profil" class="btn btn-primary"><i class="fa fa-edit">&nbsp;</i>Edit Profile</a>
@@ -189,6 +191,22 @@ if (!isset($_SESSION["userid"])) {
             <div class="row">
                 <div class="col-md-4">
                     <div class="card text-center">
+                        <div class="card-body" style="box-shadow:0 0 15px 0 lightgrey;">
+                            <h4 class="card-title">Fournisseur</h4>
+                            <p class="card-text">Ici, vous pouvez gérer vos employés ajouter un nouveau supprimer ou mettre à jour.</p>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <a href="#" data-toggle="modal" data-target="#form_fournisseur" class="btn btn-primary"><i class="fa fa-plus">&nbsp;</i>Ajouter</a>
+                                    <a href="manage_fournisseur.php" class="btn btn-secondary"><i class="fa fa-edit">&nbsp;</i>Gérer</a>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center">
                         <div class="card-body text-center" style="box-shadow:0 0 15px 0 lightgrey;">
                             <h4 class="card-title">Nouvelles commandes</h4>
                             <p class="card-text">Ici, vous pouvez faire des factures et créer de nouvelles commandes</p>
@@ -198,22 +216,6 @@ if (!isset($_SESSION["userid"])) {
                                 <div class="col-md-2"></div>
                             </div>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body text-center" style="box-shadow:0 0 15px 0 lightgrey;">
-                            <h4 class="card-title">Factures</h4>
-                            <p class="card-text">Ici, vous pouvez aperçu vos factures et les gérer.</p>
-
-                            <!--<div class="row">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-8">-->
-                            <a href="manage_factures.php"  class="btn btn-primary"><i class="fas fa-glasses">&nbsp;</i>Consulter</a>
-                            <!--</div>
-                            <div class="col-md-2"></div>
-                        </div>-->
                         </div>
                     </div>
                 </div>	
@@ -257,7 +259,24 @@ if (!isset($_SESSION["userid"])) {
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card text-center text-center">
+
+                    <div class="card text-center">
+                        <div class="card-body" style="box-shadow:0 0 15px 0 lightgrey;">
+                            <h4 class="card-title">Factures</h4>
+                            <p class="card-text">Ici, vous pouvez aperçu vos factures et les gérer.</p>
+
+                            <!--<div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">-->
+                            <a href="manage_factures.php"  class="btn btn-primary"><i class="fas fa-glasses">&nbsp;</i>Consulter</a>
+                            <!--</div>
+                            <div class="col-md-2"></div>
+                        </div>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center">
                         <div class="card-body" style="box-shadow:0 0 15px 0 lightgrey;">
                             <h4 class="card-title">Produits</h4>
                             <p class="card-text">Ici, vous pouvez gérer vos produits et ajouter de nouveaux produits.</p>
@@ -272,52 +291,9 @@ if (!isset($_SESSION["userid"])) {
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body text-center" style="box-shadow:0 0 15px 0 lightgrey;">
-                            <h4 class="card-title">Types</h4>
-                            <p class="card-text">Ici, vous pouvez gérer votre marque et ajouter de nouveaux types</p>
-
-                            <div class="row">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-8">
-                                    <a href="#" data-toggle="modal" data-target="#form_brand" class="btn btn-primary"><i class="fa fa-plus">&nbsp;</i>Ajouter</a>
-                                    <a href="manage_brand.php" class="btn btn-secondary"><i class="fa fa-edit">&nbsp;</i>Gérer</a>
-                                </div>
-                                <div class="col-md-2"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-
-                </div>
-                <div class="col-md-4">
-                    <div class="card text-center text-center">
-                        <div class="card-body" style="box-shadow:0 0 15px 0 lightgrey;">
-                            <h4 class="card-title">Fournisseur</h4>
-                            <p class="card-text">Ici, vous pouvez gérer vos employés ajouter un nouveau supprimer ou mettre à jour.</p>
-                            <div class="row">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-8">
-                                    <a href="#" data-toggle="modal" data-target="#form_fournisseur" class="btn btn-primary"><i class="fa fa-plus">&nbsp;</i>Ajouter</a>
-                                    <a href="manage_fournisseur.php" class="btn btn-secondary"><i class="fa fa-edit">&nbsp;</i>Gérer</a>
-                                </div>
-                                <div class="col-md-2"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-
-                </div>
-            </div>
-        </div>
         <br>
         <!--<div class="container">
             <div class="row">
@@ -335,7 +311,7 @@ if (!isset($_SESSION["userid"])) {
 
 
         <?php
-        //Employe Form
+//Employe Form
         include_once("./templates/fournisseur.php");
         ?>
         <?php

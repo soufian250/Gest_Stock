@@ -12,12 +12,12 @@
                 <form id="employe_form" onsubmit="return false">
                     <div class="form-group">
                         <label for="username">Nom Complet</label>
-                        <input type="text" name="username" class="form-control" id="username" placeholder="Enter Username">
+                        <input type="text" name="usernamep" class="form-control" id="username" placeholder="Enter Username">
                         <small id="u_error" class="form-text text-muted"></small>
                     </div>
                     <div class="form-group">
                         <label for="email">Address Email</label>
-                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                        <input type="email" name="emailp" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
                         <small id="e_error" class="form-text text-muted"></small>
                     </div>
                     <div class="form-group">
