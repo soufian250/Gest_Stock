@@ -260,8 +260,7 @@ $(document).ready(function () {
                     if (data == "FOURNISSEUR_ADDED") {
                         fetch_four();
                         window.location.href = encodeURI(DOMAIN + "/dashboard.php?msg=Le Fournisseur est bien Ajouté");
-                    }
-                    else{
+                    } else {
                         alert(data);
                     }
                 }
@@ -277,10 +276,21 @@ $(document).ready(function () {
             method: "POST",
             data: {getCategory: 1},
             success: function (data) {
-                var root = "<option value='0'>None</option>";
                 var choose = "<option value=''>Choisir une Categorie</option>";
-                $("#parent_cat").html(root + data);
                 $("#select_cat").html(choose + data);
+            }
+        })
+    }
+
+    fetch_pcategory();
+    function fetch_pcategory() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {getParentCategory: 1},
+            success: function (data) {
+                var root = "<option value='0'>None</option>";
+                $("#parent_cat").html(root + data);
             }
         })
     }

@@ -121,41 +121,22 @@ if (!isset($_SESSION["userid"])) {
                         <div class="row mx-auto">
                             <div class="col-md-6">
                                 <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
-                                    <div class="card-header text-center">Statistique Globale</div>
+                                    <div class="card-header text-center">Totale de Produits</div>
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-1">
+                                            <div class="col-md-2">
                                                 <i class="fas fa-tools"></i>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span>Totale Produit:</span>
                                             </div>
                                             <div class="col-md-3">
                                                 <span id="ps"></span>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-1">
-                                                <i class="fab fa-accusoft"></i>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span>Totale Types:</span>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <span id="ts"></span>
+                                            <div class="col-md-6">
+                                                Produits
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-1">
-                                                <i class="fas fa-toolbox"></i>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span>Totale Categories:</span>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <span id="cs"></span>
-                                            </div>
-                                        </div>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <a href="consulterProduit.php" style="color: #fff;">Voir La list</a>
                                     </div>
                                 </div>
                             </div>
@@ -298,13 +279,13 @@ if (!isset($_SESSION["userid"])) {
         <!--<div class="container">
             <div class="row">
                 <div class="col-md-4">
-
+    
                 </div>
                 <div class="col-md-4">
-
+    
                 </div>
                 <div class="col-md-4">
-
+    
                 </div>
             </div>
         </div>-->

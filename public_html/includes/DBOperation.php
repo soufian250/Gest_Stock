@@ -13,8 +13,7 @@ class DBOperation {
         $this->con = $db->connect();
     }
 
-    
-    public function addFournisseur($fourname, $email , $telephone) {
+    public function addFournisseur($fourname, $email, $telephone) {
         $pre_stmt = $this->con->prepare("INSERT INTO `fournisseur`(`fourname`, `email`, `telephone`)
 		 VALUES (?,?,?)");
         $pre_stmt->bind_param("sss", $fourname, $email, $telephone);
@@ -25,7 +24,7 @@ class DBOperation {
             return 0;
         }
     }
-    
+
     public function addCategory($parent, $cat) {
         $pre_stmt = $this->con->prepare("INSERT INTO `categories`(`parent_cat`, `category_name`, `status`)
 		 VALUES (?,?,?)");
@@ -68,9 +67,11 @@ class DBOperation {
     }
 
     public function getAllRecord($table) {
-        if($table == "categories"){
+        if ($table == "categories") {
             $query = "SELECT * FROM " . $table . " WHERE parent_cat != '' ";
-        }else{
+        } else if ($table == "categories_parent") {
+            $query = "SELECT * FROM categories WHERE parent_cat = '' ";
+        } else {
             $query = "SELECT * FROM " . $table;
         }
         $pre_stmt = $this->con->prepare($query);

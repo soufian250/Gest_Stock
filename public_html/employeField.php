@@ -127,5 +127,9 @@ if (!isset($_SESSION["userid"])) {
             </div>
         </div>-->
 
+        <?php
+        //Profil Form
+        include_once("./templates/editProfill.php");
+        ?>
     </body>
 </html>

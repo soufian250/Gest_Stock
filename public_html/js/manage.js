@@ -51,10 +51,21 @@ $(document).ready(function () {
             method: "POST",
             data: {getCategory: 1},
             success: function (data) {
-                var root = "<option value='0'>None</option>";
                 var choose = "<option value=''>Choose Category</option>";
-                $("#parent_cat").html(root + data);
                 $("#select_cat").html(choose + data);
+            }
+        })
+    }
+
+    fetch_pcategory();
+    function fetch_pcategory() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {getParentCategory: 1},
+            success: function (data) {
+                var root = "<option value='0'>None</option>";
+                $("#parent_cat").html(root + data);
             }
         })
     }
@@ -378,11 +389,11 @@ $(document).ready(function () {
         if (isNaN(paid.val())) {
             alert("S'il vous plaît entrer un Montant valide");
             paid.val("");
-        } else if(paid.val() * 1>$("#net_total").val() * 1) {
+        } else if (paid.val() * 1 > $("#net_total").val() * 1) {
             alert("Pardon ! Cet Montant est Invalide!");
             paid.val("")
-        }else{
-           calculate(paid.val()); 
+        } else {
+            calculate(paid.val());
         }
     })
 

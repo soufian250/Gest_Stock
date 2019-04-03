@@ -54,6 +54,16 @@ if (isset($_POST["getCategory"])) {
     exit();
 }
 
+// To get Category Parent
+if (isset($_POST["getParentCategory"])) {
+    $obj = new DBOperation();
+    $rows = $obj->getAllRecord("categories_parent");
+    foreach ($rows as $row) {
+        echo "<option value='" . $row["cid"] . "'>" . $row["category_name"] . "</option>";
+    }
+    exit();
+}
+
 //Fetch Brand
 if (isset($_POST["getBrand"])) {
     $obj = new DBOperation();
