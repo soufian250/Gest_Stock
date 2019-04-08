@@ -28,13 +28,17 @@ if ($_GET["id_facture"]) {
     $pdf->Cell(120, 10, "FACTURE", 1, 0, "C");
     $pdf->Cell(20, 10, "", 0, 0);
     $pdf->setFont("Arial", "B", 12);
-    $pdf->Cell(50, 10, "ClIENT", 1, 1, "C");
+    $pdf->Cell(50, 10, "CLIENT", 1, 1, "C");
     $pdf->setFont("Arial", "B", 10);
     $pdf->Cell(20, 5, "Numero", 1, 0, "C");
     $pdf->Cell(30, 5, "Date", 1, 0, "C");
     $pdf->Cell(70, 5, "Reference", 1, 0, "C");
     $pdf->Cell(20, 5, "", 0, 0);
-    $pdf->Cell(50, 5, "MR", "LR", 1, "C");
+    if ($row["client_type"] == "Personne") {
+        $pdf->Cell(50, 5, "'Mme/M'", "LR", 1, "C");
+    } else {
+        $pdf->Cell(50, 5, "'Etablissement'", "LR", 1, "C");
+    }
     $pdf->setFont("Arial", "", 10);
     $pdf->Cell(20, 7, "" . $row["invoice_no"] . "/" . $year . "", 1, 0, "C");
     $pdf->Cell(30, 7, "" . $row["order_date"] . "", 1, 0, "C");

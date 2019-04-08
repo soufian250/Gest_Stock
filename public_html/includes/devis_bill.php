@@ -17,24 +17,28 @@ if ($_GET["id_devis"]) {
 
     $pdf = new FPDF();
     $pdf->AddPage();
-    
+
     $pdf->Cell(50, 10, "", 0, 1);
     $pdf->Cell(50, 10, "", 0, 1);
     $pdf->Cell(50, 10, "", 0, 1);
     $pdf->Cell(50, 10, "", 0, 1);
     $pdf->Cell(50, 10, "", 0, 1);
-    
+
     $pdf->setFont("Arial", "B", 20);
     $pdf->Cell(120, 10, "DEVIS", 1, 0, "C");
     $pdf->Cell(20, 10, "", 0, 0);
     $pdf->setFont("Arial", "B", 12);
-    $pdf->Cell(50, 10, "ClIENT", 1, 1, "C");
+    $pdf->Cell(50, 10, "CLIENT", 1, 1, "C");
     $pdf->setFont("Arial", "B", 10);
     $pdf->Cell(20, 5, "Numero", 1, 0, "C");
     $pdf->Cell(30, 5, "Date", 1, 0, "C");
     $pdf->Cell(70, 5, "Reference", 1, 0, "C");
     $pdf->Cell(20, 5, "", 0, 0);
-    $pdf->Cell(50, 5, "MR", "LR", 1, "C");
+    if ($row["client_type"] == "Personne") {
+        $pdf->Cell(50, 5, "'Mme/M'", "LR", 1, "C");
+    } else {
+        $pdf->Cell(50, 5, "'Etablissement'", "LR", 1, "C");
+    }
     $pdf->setFont("Arial", "", 10);
     $pdf->Cell(20, 7, "" . $row["invoice_no"] . "/" . $year . "", 1, 0, "C");
     $pdf->Cell(30, 7, "" . $row["order_date"] . "", 1, 0, "C");
@@ -79,27 +83,27 @@ if ($_GET["id_devis"]) {
 
 
     $pdf->setFont("Arial", "B", 12);
-   
+
 
     $pdf->Cell(130, 8, "", 0, 0);
-    $pdf->Cell(60, 8, "MONTANT TOTALE ", 1, 1,"C");
+    $pdf->Cell(60, 8, "MONTANT TOTALE ", 1, 1, "C");
     $pdf->setFont("Arial", "B", 8);
     $pdf->Cell(130, 6, "", 0, 0);
-    $pdf->Cell(20, 6, "Totale HT", 1, 0,"C");
-    $pdf->Cell(20, 6, "Totale TVA ", 1,0, "C");
-    $pdf->Cell(20, 6, "Totale TTC ", 1, 1,"C");
+    $pdf->Cell(20, 6, "Totale HT", 1, 0, "C");
+    $pdf->Cell(20, 6, "Totale TVA ", 1, 0, "C");
+    $pdf->Cell(20, 6, "Totale TTC ", 1, 1, "C");
     $pdf->setFont("Arial", "", 8);
     $pdf->Cell(130, 5, "", 0, 0);
-    $pdf->Cell(20, 5, "" . $row["sub_total"], 1, 0 , "C");
+    $pdf->Cell(20, 5, "" . $row["sub_total"], 1, 0, "C");
     $pdf->Cell(20, 5, "" . $row["gst"], 1, 0, "C");
     $pdf->Cell(20, 5, "" . $row["net_total"], 1, 1, "C");
 
     $pdf->Cell(50, 10, "", 0, 1);
     $pdf->Cell(50, 10, "", 0, 1);
 
-    
+
     $pdf->setFont("Arial", "I", 12);
-    
+
     $pdf->Cell(180, 10, "Signature", 0, 0, "L");
 
     $pdf->Output("../PDF_INVOICE/PDF_DEVIS_" . $row["invoice_no"] . ".pdf", "F");

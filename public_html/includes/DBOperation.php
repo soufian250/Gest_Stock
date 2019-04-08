@@ -71,6 +71,8 @@ class DBOperation {
             $query = "SELECT * FROM " . $table . " WHERE parent_cat != '' ";
         } else if ($table == "categories_parent") {
             $query = "SELECT * FROM categories WHERE parent_cat = '' ";
+        } else if ($table == "products") {
+            $query = "SELECT * FROM products WHERE product_stock != 0 ";
         } else {
             $query = "SELECT * FROM " . $table;
         }

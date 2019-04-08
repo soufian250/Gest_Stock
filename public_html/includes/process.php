@@ -365,7 +365,7 @@ if (isset($_POST["getNewOrderItem"])) {
     <tr>
         <td><b class="number">1</b></td>
         <td>
-            <select name="pid[]" class="form-control form-control-sm pid" required>
+            <select id="product_select" name="pid[]" class="form-control form-control-sm pid" required>
                 <option value="">Choisir un produit</option>
                 <?php
                 foreach ($rows as $row) {
@@ -414,10 +414,11 @@ if (isset($_POST["order_date"]) AND isset($_POST["cust_name"])) {
     $paid = $_POST["paid"];
     $due = $_POST["due"];
     $payment_type = $_POST["payment_type"];
+    $client_type = $_POST["type_client"];
 
 
     $m = new Manage();
-    echo $result = $m->storeCustomerOrderInvoice($orderdate, $cust_name, $ar_tqty, $ar_qty, $ar_price, $ar_pro_name, $sub_total, $gst, $discount, $net_total, $paid, $due, $payment_type);
+    echo $result = $m->storeCustomerOrderInvoice($orderdate, $cust_name, $ar_tqty, $ar_qty, $ar_price, $ar_pro_name, $sub_total, $gst, $discount, $net_total, $paid, $due, $payment_type, $client_type);
 }
 //----------------invoice---------------------
 

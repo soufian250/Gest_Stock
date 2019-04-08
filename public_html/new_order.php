@@ -33,15 +33,24 @@ if (!isset($_SESSION["userid"])) {
                         <div class="card-body">
                             <form id="get_order_data" onsubmit="return false">
                                 <div class="form-group row">
+                                    <div class="col-sm-1">   
+                                    </div>
                                     <label class="col-sm-3 col-form-label" align="right">Date de commande</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-5">
                                         <input type="text" id="order_date" name="order_date" readonly class="form-control form-control-sm" value="<?php echo date("d/m/Y"); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" align="right">Nom du client</label>
-                                    <div class="col-sm-6">
+                                    <label class="col-sm-3 col-form-label" align="right">Nom de client</label>
+                                    <div class="col-sm-3">
                                         <input type="text" id="cust_name" name="cust_name"class="form-control form-control-sm" placeholder="Entrer le nom de Client"/>
+                                    </div>
+                                    <label class="col-sm-2 col-form-label" align="right">Type de client</label>
+                                    <div class="col-sm-3">
+                                        <select class="form-control form-control-sm" id="type_client" name="type_client">
+                                            <option value="Personne">Personne</option>
+                                            <option value="Etablissement">Etablissement</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -84,44 +93,58 @@ if (!isset($_SESSION["userid"])) {
 
                                 <p></p>
                                 <div class="form-group row">
-                                    <label for="sub_total" class="col-sm-3 col-form-label" align="right">Sous Totale</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-1">   
+                                    </div>
+                                    <label for="sub_total" class="col-sm-3 col-form-label" align="right">Totale HT</label>
+                                    <div class="col-sm-5">
                                         <input type="text" readonly name="sub_total" class="form-control form-control-sm" id="sub_total" required/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="gst" class="col-sm-3 col-form-label" align="right" title="Taxe sur les produits et services">GST (20%)</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-1">   
+                                    </div>
+                                    <label for="gst" class="col-sm-3 col-form-label" align="right" title="Taxe sur les produits et services">TVA (20%)</label>
+                                    <div class="col-sm-5">
                                         <input type="text" readonly name="gst" class="form-control form-control-sm" id="gst" required/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <div class="col-sm-1">   
+                                    </div>
                                     <label for="discount" class="col-sm-3 col-form-label" align="right">Remise</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-5">
                                         <input type="text" name="discount" class="form-control form-control-sm" id="discount" required/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="net_total" class="col-sm-3 col-form-label" align="right">Prix Totale</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-1">   
+                                    </div>
+                                    <label for="net_total" class="col-sm-3 col-form-label" align="right">Totale TTC</label>
+                                    <div class="col-sm-5">
                                         <input type="text" readonly name="net_total" class="form-control form-control-sm" id="net_total" required/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <div class="col-sm-1">   
+                                    </div>
                                     <label for="paid" class="col-sm-3 col-form-label" align="right">Payé</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-5">
                                         <input type="text" name="paid" class="form-control form-control-sm" id="paid">
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <div class="col-sm-1">   
+                                    </div>
                                     <label for="due" class="col-sm-3 col-form-label" align="right">Reste</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-5">
                                         <input type="text" readonly name="due" class="form-control form-control-sm" id="due" required/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <div class="col-sm-1">   
+                                    </div>
                                     <label for="payment_type" class="col-sm-3 col-form-label" align="right">Type de paiement</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-5">
                                         <select name="payment_type" class="form-control form-control-sm" id="payment_type" required/>
                                         <option>Cash</option>
                                         <option>Card</option>

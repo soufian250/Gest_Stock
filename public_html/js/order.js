@@ -108,10 +108,16 @@ $(document).ready(function () {
         var invoice = $("#get_order_data").serialize();
         var sucess = $("#order_form");
         var print = $("#print_invoice");
+        
         if ($("#cust_name").val() === "") {
             alert("S'il vous plaît entrer le nom du client.");
         } else if ($("#paid").val() === "") {
             alert("S'il vous plaît entrer le montant payé.");
+        } else if(($("#invoice_item").children().length === 0)) {
+            alert("S'il vous plaît Choisir un produit pour commander.");
+            $("#add").trigger('click');
+        } else if($("#product_select").val() === "") {
+            alert("S'il vous plaît Choisir un produit pour commander.");
         } else {
             $.ajax({
                 url: DOMAIN + "/includes/process.php",
@@ -128,7 +134,7 @@ $(document).ready(function () {
                         $("#get_order_data").trigger("reset");
 
                         alert("Facture bien Enregistrer");
-                        
+
                         if (confirm("Tu veux imprimer Un Devis!?")) {
                             sucess.addClass("d-none");
                             print.removeClass("d-none");
