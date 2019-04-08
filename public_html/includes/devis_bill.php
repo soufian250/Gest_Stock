@@ -72,7 +72,7 @@ if ($_GET["id_devis"]) {
         $i = 0;
         foreach ($rows as $rowi) {
             $pdf->Cell(10, 6, ($i + 1), 1, 0, "C");
-            $pdf->Cell(75, 6, "------", 1, 0, "C");
+            $pdf->Cell(75, 6, $rowi["description"], 1, 0, "C");
             $pdf->Cell(40, 6, $rowi["product_name"], 1, 0, "C");
             $pdf->Cell(20, 6, $rowi["qty"], 1, 0, "C");
             $pdf->Cell(25, 6, $rowi["price"], 1, 0, "C");

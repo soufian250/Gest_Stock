@@ -182,7 +182,7 @@ class Manage {
     }
 
     public function manageInvoice($id) {
-        $sql = "SELECT * FROM `invoice_details` WHERE invoice_no = " . $id . "";
+        $sql = "SELECT ID.*,P.description FROM `invoice_details` ID INNER JOIN products P ON ID.product_name=P.product_name WHERE invoice_no = " . $id . "";
         $result = $this->con->query($sql) or die($this->con->error);
         $rows = array();
         if ($result->num_rows > 0) {
