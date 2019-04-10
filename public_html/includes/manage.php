@@ -13,8 +13,8 @@ class Manage {
         $this->con = $db->connect();
     }
 
-    public function manageRecordWithPagination($table, $pno) {
-        $a = $this->pagination($this->con, $table, $pno, 5);
+    public function manageRecordWithPagination($table, $pno, $numbrePages) {
+        $a = $this->pagination($this->con, $table, $pno, $numbrePages);
         if ($table == "categories") {
             $sql = "SELECT p.cid,p.category_name as category, c.category_name as parent, p.status FROM categories p LEFT JOIN categories c ON p.parent_cat=c.cid " . $a["limit"];
         } else if ($table == "products") {

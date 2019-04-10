@@ -174,7 +174,7 @@ if (!isset($_SESSION["userid"])) {
                     <div class="card text-center">
                         <div class="card-body" style="box-shadow:0 0 15px 0 lightgrey;">
                             <h4 class="card-title">Fournisseur</h4>
-                            <p class="card-text">Ici, vous pouvez gérer vos employés ajouter un nouveau supprimer ou mettre à jour.</p>
+                            <p class="card-text">Ici, vous pouvez gérer les fournisseurs ajouter, supprimer ou mettre à jour.</p>
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-8">

@@ -217,11 +217,12 @@ $(document).ready(function () {
         var name = $("#fusername");
         var email = $("#femail");
         var tele = $("#ftele");
+        var spec = $("fspec");
 
-        var e_patt = new RegExp(/^[a-z0-9_-]+(\.[a-z0-9_-]+)*@[a-z0-9_-]+(\.[a-z0-9_-]+)*(\.[a-z]{2,4})$/);
+        var e_patt = new RegExp(/^[A-Za-z0-9_-]+(\.[a-z0-9_-]+)*@[a-z0-9_-]+(\.[a-z0-9_-]+)*(\.[a-z]{2,4})$/);
         var t_patt = new RegExp(/^[0]{1}[5,6,7]{1}[0-9]{8}$/);
 
-        if (name.val() == "" || name.val().length < 6) {
+        if (name.val() == "") {
             name.addClass("border-danger");
             $("#fu_error").html("<span class='text-danger'>S'il vous plaît entrer Le nom de Fournisseur</span>");
             status = false;
@@ -246,6 +247,15 @@ $(document).ready(function () {
         } else {
             tele.removeClass("border-danger");
             $("#ft_error").html("");
+            status = true;
+        }
+        if (spec.val()=="") {
+            spec.addClass("border-danger");
+            $("#fs_error").html("<span class='text-danger'>S'il vous plaît entrer Le specialite de Fournisseur</span>");
+            status = false;
+        } else {
+            spec.removeClass("border-danger");
+            $("#fs_error").html("");
             status = true;
         }
 

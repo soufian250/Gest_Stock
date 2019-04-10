@@ -17,13 +17,18 @@
                     </div>
                     <div class="form-group">
                         <label for="femail">Address Email</label>
-                        <input type="email" name="femail" class="form-control" id="femail" aria-describedby="emailHelp" placeholder="Entrer l'Email">
+                        <input type="email" name="femail" class="form-control" id="femail" placeholder="Entrer l'Email">
                         <small id="fe_error" class="form-text text-muted"></small>
                     </div>
                     <div class="form-group">
                         <label for="ftele">Telephone</label>
                         <input type="text" name="ftele" class="form-control"  id="ftele" placeholder="Numero de telephone">
                         <small id="ft_error" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="fspecialite">Specialite</label>
+                        <input type="text" name="fspec" class="form-control"  id="fspec" placeholder="Specialite de Fournisseur">
+                        <small id="fs_error" class="form-text text-muted"></small>
                     </div>
 
                     <button type="submit" name="user_register" class="btn btn-primary">Ajouter</button>

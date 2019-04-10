@@ -13,6 +13,9 @@ if ($_GET["id_devis"]) {
     $result = $m->manageInvoice($_GET["id_devis"]);
     $rows = $result["rows"];
 
+    $f = new NumberFormatter("fr_FR", NumberFormatter::SPELLOUT);
+    $number_text = $f->format($row["net_total"]);
+
     $year = date("y");
 
     $pdf = new FPDF();
@@ -77,6 +80,7 @@ if ($_GET["id_devis"]) {
             $pdf->Cell(20, 6, $rowi["qty"], 1, 0, "C");
             $pdf->Cell(25, 6, $rowi["price"], 1, 0, "C");
             $pdf->Cell(20, 6, ($rowi["qty"] * $rowi["price"]), 1, 1, "C");
+            $i++;
         }
     }
     $pdf->Cell(50, 10, "", 0, 1);
@@ -100,11 +104,17 @@ if ($_GET["id_devis"]) {
 
     $pdf->Cell(50, 10, "", 0, 1);
     $pdf->Cell(50, 10, "", 0, 1);
+    $pdf->Cell(50, 10, "", 0, 1);
 
 
-    $pdf->setFont("Arial", "I", 12);
 
-    $pdf->Cell(180, 10, "Signature", 0, 0, "L");
+    $pdf->setFont("Arial", "B", 8);
+
+    $pdf->Cell(180, 10, "ARRETER LE PRESENT DEVIS A LA SOMME DE :", 0, 1, "L");
+    $pdf->setFont("Arial", "B", 14);
+    $pdf->Cell(70, 10, "", 0, 0, "C"); 
+    $pdf->Cell(120, 10, $number_text . " dhs", 0, 0, "L");
+
 
     $pdf->Output("../PDF_INVOICE/PDF_DEVIS_" . $row["invoice_no"] . ".pdf", "F");
 

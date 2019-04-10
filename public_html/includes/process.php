@@ -24,7 +24,7 @@ if (isset($_POST["notes"]) AND isset($_POST["emailp"])) {
 //create Fournisseur
 if (isset($_POST["ftele"]) AND isset($_POST["femail"])) {
     $user = new DBOperation();
-    $result = $user->addFournisseur($_POST["fusername"], $_POST["femail"], $_POST["ftele"]);
+    $result = $user->addFournisseur($_POST["fusername"], $_POST["femail"], $_POST["ftele"], $_POST["fspec"]);
     echo $result;
     exit();
 }
@@ -114,11 +114,11 @@ if (isset($_POST["added_date"]) AND isset($_POST["product_name"])) {
 //Manage Category
 if (isset($_POST["manageCategory"])) {
     $m = new Manage();
-    $result = $m->manageRecordWithPagination("categories", $_POST["pageno"]);
+    $result = $m->manageRecordWithPagination("categories", $_POST["pageno"], 6);
     $rows = $result["rows"];
     $pagination = $result["pagination"];
     if (count($rows) > 0) {
-        $n = (($_POST["pageno"] - 1) * 5) + 1;
+        $n = (($_POST["pageno"] - 1) * 6) + 1;
         foreach ($rows as $row) {
             $result = $m->getCatProStat($row['cid']);
             ?>
@@ -186,7 +186,7 @@ if (isset($_POST["update_category"])) {
 //Manage Brand
 if (isset($_POST["manageBrand"])) {
     $m = new Manage();
-    $result = $m->manageRecordWithPagination("brands", $_POST["pageno"]);
+    $result = $m->manageRecordWithPagination("brands", $_POST["pageno"], 5);
     $rows = $result["rows"];
     $pagination = $result["pagination"];
     if (count($rows) > 0) {
@@ -241,16 +241,16 @@ if (isset($_POST["update_brand"])) {
 
 if (isset($_POST["manageProduct"])) {
     $m = new Manage();
-    $result = $m->manageRecordWithPagination("products", $_POST["pageno"]);
+    $result = $m->manageRecordWithPagination("products", $_POST["pageno"], 6);
     $rows = $result["rows"];
     $pagination = $result["pagination"];
     if (count($rows) > 0) {
-        $n = (($_POST["pageno"] - 1) * 5) + 1;
+        $n = (($_POST["pageno"] - 1) * 6) + 1;
         foreach ($rows as $row) {
             ?>
             <tr>
                 <td><?php echo $n; ?></td>
-                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];              ?>" width="50" height="50"></td>-->
+                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];                ?>" width="50" height="50"></td>-->
                 <td><?php echo $row["product_name"]; ?></td>
                 <td><?php echo $row["category_name"]; ?></td>
                 <td><?php echo $row["description"]; ?></td>
@@ -424,15 +424,16 @@ if (isset($_POST["order_date"]) AND isset($_POST["cust_name"])) {
 
 if (isset($_POST["manageInvoice"])) {
     $m = new Manage();
-    $result = $m->manageRecordWithPagination("invoice", $_POST["pageno"]);
+    $result = $m->manageRecordWithPagination("invoice", $_POST["pageno"], 10);
     $rows = $result["rows"];
     $pagination = $result["pagination"];
     if (count($rows) > 0) {
         //$n = (($_POST["pageno"] - 1) * 10) + 1;
+        $n = 1;
         foreach ($rows as $row) {
             ?>
             <tr  class="text-center">
-                <!--<td><?php //echo $n;              ?></td>-->
+                <td><?php echo $n; ?></td>-->
                 <td><?php echo $row["customer_name"]; ?></td>
                 <td><?php echo $row["order_date"]; ?></td>
                 <td><?php echo $row["net_total"]; ?></td>
@@ -460,10 +461,10 @@ if (isset($_POST["manageInvoice"])) {
 
             </tr>
             <?php
-            //$n++;
+            $n++;
         }
         ?>
-        <!--<tr><td colspan="8"><?php //echo $pagination;              ?></td></tr>-->
+        <!--<tr><td colspan="9"><?php //echo $pagination; ?></td></tr>-->
         <?php
         exit();
     }
@@ -517,12 +518,15 @@ if (isset($_POST["manageUser"])) {
                     <a href="#" did="<?php echo $row['id']; ?>" class="btn btn-danger btn-sm del_user"><i class="fa fa-user-slash">&nbsp;</i>Delete</a>
                     <a href="#" eid="<?php echo $row['id']; ?>" data-toggle="modal" data-target="#update_user" class="btn btn-info btn-sm edit_user"><i class="fa fa-pencil-alt">&nbsp;</i>Edit</a>
                 </td>
+                <td class="text-center">
+                    <a href="#" tid="<?php echo $row['id']; ?>" data-toggle="modal" data-target="#update_tasks" class="btn btn-secondary btn-sm edit_tasks"><i class="fas fa-envelope"></i></a>
+                </td>
             </tr>
             <?php
             $n++;
         }
         ?>
-        <tr><td colspan="7"><?php echo $pagination; ?></td></tr>
+        <tr><td colspan="8"><?php echo $pagination; ?></td></tr>
         <?php
         exit();
     }
@@ -551,9 +555,16 @@ if (isset($_POST["user"])) {
     $email = $_POST["email"];
     $usertype = $_POST["usertype"];
     $date = $_POST["date"];
-    $notes = $_POST["unotes"];
+    $result = $m->update_record("user", ["id" => $id], ["username" => $name, "email" => $email, "usertype" => $usertype, "register_date" => $date]);
+    echo $result;
+}
 
-    $result = $m->update_record("user", ["id" => $id], ["username" => $name, "email" => $email, "usertype" => $usertype, "register_date" => $date, "notes" => $notes]);
+//Update days tasks
+if (isset($_POST["tnotes"])) {
+    $m = new Manage();
+    $id = $_POST["tid"];
+    $notes = $_POST["tnotes"];
+    $result = $m->update_record("user", ["id" => $id], ["notes" => $notes]);
     echo $result;
 }
 
@@ -561,7 +572,7 @@ if (isset($_POST["user"])) {
 
 if (isset($_POST["manageFour"])) {
     $m = new Manage();
-    $result = $m->manageRecordWithPagination("fournisseur", $_POST["pageno"]);
+    $result = $m->manageRecordWithPagination("fournisseur", $_POST["pageno"], 6);
     $rows = $result["rows"];
     $pagination = $result["pagination"];
     if (count($rows) > 0) {
@@ -573,6 +584,8 @@ if (isset($_POST["manageFour"])) {
                 <td><?php echo $row["fourname"]; ?></td>
                 <td><?php echo $row["email"]; ?></td>
                 <td><?php echo $row["telephone"]; ?></td>
+                <td><?php echo $row["specialite"]; ?></td>
+
                 <td>
                     <a href="#" did="<?php echo $row['id']; ?>" class="btn btn-danger btn-sm del_four"><i class="fa fa-user-slash">&nbsp;</i>Delete</a>
                     <a href="#" eid="<?php echo $row['id']; ?>" data-toggle="modal" data-target="#update_fournisseur" class="btn btn-info btn-sm edit_four"><i class="fa fa-pencil-alt">&nbsp;</i>Edit</a>
@@ -582,7 +595,7 @@ if (isset($_POST["manageFour"])) {
             $n++;
         }
         ?>
-        <tr><td colspan="5"><?php echo $pagination; ?></td></tr>
+        <tr><td colspan="6"><?php echo $pagination; ?></td></tr>
         <?php
         exit();
     }
@@ -610,8 +623,9 @@ if (isset($_POST["fuser"])) {
     $name = $_POST["fuser"];
     $email = $_POST["femail"];
     $tele = $_POST["futele"];
+    $spec = $_POST["fspec"];
 
-    $result = $m->update_record("fournisseur", ["id" => $id], ["fourname" => $name, "email" => $email, "telephone" => $tele]);
+    $result = $m->update_record("fournisseur", ["id" => $id], ["fourname" => $name, "email" => $email, "telephone" => $tele, "specialite" => $spec]);
     echo $result;
 }
 //----------------Stat------------------

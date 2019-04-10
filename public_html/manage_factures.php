@@ -27,12 +27,15 @@ if (!isset($_SESSION["userid"])) {
         <?php include_once("./templates/header.php"); ?>
         <br/><br/>
         <h1 align="center" class="titleH1">Liste de Factures</h1>
-        <br/>
         <div class="container">
+            <div align="center">
+                <input type="text" name="search" id="search" class="form-control" placeholder="Rechercher...">
+            </div>
+            <br>
             <table id="invoice_table" class="table table-striped table-bordered text-center">
                 <thead>
                     <tr>
-                        <!--th>#</th>-->
+                        <th>#</th>
                         <th>Nom de Client</th>
                         <th>Date de commande</th>
                         <th>Prix Totale</th>
@@ -68,8 +71,3 @@ if (!isset($_SESSION["userid"])) {
     </body>
 
 </html>
-<script>
-    $(document).ready(function () {
-        $('#invoice_table').DataTable();
-    });
-</script>

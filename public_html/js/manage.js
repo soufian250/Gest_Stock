@@ -481,6 +481,37 @@ $(document).ready(function () {
         })
     })
 
+    //get ID fro tasks
+    $("body").delegate(".edit_tasks", "click", function () {
+        var tid = $(this).attr("tid");
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            dataType: "json",
+            data: {updateUser: 1, id: tid},
+            success: function (data) {
+                console.log(data);
+                $("#tid").val(data["id"]);
+            }
+        })
+    })
+    //Update Tasks
+    $("#update_tasks_form").on("submit", function () {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: $("#update_tasks_form").serialize(),
+            success: function (data) {
+                if (data == "UPDATED") {
+                    alert("Tâches pour aujourd'hui a été ajouté.!");
+                    window.location.href = "";
+                } else {
+                    alert(data);
+                }
+            }
+        })
+    })
+
     //---------------------Fournisseur-----------------
     manageFour(1);
     function manageFour(pn) {
@@ -533,11 +564,12 @@ $(document).ready(function () {
                 $("#fuser").val(data["fourname"]);
                 $("#femail").val(data["email"]);
                 $("#futele").val(data["telephone"]);
+                $("#fspec").val(data["specialite"]);
             }
         })
     })
 
-    //Update User
+    //Update Fournisseur
     $("#update_fournisseur_form").on("submit", function () {
         var tele = $("#futele");
         var status = true;
@@ -560,7 +592,7 @@ $(document).ready(function () {
                 data: $("#update_fournisseur_form").serialize(),
                 success: function (data) {
                     if (data == "UPDATED") {
-                        alert("L'Utilisateur est modifier avec succès.!");
+                        alert("Le Fournisseur est modifier avec succès.!");
                         window.location.href = "";
                     } else {
                         alert(data);
@@ -569,6 +601,44 @@ $(document).ready(function () {
             })
         }
     })
+
+    $("#search").keyup(function () {
+        search_table($(this).val());
+    })
+
+    function search_table(value) {
+        $("#invoice_table tr").each(function () {
+            var found = "false";
+            $(this).each(function () {
+                if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+                    found = "true";
+                }
+            })
+            if (found == "true")
+            {
+                $(this).show();
+            } else
+            {
+                $(this).hide();
+            }
+        })
+        $("#produit_table tr").each(function () {
+            var found = "false";
+            $(this).each(function () {
+                if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+                    found = "true";
+                }
+            })
+            if (found == "true")
+            {
+                $(this).show();
+            } else
+            {
+                $(this).hide();
+            }
+        })
+
+    }
 
 
 })

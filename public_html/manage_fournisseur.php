@@ -16,11 +16,13 @@ if (!isset($_SESSION["userid"])) {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <script type="text/javascript" src="./js/manage.js"></script>
+        <link type="text/css" rel="stylesheet" href="./css/titles.css">
     </head>
     <body>
         <!-- Navbar -->
         <?php include_once("./templates/header.php"); ?>
         <br/><br/>
+        <h1 align="center" class="titleH1">Gestion des Fournisseur</h1>
         <div class="container text-center">
             <table class="table table-hover table-bordered">
                 <thead>
@@ -29,6 +31,7 @@ if (!isset($_SESSION["userid"])) {
                         <th>Nom de Fournisseur</th>
                         <th>Email</th>
                         <th>Telephone</th>
+                        <th>Specialite</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

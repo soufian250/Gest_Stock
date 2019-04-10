@@ -13,10 +13,10 @@ class DBOperation {
         $this->con = $db->connect();
     }
 
-    public function addFournisseur($fourname, $email, $telephone) {
-        $pre_stmt = $this->con->prepare("INSERT INTO `fournisseur`(`fourname`, `email`, `telephone`)
-		 VALUES (?,?,?)");
-        $pre_stmt->bind_param("sss", $fourname, $email, $telephone);
+    public function addFournisseur($fourname, $email, $telephone, $specialite) {
+        $pre_stmt = $this->con->prepare("INSERT INTO `fournisseur`(`fourname`, `email`, `telephone`, `specialite`)
+		 VALUES (?,?,?,?)");
+        $pre_stmt->bind_param("ssss", $fourname, $email, $telephone, $specialite);
         $result = $pre_stmt->execute() or die($this->con->error);
         if ($result) {
             return "FOURNISSEUR_ADDED";

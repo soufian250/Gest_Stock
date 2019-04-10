@@ -37,11 +37,6 @@
                             <option value="Employe">Employe</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="notes">Notes</label>
-                        <textarea id="unotes" name="unotes" class="form-control"></textarea>
-                    </div>
-
                     <button type="submit" class="btn btn-primary">Modifier</button>
                 </form>
             </div>

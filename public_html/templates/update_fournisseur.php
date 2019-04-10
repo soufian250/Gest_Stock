@@ -25,6 +25,10 @@
                         <input type="text" class='form-control' id="futele" name="futele" placeholder="Donner Le Numero de Telephone">
                         <small id="ft_error" class="form-text text-muted"></small>
                     </div>
+                    <div class="form-group">
+                        <label for="fspecialite">Specialite</label>
+                        <input type="text" name="fspec" class="form-control"  id="fspec" placeholder="Specialite de Fournisseur">
+                    </div>
 
                     <button type="submit" class="btn btn-primary">Modifier</button>
                 </form>

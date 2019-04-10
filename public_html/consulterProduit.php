@@ -29,8 +29,11 @@ if (!isset($_SESSION["userid"])) {
         <br/><br/>
         <div class="container">
             <h1 class="titleH1" style="text-align: center;">Liste De Produits</h1>
+            <div align="center">
+                <input type="text" name="search" id="search" class="form-control" placeholder="Rechercher...">
+            </div>
             <br>
-            <table class="table table-hover table-bordered text-center" id="produit_table">
+            <table class="table table-striped table-bordered text-center" id="produit_table">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -58,8 +61,8 @@ if (!isset($_SESSION["userid"])) {
 
     </body>
 </html>
-<script>
+<!--<script>
     $(document).ready(function () {
         $('#produit_table').DataTable();
     });
-</script>
+</script>-->
