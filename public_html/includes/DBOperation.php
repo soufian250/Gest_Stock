@@ -104,7 +104,12 @@ class DBOperation {
     }
 
     public function getAllStat($table) {
-        $pre_stmt = $this->con->prepare("SELECT Count(*) as 'Stat' FROM " . $table);
+        if($table == "paid"){
+            $sql = "SELECT ((SELECT count(*) FROM invoice WHERE due = 0)*100)/count(*) As 'paid' FROM `invoice`";
+        }else{
+            $sql = "SELECT Count(*) as 'Stat' FROM " . $table;
+        }
+        $pre_stmt = $this->con->prepare($sql);
         $pre_stmt->execute() or die($this->con->error);
         $result = $pre_stmt->get_result();
         if ($result->num_rows == 1) {

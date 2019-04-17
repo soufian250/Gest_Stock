@@ -38,12 +38,7 @@
                             <option value="Employe">Employe</option>
                         </select>
                         <small id="t_error" class="form-text text-muted"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="notes">Notes</label>
-                        <textarea id="notes" name="notes" class="form-control"></textarea>
-                    </div>
-                    
+                    </div>      
                         <button type="submit" name="user_register" class="btn btn-primary">Ajouter</button>
                         
                 </form>

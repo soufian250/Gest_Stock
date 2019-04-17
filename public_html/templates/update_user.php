@@ -22,16 +22,16 @@
 
                     <div class="form-group">
                         <label>Le nom de l'utilisateur</label>
-                        <input type="text" class="form-control" name="user" id="user" placeholder="Entrer le nom de l'utilisateur" required>
+                        <input type="text" class="form-control" name="uuser" id="uuser" placeholder="Entrer le nom de l'utilisateur" required>
                     </div>
 
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="text" class="form-control" name="email" id="email" placeholder="Entrer L'Email" required>
+                        <input type="text" class="form-control" name="uemail" id="uemail" placeholder="Entrer L'Email" required>
                     </div>
                     <div class="form-group">
                         <label>Role</label>
-                        <select name="usertype" class="form-control" id="usertype">
+                        <select name="uusertype" class="form-control" id="uusertype">
                             <option value="">Sélectionner le type de l'utilisateur</option>
                             <option value="Admin">Admin</option>
                             <option value="Employe">Employe</option>

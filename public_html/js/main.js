@@ -86,7 +86,6 @@ $(document).ready(function () {
         var pass1 = $("#password1");
         var pass2 = $("#password2");
         var type = $("#usertype");
-
         var e_patt = new RegExp(/^[a-z0-9_-]+(\.[a-z0-9_-]+)*@[a-z0-9_-]+(\.[a-z0-9_-]+)*(\.[a-z]{2,4})$/);
         if (name.val() == "" || name.val().length < 6) {
             name.addClass("border-danger");
@@ -147,8 +146,15 @@ $(document).ready(function () {
                         $(".overlay").hide();
                         alert("Vérifier vos entrées s'il manque quelque chose");
                     } else {
+                        $("#username").val("");
+                        $("#email").val("");
+                        $("#password1").val("");
+                        $("#password2").val("");
+                        $("#usertype").val("");
                         $(".overlay").hide();
-                        window.location.href = encodeURI(DOMAIN + "/dashboard.php?msg=Employe Ajouté Avec Succès");
+                        $("#alertmsg").html("Employe Ajouté Avec Succès                                 <button id='close' type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+                        $("#alertmsg").removeClass("d-none");
+                        $('#form_employe').modal('toggle');
                     }
                 }
             })
@@ -192,11 +198,12 @@ $(document).ready(function () {
                 method: "POST",
                 data: $("#form_login").serialize(),
                 success: function (data) {
-                    if (data == "NOT_REGISTERD") {
+                    //alert(data);
+                    if (data === "NOT_REGISTERD") {
                         $(".overlay").hide();
                         email.addClass("border-danger");
                         $("#e_error").html("<span class='text-danger'>On dirait que tu n'es pas inscrit.</span>");
-                    } else if (data == "PASSWORD_NOT_MATCHED") {
+                    } else if (data === "PASSWORD_NOT_MATCHED") {
                         $(".overlay").hide();
                         pass.addClass("border-danger");
                         $("#p_error").html("<span class='text-danger'>S'il vous plaît entrer le mot de passe correct</span>");
@@ -217,11 +224,9 @@ $(document).ready(function () {
         var name = $("#fusername");
         var email = $("#femail");
         var tele = $("#ftele");
-        var spec = $("fspec");
-
+        var spec = $("#fspec");
         var e_patt = new RegExp(/^[A-Za-z0-9_-]+(\.[a-z0-9_-]+)*@[a-z0-9_-]+(\.[a-z0-9_-]+)*(\.[a-z]{2,4})$/);
         var t_patt = new RegExp(/^[0]{1}[5,6,7]{1}[0-9]{8}$/);
-
         if (name.val() == "") {
             name.addClass("border-danger");
             $("#fu_error").html("<span class='text-danger'>S'il vous plaît entrer Le nom de Fournisseur</span>");
@@ -249,7 +254,7 @@ $(document).ready(function () {
             $("#ft_error").html("");
             status = true;
         }
-        if (spec.val()=="") {
+        if (spec.val() == "") {
             spec.addClass("border-danger");
             $("#fs_error").html("<span class='text-danger'>S'il vous plaît entrer Le specialite de Fournisseur</span>");
             status = false;
@@ -268,8 +273,14 @@ $(document).ready(function () {
                 data: $("#fournisseur_form").serialize(),
                 success: function (data) {
                     if (data == "FOURNISSEUR_ADDED") {
+                        $("#fusername").val("");
+                        $("#femail").val("");
+                        $("#ftele").val("");
+                        $("#fspec").val("");
+                        $("#alertmsg").html("Le Fournisseur est bien Ajouté                                 <button id='close' type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+                        $("#alertmsg").removeClass("d-none");
+                        $('#form_fournisseur').modal('toggle');
                         fetch_four();
-                        window.location.href = encodeURI(DOMAIN + "/dashboard.php?msg=Le Fournisseur est bien Ajouté");
                     } else {
                         alert(data);
                     }
@@ -305,7 +316,7 @@ $(document).ready(function () {
         })
     }
 
-    //Fetch Brand
+//Fetch Brand
     fetch_brand();
     function fetch_brand() {
         $.ajax({
@@ -319,7 +330,7 @@ $(document).ready(function () {
         })
     }
 
-    //Fetch Fournisseur
+//Fetch Fournisseur
     fetch_four();
     function fetch_four() {
         $.ajax({
@@ -333,7 +344,7 @@ $(document).ready(function () {
         })
     }
 
-    //Add Category
+//Add Category
     $("#category_form").on("submit", function () {
         if ($("#category_name").val() == "") {
             $("#category_name").addClass("border-danger");
@@ -347,8 +358,11 @@ $(document).ready(function () {
                     if (data == "CATEGORY_ADDED") {
                         $("#category_name").removeClass("border-danger");
                         $("#category_name").val("");
+                        $("#parent_cat").val("");
+                        $("#alertmsg").html("La Categorie Ajouté Avec Succès                                 <button id='close' type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+                        $("#alertmsg").removeClass("d-none");
+                        $('#form_category').modal('toggle');
                         fetch_category();
-                        window.location.href = encodeURI(DOMAIN + "/dashboard.php?msg=La Categorie Ajouté Avec Succès");
                     } else {
                         alert(data);
                     }
@@ -358,7 +372,7 @@ $(document).ready(function () {
     })
 
 
-    //Add Brand
+//Add Brand
     $("#brand_form").on("submit", function () {
         if ($("#brand_name").val() == "") {
             $("#brand_name").addClass("border-danger");
@@ -383,7 +397,7 @@ $(document).ready(function () {
         }
     })
 
-    //Add product
+//Add product
     $("#product_form").on("submit", function () {
         var statusn = false;
         var statusc = false;
@@ -400,9 +414,7 @@ $(document).ready(function () {
         var prixachat = $("#product_pprice");
         var prix = $("#product_price");
         var quantite = $("#product_qty");
-
         var e_patt = new RegExp(/^[1-9]{1}[0-9]*$/);
-
         if (name.val() == "") {
             name.addClass("border-danger");
             $("#np_error").html("<span class='text-danger'>Entrer le nom de la Categorie</span>");
@@ -473,14 +485,16 @@ $(document).ready(function () {
                 data: $("#product_form").serialize(),
                 success: function (data) {
                     if (data == "NEW_PRODUCT_ADDED") {
-                        /*$("#product_des").val("");
-                         $("#product_name").val("");
-                         $("#select_cat").val("");
-                         $("#select_four").val("");
-                         $("#product_pprice").val("");
-                         $("#product_price").val("");
-                         $("#product_qty").val("");*/
-                        window.location.href = encodeURI(DOMAIN + "/dashboard.php?msg=Le Produit ajouter Avec Succès");
+                        $("#product_des").val("");
+                        $("#product_name").val("");
+                        $("#select_cat").val("");
+                        $("#select_four").val("");
+                        $("#product_pprice").val("");
+                        $("#product_price").val("");
+                        $("#product_qty").val("");
+                        $("#alertmsg").html("Le Produit ajouter Avec Succès                                 <button id='close' type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+                        $("#alertmsg").removeClass("d-none");
+                        $('#form_products').modal('toggle');
                         //alert("Le Produit ajouter Avec Succès");
                     } else {
                         console.log(data);
@@ -492,29 +506,17 @@ $(document).ready(function () {
         }
     })
 
-    //Edit profile
+//Edit profile
     $("#profil_form").on("submit", function () {
 
-        var statuse = false;
         var statusn = false;
         var status = false;
-        var email = $("#pemail");
         var name = $("#usernamen");
         var pass1 = $("#passwordf");
         var passn = $("#passwordnew");
         var pass2 = $("#passwords");
+        //var e_patt = new RegExp(/^[a-z0-9_-]+(\.[a-z0-9_-]+)*@[a-z0-9_-]+(\.[a-z0-9_-]+)*(\.[a-z]{2,4})$/);
 
-        var e_patt = new RegExp(/^[a-z0-9_-]+(\.[a-z0-9_-]+)*@[a-z0-9_-]+(\.[a-z0-9_-]+)*(\.[a-z]{2,4})$/);
-
-        if (!e_patt.test(email.val())) {
-            email.addClass("border-danger");
-            $("#pe_error").html("<span class='text-danger'>Veuillez entrer une adresse email valide</span>");
-            statuse = false;
-        } else {
-            email.removeClass("border-danger");
-            $("#pe_error").html("");
-            statuse = true;
-        }
         if (name.val() == "" || name.val().length < 6) {
             name.addClass("border-danger");
             $("#pu_error").html("<span class='text-danger'>S'il vous plaît entrer le nom et le nom doit être plus de 6 caractères</span>");
@@ -552,7 +554,7 @@ $(document).ready(function () {
             $("#pp2_error").html("");
             status = true;
         }
-        if (status == true && statuse == true && statusn == true) {
+        if (status == true && statusn == true) {
             if (passn.val() == pass2.val()) {
                 $(".overlay").show();
                 $.ajax({
@@ -569,7 +571,9 @@ $(document).ready(function () {
                         } else {
                             //alert(data);
                             $(".overlay").hide();
-                            window.location.href = encodeURI(DOMAIN + "/dashboard.php?msg=Modification effectuer");
+                            $("#alertmsg").html("Modification effectuer                                 <button id='close' type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+                            $("#alertmsg").removeClass("d-none");
+                            $('#form_profil').modal('toggle');
                         }
                     }
                 })
@@ -594,19 +598,22 @@ $(document).ready(function () {
             }
         })
     }
-    //Fetch Brand Stat
-    fetch_Brand_Stat();
-    function fetch_Brand_Stat() {
+//Fetch Brand Stat
+    fetch_Paid_Stat();
+    function fetch_Paid_Stat() {
         $.ajax({
             url: DOMAIN + "/includes/process.php",
             method: "POST",
-            data: {statBrand: 1},
+            data: {statPaid: 1},
             success: function (data) {
-                $("#ts").html(data);
+                var num = (Math.round(data * 100)/100).toFixed(2);
+                $("#paids").html(num+"%");
+                $("#stat").attr('aria-valuenow',num);
+                $("#stat").css("width",num+"%");
             }
         })
     }
-    //Fetch Category Stat
+//Fetch Category Stat
     fetch_Category_Stat();
     function fetch_Category_Stat() {
         $.ajax({
@@ -618,7 +625,7 @@ $(document).ready(function () {
             }
         })
     }
-    //Fetch Command Stat
+//Fetch Command Stat
     fetch_Command_Stat();
     function fetch_Command_Stat() {
         $.ajax({

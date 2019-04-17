@@ -4,8 +4,9 @@ include_once("user.php");
 include_once("DBOperation.php");
 include_once("manage.php");
 
-$email = $_SESSION["email"];
-
+if (isset($_SESSION["email"])) {
+    $email = $_SESSION["email"];
+}
 //For Registration Processsing
 if (isset($_POST["username"]) AND isset($_POST["email"])) {
     $user = new User();
@@ -250,7 +251,7 @@ if (isset($_POST["manageProduct"])) {
             ?>
             <tr>
                 <td><?php echo $n; ?></td>
-                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];                ?>" width="50" height="50"></td>-->
+                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];                 ?>" width="50" height="50"></td>-->
                 <td><?php echo $row["product_name"]; ?></td>
                 <td><?php echo $row["category_name"]; ?></td>
                 <td><?php echo $row["description"]; ?></td>
@@ -464,7 +465,7 @@ if (isset($_POST["manageInvoice"])) {
             $n++;
         }
         ?>
-        <!--<tr><td colspan="9"><?php //echo $pagination; ?></td></tr>-->
+        <!--<tr><td colspan="9"><?php //echo $pagination;  ?></td></tr>-->
         <?php
         exit();
     }
@@ -548,12 +549,12 @@ if (isset($_POST["updateUser"])) {
 }
 
 //Update Record after getting data
-if (isset($_POST["user"])) {
+if (isset($_POST["uuser"])) {
     $m = new Manage();
     $id = $_POST["id"];
-    $name = $_POST["user"];
-    $email = $_POST["email"];
-    $usertype = $_POST["usertype"];
+    $name = $_POST["uuser"];
+    $email = $_POST["uemail"];
+    $usertype = $_POST["uusertype"];
     $date = $_POST["date"];
     $result = $m->update_record("user", ["id" => $id], ["username" => $name, "email" => $email, "usertype" => $usertype, "register_date" => $date]);
     echo $result;
@@ -638,12 +639,12 @@ if (isset($_POST["statProduit"])) {
 
     exit();
 }
-//Brand Stat
-if (isset($_POST["statBrand"])) {
+//Paid Stat
+if (isset($_POST["statPaid"])) {
     $obj = new DBOperation();
-    $row = $obj->getAllStat("brands");
+    $row = $obj->getAllStat("paid");
 
-    echo $row["Stat"];
+    echo $row["paid"];
 
     exit();
 }

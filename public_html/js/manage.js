@@ -454,10 +454,11 @@ $(document).ready(function () {
             data: {updateUser: 1, id: eid},
             success: function (data) {
                 console.log(data);
+                //alert(data["email"]);
                 $("#id").val(data["id"]);
-                $("#user").val(data["username"]);
-                $("#email").val(data["email"]);
-                $("#usertype").val(data["usertype"]);
+                $("#uuser").val(data["username"]);
+                $("#uemail").val(data["email"]);
+                $("#uusertype").val(data["usertype"]);
 
 
             }

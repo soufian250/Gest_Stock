@@ -11,9 +11,7 @@
             <div class="modal-body">
                 <form id="profil_form" onsubmit="return false">
                     <div class="form-group">
-                        <label for="username">Votre Email</label>
-                        <input type="text" name="pemail" class="form-control" id="pemail" placeholder="Entrer Votre Email (Important!!)">
-                        <small id="pe_error" class="form-text text-muted"></small>
+                        <input type="hidden" name="pemail" id="pemail" value="<?php echo $_SESSION["email"]; ?>"/>
                     </div>
                     <div class="form-group">
                         <label for="username">Nom Complet</label>
@@ -35,9 +33,9 @@
                         <input type="password" name="passwords" class="form-control"  id="passwords" placeholder="Rentrer le nouveau Mot de Passe">
                         <small id="pp2_error" class="form-text text-muted"></small>
                     </div>
-                    
-                        <button type="submit" name="user_register" class="btn btn-primary">Editer</button>
-                        
+
+                    <button type="submit" name="user_register" class="btn btn-primary">Editer</button>
+
                 </form>
             </div>
             <div class="modal-footer">

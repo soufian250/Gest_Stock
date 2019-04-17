@@ -147,6 +147,6 @@ class User {
 }
 //$user = new User();
 //echo $user->createUserAccount("Test","rizwan1@gmail.com","1234567890","Admin");
-//echo $user->userLogin("rizwan1@gmail.com","1234567890");
+//echo $user->userLogin("Hamza@gmail.com","1235");
 //echo $_SESSION["username"];
 ?>
