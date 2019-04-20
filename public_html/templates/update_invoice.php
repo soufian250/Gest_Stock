@@ -20,7 +20,13 @@
                     <div class="form-group row">
                         <label for="paid" class="col-sm-3 col-form-label" align="right">Payé</label>
                         <div class="col-sm-8">
-                            <input type="text" name="paid" class="form-control form-control-sm" id="paid">
+                            <input type="text" class="form-control form-control-sm" name="paid" id="paid" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="paid" class="col-sm-3 col-form-label" align="right">Paiement</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control form-control-sm" name="plpaid" id="plpaid">
                         </div>
                     </div>
                     <div class="form-group row">

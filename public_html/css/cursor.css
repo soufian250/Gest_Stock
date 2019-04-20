@@ -1,0 +1,4 @@
+.pointer         { cursor: pointer; }
+.help            { cursor: help; }
+.cell            { cursor: cell; }
+.no-drop         { cursor: no-drop; }

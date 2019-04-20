@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="form_products" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="form_update_products" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <label>Categorie</label>
-                        <select class="form-control" id="select_cat" name="select_cat" required/>
+                        <select class="form-control" id="select_ucat" name="select_cat" required/>
 
 
 
@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group">
                         <label>Fournisseur</label>
-                        <select class="form-control" id="select_four" name="select_four" required/>
+                        <select class="form-control" id="select_ufour" name="select_four" required/>
 
 
 
@@ -45,19 +45,19 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <input type="text" class="form-control" name="product_des" id="product_des" placeholder="Entrer La description de Produit" required>
+                        <input type="text" class="form-control" name="product_des" id="product_udes" placeholder="Entrer La description de Produit" required>
                     </div>
                     <div class="form-group">
                         <label>Prix d'achat</label>
-                        <input type="text" class="form-control" id="product_pprice" name="product_pprice" placeholder="Entrer le prix d'achat de produit" required>
+                        <input type="text" class="form-control" id="product_upprice" name="product_pprice" placeholder="Entrer le prix d'achat de produit" required>
                     </div>
                     <div class="form-group">
                         <label>Prix de vente</label>
-                        <input type="text" class="form-control" id="product_price" name="product_price" placeholder="Entrer le prix de vente de produit" required/>
+                        <input type="text" class="form-control" id="product_uprice" name="product_price" placeholder="Entrer le prix de vente de produit" required/>
                     </div>
                     <div class="form-group">
                         <label>Quantite</label>
-                        <input type="text" class="form-control" id="product_qty" name="product_qty" placeholder="Entrer La Quantite en Stock" required/>
+                        <input type="text" class="form-control" id="product_uqty" name="product_qty" placeholder="Entrer La Quantite en Stock" required/>
                     </div>
                     <button type="submit" class="btn btn-primary">Modifier</button>
                 </form>

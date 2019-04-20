@@ -18,7 +18,7 @@
 
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="text" class="form-control" name="femail" id="femail" placeholder="Entrer L'Email" required>
+                        <input type="text" class="form-control" name="femail" id="fuemail" placeholder="Entrer L'Email" required>
                     </div>
                     <div class="form-group">
                         <label>Telephone</label>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label for="fspecialite">Specialite</label>
-                        <input type="text" name="fspec" class="form-control"  id="fspec" placeholder="Specialite de Fournisseur">
+                        <input type="text" name="fspec" class="form-control"  id="fuspec" placeholder="Specialite de Fournisseur">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Modifier</button>

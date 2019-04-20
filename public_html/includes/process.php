@@ -4,9 +4,49 @@ include_once("user.php");
 include_once("DBOperation.php");
 include_once("manage.php");
 
+
+//use PHPMailer\PHPMailer\PHPMailer;
+
 if (isset($_SESSION["email"])) {
     $email = $_SESSION["email"];
 }
+//Reset Password
+/* if (isset($_POST["logf_email"])) {
+  // Instantiation and passing `true` enables exceptions
+  $mail = new PHPMailer(true);
+
+  try {
+  //Server settings
+  $mail->isSMTP();                                            // Set mailer to use SMTP
+  $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+  $mail->SMTPAuth = true;                                   // Enable SMTP authentication
+  $mail->Username = 'Hamza.nfs02@gmail.com';                     // SMTP username
+  $mail->Password = 'nfs022011';                               // SMTP password
+  $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+  $mail->Port = 587;                                    // TCP port to connect to
+  //Recipients
+  $mail->setFrom('Hamza.nfs02@gmail.com', 'Gestion de Stock WEB SITE');
+  $mail->addAddress($_POST["logf_email"]);     // Add a recipient               // Name is optional
+  $mail->addReplyTo('no-reply@gmail.com', 'No replay');
+
+  // Attachments
+  $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+  $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+  // Content
+  $mail->isHTML(true);                                  // Set email format to HTML
+  $mail->Subject = 'Here is the subject';
+  $mail->Body = 'This is the HTML message body <b>in bold!</b>';
+  $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+  $mail->send();
+  echo 'SENT';
+  } catch (Exception $e) {
+  echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+  }
+
+  exit();
+  } */
+
 //For Registration Processsing
 if (isset($_POST["username"]) AND isset($_POST["email"])) {
     $user = new User();
@@ -15,9 +55,9 @@ if (isset($_POST["username"]) AND isset($_POST["email"])) {
     exit();
 }
 //create Employe
-if (isset($_POST["notes"]) AND isset($_POST["emailp"])) {
+if (isset($_POST["emailp"])) {
     $user = new User();
-    $result = $user->addemployes($_POST["usernamep"], $_POST["emailp"], $_POST["password1"], $_POST["usertype"], $_POST["notes"]);
+    $result = $user->addemployes($_POST["usernamep"], $_POST["emailp"], $_POST["password1"], $_POST["usertype"]);
     echo $result;
     exit();
 }
@@ -144,7 +184,7 @@ if (isset($_POST["manageCategory"])) {
                 ?>
                 <td>
                     <a href="#" did="<?php echo $row['cid']; ?>" class="btn btn-danger btn-sm del_cat"><i class="fa fa-trash-alt">&nbsp;</i>Delete</a>
-                    <a href="#" eid="<?php echo $row['cid']; ?>" data-toggle="modal" data-target="#form_category" class="btn btn-info btn-sm edit_cat"><i class="fa fa-pencil-alt">&nbsp;</i>Edit</a>
+                    <a href="#" eid="<?php echo $row['cid']; ?>" data-toggle="modal" data-target="#form_update_Category" class="btn btn-info btn-sm edit_cat"><i class="fa fa-pencil-alt">&nbsp;</i>Edit</a>
                 </td>
             </tr>
             <?php
@@ -251,7 +291,7 @@ if (isset($_POST["manageProduct"])) {
             ?>
             <tr>
                 <td><?php echo $n; ?></td>
-                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];                 ?>" width="50" height="50"></td>-->
+                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];                          ?>" width="50" height="50"></td>-->
                 <td><?php echo $row["product_name"]; ?></td>
                 <td><?php echo $row["category_name"]; ?></td>
                 <td><?php echo $row["description"]; ?></td>
@@ -274,7 +314,7 @@ if (isset($_POST["manageProduct"])) {
                 ?>
                 <td>
                     <a href="#" did="<?php echo $row['pid']; ?>" class="btn btn-danger btn-sm del_product"><i class="fa fa-trash-alt">&nbsp;</i>Delete</a>
-                    <a href="#" eid="<?php echo $row['pid']; ?>" data-toggle="modal" data-target="#form_products" class="btn btn-info btn-sm edit_product"><i class="fa fa-pencil-alt">&nbsp;</i>Edit</a>
+                    <a href="#" eid="<?php echo $row['pid']; ?>" data-toggle="modal" data-target="#form_update_products" class="btn btn-info btn-sm edit_product"><i class="fa fa-pencil-alt">&nbsp;</i>Edit</a>
                 </td>
             </tr>
             <?php
@@ -366,7 +406,7 @@ if (isset($_POST["getNewOrderItem"])) {
     <tr>
         <td><b class="number">1</b></td>
         <td>
-            <select id="product_select" name="pid[]" class="form-control form-control-sm pid" required>
+            <select id="product_select" name="pid[]" class="form-control form-control-sm pid">
                 <option value="">Choisir un produit</option>
                 <?php
                 foreach ($rows as $row) {
@@ -376,7 +416,7 @@ if (isset($_POST["getNewOrderItem"])) {
             </select>
         </td>
         <td><input name="tqty[]" readonly type="text" class="form-control form-control-sm tqty"></td>   
-        <td><input name="qty[]" type="text" class="form-control form-control-sm qty" required></td>
+        <td><input name="qty[]" type="text" class="form-control form-control-sm qty"></td>
         <td><input name="price[]" type="text" class="form-control form-control-sm price" readonly></span>
         <span><input name="pro_name[]" type="hidden" class="form-control form-control-sm pro_name"></td>
             <td title="Montant totale">Mt.<span class="amt">0</span></td>
@@ -465,7 +505,7 @@ if (isset($_POST["manageInvoice"])) {
             $n++;
         }
         ?>
-        <!--<tr><td colspan="9"><?php //echo $pagination;  ?></td></tr>-->
+        <!--<tr><td colspan="9"><?php //echo $pagination;         ?></td></tr>-->
         <?php
         exit();
     }
@@ -492,8 +532,9 @@ if (isset($_POST["invoice_id"])) {
     $id = $_POST["invoice_id"];
     $total = $_POST["net_total"];
     $paid = $_POST["paid"];
+    $plpaid = $_POST["plpaid"];
     $due = $_POST["due"];
-    $result = $m->update_record("invoice", ["invoice_no" => $id], ["net_total" => $total, "paid" => $paid, "due" => $due]);
+    $result = $m->update_record("invoice", ["invoice_no" => $id], ["net_total" => $total, "paid" => $paid + $plpaid, "due" => $due]);
     echo $result;
 }
 
@@ -665,5 +706,53 @@ if (isset($_POST["statCommand"])) {
     echo $row["Stat"];
 
     exit();
+}
+
+//Top 3 Stat
+if (isset($_POST["statTop"])) {
+    $m = new DBOperation();
+    $rows = $m->getAllStat("top");
+    $n = 1;
+    if (count($rows) > 0) {
+        foreach ($rows as $row) {
+            if ($n == 1) {
+                ?>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Produits les plus vendus</h6>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="small font-weight-bold"><?php echo $row["product_name"]; ?> <span class="float-right"><?php echo $row["top"]; ?>%</span></h4>
+                        <div class="progress mb-4">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $row["top"]; ?>%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <?php
+                    }
+                    if ($n == 2) {
+                        ?>
+                        <h4 class="small font-weight-bold"><?php echo $row["product_name"]; ?> <span class="float-right"><?php echo $row["top"]; ?>%</span></h4>
+                        <div class="progress mb-4">
+                            <div class="progress-bar" role="progressbar" style="width: <?php echo $row["top"]; ?>%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <?php
+                    }
+
+                    if ($n == 3) {
+                        ?>
+                        <h4 class = "small font-weight-bold"><?php echo $row["product_name"]; ?> <span class = "float-right"><?php echo $row["top"]; ?>%</span></h4>
+                        <div class = "progress mb-4">
+                            <div class = "progress-bar bg-info" role = "progressbar" style = "width: <?php echo $row["top"]; ?>%" aria-valuenow = "60" aria-valuemin = "0" aria-valuemax = "100"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <?php
+            }
+            $n++;
+        }
+        ?>
+        <?php
+        exit();
+    }
 }
 ?>

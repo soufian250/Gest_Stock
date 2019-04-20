@@ -20,6 +20,7 @@ if (!isset($_SESSION["userid"])) {
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="./css/titles.css">
         <script type="text/javascript" src="./js/order.js"></script>
+        <script type="text/javascript" src="./js/main.js"></script>
     </head>
     <body id="page-top">
         <!-- Page Wrapper -->
@@ -252,7 +253,7 @@ if (!isset($_SESSION["userid"])) {
                                                     </div>
                                                     <label for="sub_total" class="col-sm-3 col-form-label" align="right">Totale HT</label>
                                                     <div class="col-sm-5">
-                                                        <input type="text" readonly name="sub_total" class="form-control form-control-sm" id="sub_total" required/>
+                                                        <input type="text" readonly name="sub_total" class="form-control form-control-sm" id="sub_total"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -260,7 +261,7 @@ if (!isset($_SESSION["userid"])) {
                                                     </div>
                                                     <label for="gst" class="col-sm-3 col-form-label" align="right" title="Taxe sur les produits et services">TVA (20%)</label>
                                                     <div class="col-sm-5">
-                                                        <input type="text" readonly name="gst" class="form-control form-control-sm" id="gst" required/>
+                                                        <input type="text" readonly name="gst" class="form-control form-control-sm" id="gst"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -268,7 +269,7 @@ if (!isset($_SESSION["userid"])) {
                                                     </div>
                                                     <label for="discount" class="col-sm-3 col-form-label" align="right">Remise</label>
                                                     <div class="col-sm-5">
-                                                        <input type="text" name="discount" class="form-control form-control-sm" id="discount" required/>
+                                                        <input type="text" name="discount" class="form-control form-control-sm" id="discount"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -276,7 +277,7 @@ if (!isset($_SESSION["userid"])) {
                                                     </div>
                                                     <label for="net_total" class="col-sm-3 col-form-label" align="right">Totale TTC</label>
                                                     <div class="col-sm-5">
-                                                        <input type="text" readonly name="net_total" class="form-control form-control-sm" id="net_total" required/>
+                                                        <input type="text" readonly name="net_total" class="form-control form-control-sm" id="net_total"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -292,7 +293,7 @@ if (!isset($_SESSION["userid"])) {
                                                     </div>
                                                     <label for="due" class="col-sm-3 col-form-label" align="right">Reste</label>
                                                     <div class="col-sm-5">
-                                                        <input type="text" readonly name="due" class="form-control form-control-sm" id="due" required/>
+                                                        <input type="text" readonly name="due" class="form-control form-control-sm" id="due"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -300,9 +301,8 @@ if (!isset($_SESSION["userid"])) {
                                                     </div>
                                                     <label for="payment_type" class="col-sm-3 col-form-label" align="right">Type de paiement</label>
                                                     <div class="col-sm-5">
-                                                        <select name="payment_type" class="form-control form-control-sm" id="payment_type" required/>
+                                                        <select name="payment_type" class="form-control form-control-sm" id="payment_type"/>
                                                         <option>Cash</option>
-                                                        <option>Card</option>
                                                         <option>Cheque</option>
                                                         </select>
                                                     </div>
@@ -332,7 +332,7 @@ if (!isset($_SESSION["userid"])) {
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website <?php echo date("Y"); ?></span>
+                            <span>Copyright &copy; GestionDeStock <?php echo date("Y"); ?></span>
                         </div>
                     </div>
                 </footer>

@@ -187,7 +187,7 @@ if (!isset($_SESSION["userid"])) {
                         </div>
                         <br>
                         <br>
-                        <div class="container"  style="max-width: 1250px;">
+                        <div class="container text-center"  style="max-width: 1250px;">
                             <table class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
@@ -217,7 +217,7 @@ if (!isset($_SESSION["userid"])) {
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website <?php echo date("Y"); ?></span>
+                            <span>Copyright &copy; GestionDeStock <?php echo date("Y"); ?></span>
                         </div>
                     </div>
                 </footer>

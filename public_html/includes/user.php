@@ -61,7 +61,7 @@ class User {
         }
     }
 
-    public function addemployes($username, $email, $password, $usertype, $notes) {
+    public function addemployes($username, $email, $password, $usertype) {
         //To protect your application from sql attack you can user 
         //prepares statment
         if ($this->emailExists($email)) {
@@ -69,9 +69,9 @@ class User {
         } else {
             $pass_hash = password_hash($password, PASSWORD_BCRYPT, ["cost" => 8]);
             $date = date("d/m/Y");
-            $pre_stmt = $this->con->prepare("INSERT INTO `user`(`username`, `email`, `password`, `usertype`, `register_date`, `last_login`, `notes`)
-			 VALUES (?,?,?,?,?,?,?)");
-            $pre_stmt->bind_param("sssssss", $username, $email, $pass_hash, $usertype, $date, $date, $notes);
+            $pre_stmt = $this->con->prepare("INSERT INTO `user`(`username`, `email`, `password`, `usertype`, `register_date`, `last_login`)
+			 VALUES (?,?,?,?,?,?)");
+            $pre_stmt->bind_param("ssssss", $username, $email, $pass_hash, $usertype, $date, $date);
             $result = $pre_stmt->execute() or die($this->con->error);
             if ($result) {
                 return $this->con->insert_id;
@@ -134,6 +134,7 @@ class User {
             $pre_stmt->bind_param("ssss", $username,$pass_hash,$date,$email);
             $result = $pre_stmt->execute() or die($this->con->error);
             if ($result) {
+                $_SESSION["username"] = $username;
                 return 1;
             } else {
                 return 0;

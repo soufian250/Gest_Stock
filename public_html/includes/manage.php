@@ -68,7 +68,7 @@ class Manage {
             if ($pageno > 1) {
                 $previous = "";
                 $previous = $pageno - 1;
-                $pagination .= "<li class='page-item'><a class='page-link' pn='" . $previous . "' href='#' style='color:#333;'> Previous </a></li></li>";
+                $pagination .= "<li class='page-item'><a class='page-link' pn='" . $previous . "' href='#' style='color:#333;'> Précédente </a></li></li>";
             }
             for ($i = $pageno - $numberOfRecordsPerPage; $i < $pageno; $i++) {
                 if ($i > 0) {
@@ -84,7 +84,7 @@ class Manage {
             }
             if ($last > $pageno) {
                 $next = $pageno + 1;
-                $pagination .= "<li class='page-item'><a class='page-link' pn='" . $next . "' href='#' style='color:#333;'> Next </a></li></ul>";
+                $pagination .= "<li class='page-item'><a class='page-link' pn='" . $next . "' href='#' style='color:#333;'> Suivante </a></li></ul>";
             }
         }
         //LIMIT 0,10

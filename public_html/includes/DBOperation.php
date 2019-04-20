@@ -104,18 +104,26 @@ class DBOperation {
     }
 
     public function getAllStat($table) {
-        if($table == "paid"){
+        if ($table == "top") {
+            $sql = "SELECT P.product_name,TRUNCATE(((count(I.product_name)*100) / (SELECT COUNT(*) from invoice_details)),2) AS 'top'  from products P INNER JOIN invoice_details I on P.product_name=I.product_name GROUP by P.product_name ORDER by top DESC LIMIT 3";
+        }else if ($table == "paid") {
             $sql = "SELECT ((SELECT count(*) FROM invoice WHERE due = 0)*100)/count(*) As 'paid' FROM `invoice`";
-        }else{
+        } else {
             $sql = "SELECT Count(*) as 'Stat' FROM " . $table;
         }
         $pre_stmt = $this->con->prepare($sql);
         $pre_stmt->execute() or die($this->con->error);
         $result = $pre_stmt->get_result();
+        $rows = array();
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
+            return $row;
+        } else if ($result->num_rows >1) {
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
         }
-        return $row;
     }
 
 }
@@ -123,5 +131,5 @@ class DBOperation {
 //$opr = new DBOperation();
 //echo $opr->addCategory(1,"Mobiles");
 //echo "<pre>";
-//print_r($opr->getAllRecord("categories"));
+//print_r($opr->getAllStat("top"));
 ?>

@@ -61,7 +61,7 @@ if (isset($_SESSION["userid"])) {
                 </div>
                 <div class="card-footer">
                     <div class="text-center">
-                        <a class="small" href="forgot-password.html">Mot de passe oublié?</a>
+                        <a class="small" href="requestReset.php">Mot de passe oublié?</a>
                     </div>
                     <div class="text-center">
                         <a class="small" href="#" data-toggle="modal" data-target="#form_register">Créer un compte!</a>

@@ -22,6 +22,8 @@ if (!isset($_SESSION["userid"])) {
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <script type="text/javascript" src="./js/main.js"></script>
+        <script type="text/javascript" src="./js/manage.js"></script>
+        <link type="text/css" href="css/cursor.css" rel="stylesheet">
     </head>
     <body id="page-top">
         <!-- Page Wrapper -->
@@ -184,6 +186,7 @@ if (!isset($_SESSION["userid"])) {
                             <div class="row">
                                 <div class="col-md-1"></div>
                                 <div class="col-md-3">
+                                    <br><p></p>
                                     <div class="card mx-auto" style="box-shadow:0 0 25px 0 lightgrey;">
                                         <div class="card-body"><h3 style="text-align: center;">Bienvenue Admin</h3></div>
 
@@ -208,7 +211,7 @@ if (!isset($_SESSION["userid"])) {
                                         <!-- Earnings (Monthly) Card Example -->
                                         <div class="row">
                                             <div class="col-xl-6 col-md-6 mb-4">
-                                                <div class="card border-left-primary shadow h-100 py-2">
+                                                <div class="card border-left-primary shadow h-100 py-2 pointer" id="box" location="http://localhost/inv_project/public_html/manage_factures.php">
                                                     <div class="card-body">
                                                         <div class="row no-gutters align-items-center">
                                                             <div class="col mr-2">
@@ -247,7 +250,7 @@ if (!isset($_SESSION["userid"])) {
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-md-6 mb-4">
-                                                <div class="card border-left-success shadow h-100 py-2">
+                                                <div class="card border-left-success shadow h-100 py-2 pointer" id="box2" location="http://localhost/inv_project/public_html/manage_product.php">
                                                     <div class="card-body">
                                                         <div class="row no-gutters align-items-center">
                                                             <div class="col mr-2">
@@ -278,6 +281,11 @@ if (!isset($_SESSION["userid"])) {
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 mb-4" id="top">
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-2"></div>
@@ -300,7 +308,7 @@ if (!isset($_SESSION["userid"])) {
                                             <div class="row">
                                                 <div class="col-md-2"></div>
                                                 <div class="col-md-8">
-                                                    <a href="#" data-toggle="modal" data-target="#form_fournisseur" class="btn btn-primary"><i class="fa fa-plus">&nbsp;</i>Ajouter</a>
+                                                    <a href="#" data-toggle="modal" data-target="#form_fournisseur" class="btn btn-primary cell"><i class="fa fa-plus">&nbsp;</i>Ajouter</a>
                                                     <a href="manage_fournisseur.php" class="btn btn-secondary"><i class="fa fa-edit">&nbsp;</i>Gérer</a>
                                                 </div>
                                                 <div class="col-md-2"></div>
@@ -315,7 +323,7 @@ if (!isset($_SESSION["userid"])) {
                                             <p class="card-text">Ici, vous pouvez faire des factures et créer de nouvelles commandes</p>
                                             <div class="row">
                                                 <div class="col-md-2"></div>
-                                                <div class="col-md-8"><a href="new_order.php" class="btn btn-primary"><i class="fas fa-newspaper">&nbsp;</i>Nouvelle commande</a></div>
+                                                <div class="col-md-8"><a href="new_order.php" class="btn btn-primary cell"><i class="fas fa-newspaper">&nbsp;</i>Nouvelle commande</a></div>
                                                 <div class="col-md-2"></div>
                                             </div>
 
@@ -331,7 +339,7 @@ if (!isset($_SESSION["userid"])) {
                                             <div class="row">
                                                 <div class="col-md-2"></div>
                                                 <div class="col-md-8">
-                                                    <a href="#" data-toggle="modal" data-target="#form_employe" class="btn btn-primary"><i class="fa fa-plus">&nbsp;</i>Ajouter</a>
+                                                    <a href="#" data-toggle="modal" data-target="#form_employe" class="btn btn-primary cell"><i class="fa fa-plus">&nbsp;</i>Ajouter</a>
                                                     <a href="manage_users.php" class="btn btn-secondary"><i class="fa fa-edit">&nbsp;</i>Gérer</a>
                                                 </div>
                                                 <div class="col-md-2"></div>
@@ -353,7 +361,7 @@ if (!isset($_SESSION["userid"])) {
                                             <div class="row">
                                                 <div class="col-md-2"></div>
                                                 <div class="col-md-8">
-                                                    <a href="#" data-toggle="modal" data-target="#form_category" class="btn btn-primary"><i class="fa fa-plus">&nbsp;</i>Ajouter</a>
+                                                    <a href="#" data-toggle="modal" data-target="#form_category" class="btn btn-primary cell"><i class="fa fa-plus">&nbsp;</i>Ajouter</a>
                                                     <a href="manage_categories.php" class="btn btn-secondary"><i class="fa fa-edit">&nbsp;</i>Gérer</a>
                                                 </div>
                                                 <div class="col-md-2"></div>
@@ -371,7 +379,7 @@ if (!isset($_SESSION["userid"])) {
                                             <!--<div class="row">
                                                 <div class="col-md-2"></div>
                                                 <div class="col-md-8">-->
-                                            <a href="manage_factures.php"  class="btn btn-primary"><i class="fas fa-glasses">&nbsp;</i>Consulter</a>
+                                            <a href="manage_factures.php"  class="btn btn-primary cell"><i class="fas fa-glasses">&nbsp;</i>Consulter</a>
                                             <!--</div>
                                             <div class="col-md-2"></div>
                                         </div>-->
@@ -386,7 +394,7 @@ if (!isset($_SESSION["userid"])) {
                                             <div class="row">
                                                 <div class="col-md-2"></div>
                                                 <div class="col-md-8">
-                                                    <a href="#" data-toggle="modal" data-target="#form_products" class="btn btn-primary"><i class="fa fa-plus">&nbsp;</i>Ajouter</a>
+                                                    <a href="#" data-toggle="modal" data-target="#form_products" class="btn btn-primary cell"><i class="fa fa-plus">&nbsp;</i>Ajouter</a>
                                                     <a href="manage_product.php" class="btn btn-secondary"><i class="fa fa-edit">&nbsp;</i>Gérer</a>
                                                 </div>
                                                 <div class="col-md-2"></div>
@@ -408,7 +416,7 @@ if (!isset($_SESSION["userid"])) {
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website <?php echo date("Y"); ?></span>
+                            <span>Copyright &copy; GestionDeStock <?php echo date("Y"); ?></span>
                         </div>
                     </div>
                 </footer>
