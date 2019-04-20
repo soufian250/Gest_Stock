@@ -230,7 +230,7 @@ if (!isset($_SESSION["userid"])) {
                                                     <div class="card-body">
                                                         <div class="row no-gutters align-items-center">
                                                             <div class="col mr-2">
-                                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Paid Factures</div>
+                                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Factures payées</div>
                                                                 <div class="row no-gutters align-items-center">
                                                                     <div class="col-auto">
                                                                         <div id="paids" class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>

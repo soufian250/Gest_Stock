@@ -80,6 +80,7 @@ $(document).ready(function () {
                         $("#alertmsg").removeClass("d-none");
                         $('#form_category').modal('toggle');
                         fetch_pcategory();
+                        fetch_category();
                         manageCategory(1);
                     } else {
                         alert(data);
@@ -512,7 +513,7 @@ $(document).ready(function () {
                     $("#plpaid").val("");
                     $("#form_invoice").modal("toggle");
                 } else {
-                    alert(data);
+                    alert("Remplissez le prix supplémentaire s'il vous plaît!");
                 }
             }
         })
@@ -758,6 +759,10 @@ $(document).ready(function () {
     // create Fournisseur
     $("#fournisseur_form").on("submit", function () {
         var status = true;
+        var status1 = true;
+        var status2 = true;
+        var status3 = true;
+
         var name = $("#fusername");
         var email = $("#femail");
         var tele = $("#ftele");
@@ -767,29 +772,29 @@ $(document).ready(function () {
         if (name.val() == "") {
             name.addClass("border-danger");
             $("#fu_error").html("<span class='text-danger'>S'il vous plaît entrer Le nom de Fournisseur</span>");
-            status = false;
+            status1 = false;
         } else {
             name.removeClass("border-danger");
             $("#fu_error").html("");
-            status = true;
+            status1 = true;
         }
         if (!e_patt.test(email.val())) {
             email.addClass("border-danger");
             $("#fe_error").html("<span class='text-danger'>Veuillez entrer une adresse email valide</span>");
-            status = false;
+            status2 = false;
         } else {
             email.removeClass("border-danger");
             $("#e_error").html("");
-            status = true;
+            status2 = true;
         }
         if (!t_patt.test(tele.val())) {
             tele.addClass("border-danger");
             $("#ft_error").html("<span class='text-danger'>Veuillez entrer un numero de telephone valide</span>");
-            status = false;
+            status3 = false;
         } else {
             tele.removeClass("border-danger");
             $("#ft_error").html("");
-            status = true;
+            status3 = true;
         }
         if (spec.val() == "") {
             spec.addClass("border-danger");
@@ -802,7 +807,7 @@ $(document).ready(function () {
         }
 
 
-        if (status == true) {
+        if (status == true && status1 == true && status2 == true && status3 == true) {
             $(".overlay").show();
             $.ajax({
                 url: DOMAIN + "/includes/process.php",
@@ -817,6 +822,7 @@ $(document).ready(function () {
                         $("#alertmsg").html("Le Fournisseur est bien Ajouté                                 <button id='close' type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
                         $("#alertmsg").removeClass("d-none");
                         $('#form_fournisseur').modal('toggle');
+                        manageFour(1);
                         fetch_four();
                     } else {
                         alert(data);

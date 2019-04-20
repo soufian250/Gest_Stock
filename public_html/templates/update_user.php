@@ -27,7 +27,7 @@
 
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="text" class="form-control" name="uemail" id="uemail" placeholder="Entrer L'Email" required>
+                        <input type="email" class="form-control" name="uemail" id="uemail" placeholder="Entrer L'Email" required>
                     </div>
                     <div class="form-group">
                         <label>Role</label>
