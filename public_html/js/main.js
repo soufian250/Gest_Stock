@@ -23,7 +23,7 @@ $(document).ready(function () {
         }
         if (!e_patt.test(email.val())) {
             email.addClass("border-danger");
-            $("#e_error").html("<span class='text-danger'>Veuillez entrer une adresse email valide</span>");
+            $("#er_error").html("<span class='text-danger'>Veuillez entrer une adresse email valide</span>");
             status2 = false;
         } else {
             email.removeClass("border-danger");
