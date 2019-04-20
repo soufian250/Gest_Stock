@@ -123,6 +123,8 @@ class DBOperation {
                 $rows[] = $row;
             }
             return $rows;
+        } else{
+            return $rows;
         }
     }
 

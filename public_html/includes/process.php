@@ -712,8 +712,9 @@ if (isset($_POST["statCommand"])) {
 if (isset($_POST["statTop"])) {
     $m = new DBOperation();
     $rows = $m->getAllStat("top");
-    $n = 1;
-    if (count($rows) > 0) {
+    $n = 0;
+    if (count($rows) > 2) {
+        $n++;
         foreach ($rows as $row) {
             if ($n == 1) {
                 ?>
