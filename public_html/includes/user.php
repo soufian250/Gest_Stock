@@ -26,19 +26,19 @@ class User {
         }
     }
 
-    /*private function passwordExists($oldpassword) {
+    /* private function passwordExists($oldpassword) {
 
-        $pass_hash = password_hash($oldpassword, PASSWORD_BCRYPT, ["cost" => 8]);
-        $pre_stmt = $this->con->prepare("SELECT id FROM user WHERE password = ? ");
-        $pre_stmt->bind_param("s", $pass_hash);
-        $pre_stmt->execute() or die($this->con->error);
-        $result = $pre_stmt->get_result();
-        if ($result->num_rows > 0) {
-            return 'Hamza';
-        } else {
-            return 0;
-        }
-    }*/
+      $pass_hash = password_hash($oldpassword, PASSWORD_BCRYPT, ["cost" => 8]);
+      $pre_stmt = $this->con->prepare("SELECT id FROM user WHERE password = ? ");
+      $pre_stmt->bind_param("s", $pass_hash);
+      $pre_stmt->execute() or die($this->con->error);
+      $result = $pre_stmt->get_result();
+      if ($result->num_rows > 0) {
+      return 'Hamza';
+      } else {
+      return 0;
+      }
+      } */
 
     public function createUserAccount($username, $email, $password, $usertype) {
         //To protect your application from sql attack you can user 
@@ -115,23 +115,38 @@ class User {
         }
     }
 
-    public function profilEdit($username, $oldpassword,$password ,$email) {
+    public function profilEdit($username, $oldpassword, $password, $email) {
 
         $pre_stmt = $this->con->prepare("SELECT id,username,password,last_login FROM user WHERE email = ?");
         $pre_stmt->bind_param("s", $email);
         $pre_stmt->execute() or die($this->con->error);
         $result = $pre_stmt->get_result();
-        
+
         if ($result->num_rows < 1) {
             return "EMAIL_NOT_MATCHED";
-        
         } else {
             $row = $result->fetch_assoc();
             if (password_verify($oldpassword, $row["password"])) {
-            $date = date("Y-m-d");
-            $pass_hash = password_hash($password, PASSWORD_BCRYPT, ["cost" => 8]);
-            $pre_stmt = $this->con->prepare("UPDATE user SET username = ? , password = ? , register_date = ? WHERE email = ?");
-            $pre_stmt->bind_param("ssss", $username,$pass_hash,$date,$email);
+                $date = date("Y-m-d");
+                $pass_hash = password_hash($password, PASSWORD_BCRYPT, ["cost" => 8]);
+                $pre_stmt = $this->con->prepare("UPDATE user SET username = ? , password = ? , register_date = ? WHERE email = ?");
+                $pre_stmt->bind_param("ssss", $username, $pass_hash, $date, $email);
+                $result = $pre_stmt->execute() or die($this->con->error);
+                if ($result) {
+                    $_SESSION["username"] = $username;
+                    return 1;
+                } else {
+                    return 0;
+                }
+            } else {
+                return "PASSWORD_NOT_EXISTS";
+            }
+        }
+    }
+
+    public function editProfilName($username, $email) {
+            $pre_stmt = $this->con->prepare("UPDATE user SET username = ? WHERE email = ?");
+            $pre_stmt->bind_param("ss", $username, $email);
             $result = $pre_stmt->execute() or die($this->con->error);
             if ($result) {
                 $_SESSION["username"] = $username;
@@ -139,14 +154,12 @@ class User {
             } else {
                 return 0;
             }
-        } else {
-            return "PASSWORD_NOT_EXISTS";
-        }
     }
 
 }
-}
+
 //$user = new User();
+//echo $user->editProfilName("Hamza Aqa", "Hamza@gmail.com");
 //echo $user->createUserAccount("Test","rizwan1@gmail.com","1234567890","Admin");
 //echo $user->userLogin("Hamza@gmail.com","1235");
 //echo $_SESSION["username"];

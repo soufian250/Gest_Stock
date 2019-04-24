@@ -25,114 +25,168 @@ if (!isset($_SESSION["userid"])) {
         <!-- Page Wrapper -->
         <div id="wrapper">
 
-            <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <?php
+            if ($_SESSION["role"] == "Admin") {
+                ?>
+                <!-- Sidebar -->
+                <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
-                    <div class="sidebar-brand-icon">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <div class="sidebar-brand-text mx-3">Gestion de Stock</div>
-                </a>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
-
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item">
-                    <a class="nav-link" href="dashboard.php">
-                        <i class="fa fa-home"></i>
-                        <span>Accueil</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <div class="sidebar-heading">
-                    Ordres
-                </div>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                        <i class="far fa-newspaper"></i>
-                        <span>Facture</span>
-                    </a>
-                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Nouvelle Commande</h6>
-                            <a class="collapse-item" href="new_order.php">Faire</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Gérer Les Factures</h6>
-                            <a class="collapse-item" href="manage_factures.php">Consulter</a>
+                    <!-- Sidebar - Brand -->
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
+                        <div class="sidebar-brand-icon">
+                            <i class="fas fa-tasks"></i>
                         </div>
+                        <div class="sidebar-brand-text mx-3">Gestion de Stock</div>
+                    </a>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider my-0">
+
+                    <!-- Nav Item - Dashboard -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.php">
+                            <i class="fa fa-home"></i>
+                            <span>Accueil</span></a>
+                    </li>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <div class="sidebar-heading">
+                        Ordres
                     </div>
-                </li>
 
-                <hr class="sidebar-divider">
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Espaces
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link" href="manage_users.php" >
-                        <i class="fas fa-user-cog"></i>
-                        <span>Employes</span>
-                    </a>
-                </li>
-
-                <!-- Nav Item - Utilities Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link" href="manage_fournisseur.php">
-                        <i class="fas fa-dolly-flatbed"></i>
-                        <span>Fournisseurs</span>
-                    </a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Gestions
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="manage_categories.php">
-                        <i class="fab fa-accusoft"></i>
-                        <span>Gestion De Categories</span>
-                    </a>
-                </li>
-
-                <!-- Nav Item - Charts -->
-                <li class="nav-item active">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-tools"></i>
-                        <span>Gestion De Produits</span></a>
-                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Gestion</h6>
-                            <a class="collapse-item" href="manage_product.php">Gérer</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Voir La liste</h6>
-                            <a class="collapse-item" href="consulterProduit.php">Consulter</a>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                            <i class="far fa-newspaper"></i>
+                            <span>Facture</span>
+                        </a>
+                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Nouvelle Commande</h6>
+                                <a class="collapse-item" href="new_order.php">Faire</a>
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Gérer Les Factures</h6>
+                                <a class="collapse-item" href="manage_factures.php">Consulter</a>
+                            </div>
                         </div>
+                    </li>
+
+                    <hr class="sidebar-divider">
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Espaces
                     </div>
-                </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="manage_users.php" >
+                            <i class="fas fa-user-cog"></i>
+                            <span>Employes</span>
+                        </a>
+                    </li>
 
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
+                    <!-- Nav Item - Utilities Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="manage_fournisseur.php">
+                            <i class="fas fa-dolly-flatbed"></i>
+                            <span>Fournisseurs</span>
+                        </a>
+                    </li>
 
-            </ul>
-            <!-- End of Sidebar -->
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Gestions
+                    </div>
+
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="manage_categories.php">
+                            <i class="fab fa-accusoft"></i>
+                            <span>Gestion De Categories</span>
+                        </a>
+                    </li>
+
+                    <!-- Nav Item - Charts -->
+                    <li class="nav-item active">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                            <i class="fas fa-tools"></i>
+                            <span>Gestion De Produits</span></a>
+                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Gestion</h6>
+                                <a class="collapse-item" href="manage_product.php">Gérer</a>
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Voir La liste</h6>
+                                <a class="collapse-item" href="consulterProduit.php">Consulter</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider d-none d-md-block">
+
+                    <!-- Sidebar Toggler (Sidebar) -->
+                    <div class="text-center d-none d-md-inline">
+                        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                    </div>
+
+                </ul>
+                <!-- End of Sidebar -->
+                <?php
+            } else {
+                ?>
+                <!-- Sidebar -->
+                <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+                    <!-- Sidebar - Brand -->
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
+                        <div class="sidebar-brand-icon">
+                            <i class="fas fa-bars"></i>
+                        </div>
+                        <div class="sidebar-brand-text mx-3">Gestion de Stock</div>
+                    </a>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider my-0">
+
+                    <!-- Nav Item - Dashboard -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="employeField.php">
+                            <i class="fa fa-home"></i>
+                            <span>Accueil</span></a>
+                    </li>
+
+                    <!-- Divider -->
+
+                    <hr class="sidebar-divider">
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Consulter
+                    </div>
+
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="consulterProduit.php" >
+                            <i class="fas fa-glasses"></i>
+                            <span>Produits</span>
+                        </a>
+                    </li>               
+                    <!-- Divider -->
+                    <hr class="sidebar-divider d-none d-md-block">
+
+                    <!-- Sidebar Toggler (Sidebar) -->
+                    <div class="text-center d-none d-md-inline">
+                        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                    </div>
+
+                </ul>
+                <?php
+            }
+            ?>
 
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">

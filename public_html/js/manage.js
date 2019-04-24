@@ -784,7 +784,7 @@ $(document).ready(function () {
             status2 = false;
         } else {
             email.removeClass("border-danger");
-            $("#e_error").html("");
+            $("#fe_error").html("");
             status2 = true;
         }
         if (!t_patt.test(tele.val())) {

@@ -106,7 +106,7 @@ class DBOperation {
     public function getAllStat($table) {
         if ($table == "top") {
             $sql = "SELECT P.product_name,TRUNCATE(((count(I.product_name)*100) / (SELECT COUNT(*) from invoice_details)),2) AS 'top'  from products P INNER JOIN invoice_details I on P.product_name=I.product_name GROUP by P.product_name ORDER by top DESC LIMIT 3";
-        }else if ($table == "paid") {
+        } else if ($table == "paid") {
             $sql = "SELECT ((SELECT count(*) FROM invoice WHERE due = 0)*100)/count(*) As 'paid' FROM `invoice`";
         } else {
             $sql = "SELECT Count(*) as 'Stat' FROM " . $table;
@@ -118,19 +118,29 @@ class DBOperation {
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
             return $row;
-        } else if ($result->num_rows >1) {
+        } else if ($result->num_rows > 1) {
             while ($row = $result->fetch_assoc()) {
                 $rows[] = $row;
             }
             return $rows;
-        } else{
+        } else {
             return $rows;
         }
     }
 
+    public function getZakatStat() {
+        $sql = "SELECT SUM(P.product_price*Lv.qty - P.purchase_price*Lv.qty) AS 'profit', (SUM(P.product_price*Lv.qty - P.purchase_price*Lv.qty) * 2.5)/100 AS 'zakat' FROM products P INNER join invoice_details Lv on P.product_name = Lv.product_name INNER join invoice I on I.invoice_no = Lv.invoice_no where I.due = 0 LIMIT 1";
+        $pre_stmt = $this->con->prepare($sql);
+        $pre_stmt->execute() or die($this->con->error);
+        $result = $pre_stmt->get_result();
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+        }
+        return $row;
+    }
 }
-
 //$opr = new DBOperation();
+//echo $opr->getZakatStat();
 //echo $opr->addCategory(1,"Mobiles");
 //echo "<pre>";
 //print_r($opr->getAllStat("top"));

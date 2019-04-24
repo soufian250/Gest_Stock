@@ -21,6 +21,7 @@ if (!isset($_SESSION["userid"])) {
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="./css/titles.css">
         <script type="text/javascript" src="./js/main.js"></script>
         <script type="text/javascript" src="./js/manage.js"></script>
         <link type="text/css" href="css/cursor.css" rel="stylesheet">
@@ -323,7 +324,7 @@ if (!isset($_SESSION["userid"])) {
                                             <p class="card-text">Ici, vous pouvez faire des factures et créer de nouvelles commandes</p>
                                             <div class="row">
                                                 <div class="col-md-2"></div>
-                                                <div class="col-md-8"><a href="new_order.php" class="btn btn-primary cell"><i class="fas fa-newspaper">&nbsp;</i>Nouvelle commande</a></div>
+                                                <div class="col-md-8"><a href="new_order.php" class="btn btn-primary"><i class="fas fa-newspaper">&nbsp;</i>Nouvelle commande</a></div>
                                                 <div class="col-md-2"></div>
                                             </div>
 
@@ -379,7 +380,7 @@ if (!isset($_SESSION["userid"])) {
                                             <!--<div class="row">
                                                 <div class="col-md-2"></div>
                                                 <div class="col-md-8">-->
-                                            <a href="manage_factures.php"  class="btn btn-primary cell"><i class="fas fa-glasses">&nbsp;</i>Consulter</a>
+                                            <a href="manage_factures.php"  class="btn btn-primary"><i class="fas fa-glasses">&nbsp;</i>Consulter</a>
                                             <!--</div>
                                             <div class="col-md-2"></div>
                                         </div>-->
@@ -403,73 +404,111 @@ if (!isset($_SESSION["userid"])) {
                                     </div>
                                 </div>
                             </div>
-                        </div>   
+                        </div>  
+                        <br>                        
+                        <br>
+                        <div class="container" id="zakat_card">
+                            <div class="row">
+                                <div class="row mx-auto">
+                                    <h2>La Zakat Al Maal</h2>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-8">
+                                    <div class="card shadow mb-4">
+                                        <!-- Card Header - Dropdown -->
+                                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                            <h6 class="m-0 font-weight-bold text-primary" style="text-align: center;">LA ZAKAT</h6>
+                                            <div class="dropdown no-arrow">
+                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                    <div class="dropdown-header">Options</div>
+                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#zakat_info">Zakat Info</a>
+                                                    <a class="dropdown-item zakat_info" href="#" data-toggle="modal" data-target="#zakat_modal">Vos Progrès</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#" id="zakat_close">Fermer</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Card Body -->
+                                        <div class="card-body" id="zakat">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2"></div>
+                            </div>
+
+                        </div>
+                        <!-- /.container-fluid -->
 
                     </div>
-                    <!-- /.container-fluid -->
+                    <br>
+                    <!-- End of Main Content -->
+
+                    <!-- Footer -->
+                    <footer class="sticky-footer bg-white">
+                        <div class="container my-auto">
+                            <div class="copyright text-center my-auto">
+                                <span>Copyright &copy; GestionDeStock <?php echo date("Y"); ?></span>
+                            </div>
+                        </div>
+                    </footer>
+                    <!-- End of Footer -->
 
                 </div>
-                <br>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; GestionDeStock <?php echo date("Y"); ?></span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
+                <!-- End of Content Wrapper -->
 
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Page Wrapper -->
 
-        </div>
-        <!-- End of Page Wrapper -->
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+            <?php
+            //Forms
+            include_once("./templates/fournisseur.php");
+            include_once("./templates/zakatprogress.php");
+            include_once("./templates/zakatinfos.php");
+            include_once("./templates/info_profil.php");
+            include_once("./templates/logout.php");
+            ?>
+            <?php
+            //Employe Form
+            include_once("./templates/employe.php");
+            ?>
+            <?php
+            //Categpry Form
+            include_once("./templates/category.php");
+            ?>
+            <?php
+            //Brand Form
+            include_once("./templates/brand.php");
+            ?>
+            <?php
+            //Products Form
+            include_once("./templates/products.php");
+            ?>
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-        <?php
-        //Forms
-        include_once("./templates/fournisseur.php");
-        include_once("./templates/info_profil.php");
-        include_once("./templates/logout.php");
-        ?>
-        <?php
-        //Employe Form
-        include_once("./templates/employe.php");
-        ?>
-        <?php
-        //Categpry Form
-        include_once("./templates/category.php");
-        ?>
-        <?php
-        //Brand Form
-        include_once("./templates/brand.php");
-        ?>
-        <?php
-        //Products Form
-        include_once("./templates/products.php");
-        ?>
+            <?php
+            //Profil Form
+            include_once("./templates/editProfill.php");
+            ?>
 
-        <?php
-        //Profil Form
-        include_once("./templates/editProfill.php");
-        ?>
+            <script src="vendor/jquery/jquery.min.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+            <script src="js/sb-admin-2.min.js"></script>
 
-        <script src="js/sb-admin-2.min.js"></script>
+            <script src="vendor/chart.js/Chart.min.js"></script>
 
-        <script src="vendor/chart.js/Chart.min.js"></script>
-
-        <script src="js/demo/chart-area-demo.js"></script>
-        <script src="js/demo/chart-pie-demo.js"></script>
+            <script src="js/demo/chart-area-demo.js"></script>
+            <script src="js/demo/chart-pie-demo.js"></script>
     </body>
 </html>

@@ -280,6 +280,39 @@ $(document).ready(function () {
             alert("Il ya des errors dans votre entries!");
     })
 
+    //Modifer Name
+    $("body").delegate(".edit_name", "click", function () {
+
+        var statusn = false;
+        var name = $("#usernamen");
+        if (name.val() == "" || name.val().length < 6) {
+            name.addClass("border-danger");
+            $("#pu_error").html("<span class='text-danger'>S'il vous plaît entrer le nom et le nom doit être plus de 6 caractères</span>");
+            statusn = false;
+        } else {
+            name.removeClass("border-danger");
+            $("#pu_error").html("");
+            statusn = true;
+        }
+        var username = name.val();
+        if (statusn == true) {
+            alert("Hamza");
+            $.ajax({
+                url: DOMAIN + "/includes/process.php",
+                method: "POST",
+                data: {editName: 1, name: username},
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Votre Nom est bien Modifier!");
+                        window.location.href = "";
+                    } else {
+                        alert("Il ya des errors dans votre entries!");
+                    }
+                }
+            })
+        }
+    })
+
 //Fetch Product Stat
     fetch_Product_Stat();
     function fetch_Product_Stat() {
@@ -352,6 +385,42 @@ $(document).ready(function () {
 //Box Products Click
     $("#box2").click(function () {
         window.location = $(this).attr("location");
+    })
+
+    fetch_zakat_stat();
+    function fetch_zakat_stat() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            dataType: "json",
+            data: {statZakat: 1},
+            success: function (data) {
+                //alert(data["profit"]);
+                if (data["profit"] * 1 >= 17000) {
+                    $("#zakat").html("<b class='text-danger'>Remarque: </b>Tu es rencontré les conditions pour Sortir la zakat <br>\n\
+                    <div class=form-groupe><p class='text-success'>Le montant de zakat est : <b>" + data["zakat"] + "</b></p></div>");
+                } else {
+                    $("#zakat").html("<b class='text-danger'>Remarque: </b>Pas encore atteint pour la valeur de nissab!");
+                }
+            }
+        })
+    }
+
+    $("body").delegate("#zakat_close", "click", function () {
+        $("#zakat_card").addClass("d-none");
+    })
+    
+    $("body").delegate(".zakat_info", "click", function () {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            dataType: "json",
+            data: {statZakat: 1},
+            success: function (data) {
+                $("#nissab").html("17000 DH");
+                $("#profit").html(data["profit"]+" DH");
+            }
+        })
     })
 
 

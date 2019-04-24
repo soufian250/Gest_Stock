@@ -1,0 +1,37 @@
+.h1Ad {
+	color: #15171b;
+	font-family: 'Vollkorn';
+	font-size: 120px;
+	line-height: 120px;
+	margin: 0 0 72px -10px;
+	position: relative;
+	text-align: center;
+}
+
+.pAd {
+	color: #fff;
+	font-family: 'Roboto';
+	font-size: 32px;
+	float: right;
+	line-height: 48px;
+	margin-bottom: 48px;
+	width: 500px;
+}
+
+.aAd {
+	color: #48222F;	font-size: 16px;
+	font-family: 'Vollkorn', serif;
+	font-style: italic;
+	font-weight: 400;
+	float: left;
+	line-height: 24px;
+	margin-bottom: 48px;
+	margin-top: 20px;
+	text-align: right;
+	text-decoration: none;
+	width: 240px;
+}
+
+.aAd:hover {
+	color: #fff;
+}

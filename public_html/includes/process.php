@@ -84,6 +84,13 @@ if (isset($_POST["passwordnew"]) AND isset($_POST["passwordf"])) {
     echo $result;
     exit();
 }
+//For Edit Name Only
+if (isset($_POST["editName"])) {
+    $user = new User();
+    $name = $_POST["name"];
+    $result = $user->editProfilName($name, $email);
+    echo $result;
+}
 
 //To get Category
 if (isset($_POST["getCategory"])) {
@@ -291,7 +298,7 @@ if (isset($_POST["manageProduct"])) {
             ?>
             <tr>
                 <td><?php echo $n; ?></td>
-                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];                          ?>" width="50" height="50"></td>-->
+                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];                            ?>" width="50" height="50"></td>-->
                 <td><?php echo $row["product_name"]; ?></td>
                 <td><?php echo $row["category_name"]; ?></td>
                 <td><?php echo $row["description"]; ?></td>
@@ -505,7 +512,7 @@ if (isset($_POST["manageInvoice"])) {
             $n++;
         }
         ?>
-        <!--<tr><td colspan="9"><?php //echo $pagination;         ?></td></tr>-->
+        <!--<tr><td colspan="9"><?php //echo $pagination;           ?></td></tr>-->
         <?php
         exit();
     }
@@ -707,7 +714,6 @@ if (isset($_POST["statCommand"])) {
 
     exit();
 }
-
 //Top 3 Stat
 if (isset($_POST["statTop"])) {
     $m = new DBOperation();
@@ -755,5 +761,12 @@ if (isset($_POST["statTop"])) {
         <?php
         exit();
     }
+}
+//Zakat Stat
+if (isset($_POST["statZakat"])) {
+    $obj = new DBOperation();
+    $row = $obj->getZakatStat();
+    echo json_encode($row);
+    exit();
 }
 ?>

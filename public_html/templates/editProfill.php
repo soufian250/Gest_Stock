@@ -14,9 +14,19 @@
                         <input type="hidden" name="pemail" id="pemail" value="<?php echo $_SESSION["email"]; ?>"/>
                     </div>
                     <div class="form-group">
-                        <label for="username">Nom Complet</label>
-                        <input type="text" name="usernamen" class="form-control" id="usernamen" value="<?php echo $_SESSION["username"] ?>" placeholder="Entrer Votre Nom">
-                        <small id="pu_error" class="form-text text-muted"></small>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-8">
+                                <label for="username">Nom Complet</label>
+                                <input type="text" name="usernamen" class="form-control" id="usernamen" value="<?php echo $_SESSION["username"] ?>" placeholder="Entrer Votre Nom">
+                                <small id="pu_error" class="form-text text-muted"></small>
+                            </div>
+                            <div class="col-md-2">
+                                <br><p></p>
+                                <a href="#" class="edit_name">Modifier</a>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="passwordf">Ancien Mot de passe</label>
