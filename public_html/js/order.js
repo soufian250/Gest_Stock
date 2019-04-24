@@ -100,7 +100,7 @@ $(document).ready(function () {
             alert("S'il vous plaît entrer un Montant valide");
             paid.val("");
         } else if (paid.val() * 1 > $("#net_total").val() * 1) {
-            paid.val(paid.val().slice(0,-1));
+            paid.val(paid.val().slice(0, -1));
         } else {
             var discount = $("#discount").val();
             calculate(discount, paid.val());
@@ -115,55 +115,58 @@ $(document).ready(function () {
         var invoice = $("#get_order_data").serialize();
         var sucess = $("#order_form");
         var print = $("#print_invoice");
-        
+        var status = true;
+
         var rows = $("#invoice_item tr");
-        for(var i =0; i <rows.length - 1;i++){
-            if($(rows[i]).find("td").find("select").val() == $(rows[i+1]).find("td").find("select").val())
+        for (var i = 0; i < rows.length - 1; i++) {
+            if ($(rows[i]).find("td").find("select").val() == $(rows[i + 1]).find("td").find("select").val())
             {
                 alert("vous avez sélectionné le même produit deux fois, nous le corrigerons pour vous!")
-                $(rows[i+1]).remove();
+                $(rows[i + 1]).remove();
+                status = false;
             }
         }
-        
-        
 
-        if ($("#cust_name").val() === "") {
-            alert("S'il vous plaît entrer le nom du client.");
-        } else if (($("#invoice_item").children().length === 0)) {
-            alert("S'il vous plaît Choisir un produit pour commander.");
-            $("#add").trigger('click');
-        } else if ($("#product_select").val() === "") {
-            alert("S'il vous plaît Choisir un produit pour commander.");
-        } else {
-            $.ajax({
-                url: DOMAIN + "/includes/process.php",
-                method: "POST",
-                data: $("#get_order_data").serialize(),
-                success: function (data) {
 
-                    if (data == "ORDER_FAIL_TO_COMPLETE") {
-                        alert("Quantite Non Disponible ");
+        if (statue == true) {
+            if ($("#cust_name").val() === "") {
+                alert("S'il vous plaît entrer le nom du client.");
+            } else if (($("#invoice_item").children().length === 0)) {
+                alert("S'il vous plaît Choisir un produit pour commander.");
+                $("#add").trigger('click');
+            } else if ($("#product_select").val() === "") {
+                alert("S'il vous plaît Choisir un produit pour commander.");
+            } else {
+                $.ajax({
+                    url: DOMAIN + "/includes/process.php",
+                    method: "POST",
+                    data: $("#get_order_data").serialize(),
+                    success: function (data) {
 
-                    } else if (data < 0) {
-                        alert(data);
-                    } else {
-                        $("#get_order_data").trigger("reset");
+                        if (data == "ORDER_FAIL_TO_COMPLETE") {
+                            alert("Quantite Non Disponible ");
 
-                        alert("Facture bien Enregistrer");
+                        } else if (data < 0) {
+                            alert(data);
+                        } else {
+                            $("#get_order_data").trigger("reset");
 
-                        if (confirm("Tu veux imprimer Un Devis!?")) {
-                            sucess.addClass("d-none");
-                            print.removeClass("d-none");
+                            alert("Facture bien Enregistrer");
+
+                            if (confirm("Tu veux imprimer Un Devis!?")) {
+                                sucess.addClass("d-none");
+                                print.removeClass("d-none");
+                            }
+
+                            $("#print_invoice").click(function () {
+                                window.location.href = DOMAIN + "/includes/devis_in_create.php?invoice_no=" + data + "&" + invoice;
+                                sucess.removeClass("d-none");
+                                print.addClass("d-none");
+                            })
                         }
-
-                        $("#print_invoice").click(function () {
-                            window.location.href = DOMAIN + "/includes/devis_in_create.php?invoice_no=" + data + "&" + invoice;
-                            sucess.removeClass("d-none");
-                            print.addClass("d-none");
-                        })
                     }
-                }
-            });
+                });
+            }
         }
     });
 });

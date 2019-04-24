@@ -296,7 +296,6 @@ $(document).ready(function () {
         }
         var username = name.val();
         if (statusn == true) {
-            alert("Hamza");
             $.ajax({
                 url: DOMAIN + "/includes/process.php",
                 method: "POST",
