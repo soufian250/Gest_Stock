@@ -12,38 +12,7 @@ if (isset($_SESSION["email"])) {
 }
 //Reset Password
 /* if (isset($_POST["logf_email"])) {
-  // Instantiation and passing `true` enables exceptions
-  $mail = new PHPMailer(true);
-
-  try {
-  //Server settings
-  $mail->isSMTP();                                            // Set mailer to use SMTP
-  $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-  $mail->SMTPAuth = true;                                   // Enable SMTP authentication
-  $mail->Username = 'Hamza.nfs02@gmail.com';                     // SMTP username
-  $mail->Password = 'nfs022011';                               // SMTP password
-  $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
-  $mail->Port = 587;                                    // TCP port to connect to
-  //Recipients
-  $mail->setFrom('Hamza.nfs02@gmail.com', 'Gestion de Stock WEB SITE');
-  $mail->addAddress($_POST["logf_email"]);     // Add a recipient               // Name is optional
-  $mail->addReplyTo('no-reply@gmail.com', 'No replay');
-
-  // Attachments
-  $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-  $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-  // Content
-  $mail->isHTML(true);                                  // Set email format to HTML
-  $mail->Subject = 'Here is the subject';
-  $mail->Body = 'This is the HTML message body <b>in bold!</b>';
-  $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-  $mail->send();
-  echo 'SENT';
-  } catch (Exception $e) {
-  echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-  }
-
+  $mail = new PHPMailer();
   exit();
   } */
 
@@ -298,7 +267,7 @@ if (isset($_POST["manageProduct"])) {
             ?>
             <tr>
                 <td><?php echo $n; ?></td>
-                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];                            ?>" width="50" height="50"></td>-->
+                <!--<td><img class="rounded-circle" src="images/<?php // echo $row["picture"];                                ?>" width="50" height="50"></td>-->
                 <td><?php echo $row["product_name"]; ?></td>
                 <td><?php echo $row["category_name"]; ?></td>
                 <td><?php echo $row["description"]; ?></td>
@@ -454,7 +423,6 @@ if (isset($_POST["order_date"]) AND isset($_POST["cust_name"])) {
     $ar_price = $_POST["price"];
     $ar_pro_name = $_POST["pro_name"];
 
-
     $sub_total = $_POST["sub_total"];
     $gst = $_POST["gst"];
     $discount = $_POST["discount"];
@@ -463,10 +431,14 @@ if (isset($_POST["order_date"]) AND isset($_POST["cust_name"])) {
     $due = $_POST["due"];
     $payment_type = $_POST["payment_type"];
     $client_type = $_POST["type_client"];
-
+    $ice = "";
+    if (isset($_POST["numero"])) {
+        $ice = $_POST["numero"];
+    }
 
     $m = new Manage();
-    echo $result = $m->storeCustomerOrderInvoice($orderdate, $cust_name, $ar_tqty, $ar_qty, $ar_price, $ar_pro_name, $sub_total, $gst, $discount, $net_total, $paid, $due, $payment_type, $client_type);
+    echo $result = $m->storeCustomerOrderInvoice($orderdate, $cust_name, $ar_tqty, $ar_qty, $ar_price, $ar_pro_name, $sub_total, $gst, $discount, $net_total, $paid, $due, $payment_type, $client_type, $ice);
+    
 }
 //----------------invoice---------------------
 
@@ -512,7 +484,7 @@ if (isset($_POST["manageInvoice"])) {
             $n++;
         }
         ?>
-        <!--<tr><td colspan="9"><?php //echo $pagination;           ?></td></tr>-->
+        <!--<tr><td colspan="9"><?php //echo $pagination;             ?></td></tr>-->
         <?php
         exit();
     }

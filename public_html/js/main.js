@@ -405,10 +405,15 @@ $(document).ready(function () {
         })
     }
 
+//Zakat treatments
+    $("#zakat_dis").on("click", function () {
+        $("#zakat_card").removeClass("d-none");
+    })
+
     $("body").delegate("#zakat_close", "click", function () {
         $("#zakat_card").addClass("d-none");
     })
-    
+
     $("body").delegate(".zakat_info", "click", function () {
         $.ajax({
             url: DOMAIN + "/includes/process.php",
@@ -417,7 +422,7 @@ $(document).ready(function () {
             data: {statZakat: 1},
             success: function (data) {
                 $("#nissab").html("17000 DH");
-                $("#profit").html(data["profit"]+" DH");
+                $("#profit").html(data["profit"] + " DH");
             }
         })
     })

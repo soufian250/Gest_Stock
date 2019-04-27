@@ -159,6 +159,11 @@ if (!isset($_SESSION["userid"])) {
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#zakat_card" id="zakat_dis">
+                                        <i class="fas fa-gift fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        les progrès de Zakat
+                                    </a>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#info_profil">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Les infos de Profil
@@ -407,10 +412,10 @@ if (!isset($_SESSION["userid"])) {
                         </div>  
                         <br>                        
                         <br>
-                        <div class="container" id="zakat_card">
+                        <div class="container d-none" id="zakat_card">
                             <div class="row">
                                 <div class="row mx-auto">
-                                    <h2>La Zakat Al Maal</h2>
+                                    <h2>Zakat Al Maal</h2>
                                 </div>
                             </div>
                             <br>

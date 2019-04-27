@@ -49,9 +49,13 @@ if ($_GET["id_devis"]) {
     $pdf->Cell(20, 7, "", 0, 0);
     $pdf->setFont("Arial", "I", 15);
     $pdf->Cell(50, 7, "" . $row["customer_name"] . "", "LBR", 1, "C");
+    $pdf->Cell(140, 7, "", 0, 0);
+    if ($row["client_type"] != "Personne") {
+        $pdf->setFont("Arial", "B", 10);
+        $pdf->Cell(50, 5, "ICE : ".$row["ice"]."", 1, 1, "C");
+    }
 
-
-    $pdf->Cell(50, 10, "", 0, 1);
+    $pdf->Cell(50, 3, "", 0, 1);
     $pdf->Cell(50, 10, "", 0, 1);
 
     $pdf->setFont("Arial", "B", 9);
@@ -112,7 +116,7 @@ if ($_GET["id_devis"]) {
 
     $pdf->Cell(180, 10, "ARRETER LE PRESENT DEVIS A LA SOMME DE :", 0, 1, "L");
     $pdf->setFont("Arial", "B", 14);
-    $pdf->Cell(70, 10, "", 0, 0, "C"); 
+    $pdf->Cell(70, 10, "", 0, 0, "C");
     $pdf->Cell(120, 10, $number_text . " dhs", 0, 0, "L");
 
 

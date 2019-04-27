@@ -115,7 +115,9 @@ $(document).ready(function () {
         var invoice = $("#get_order_data").serialize();
         var sucess = $("#order_form");
         var print = $("#print_invoice");
-        var status = true;
+        var statue = true;
+
+        var ice_reg = new RegExp(/^[0-9]{15}$/);
 
         var rows = $("#invoice_item tr");
         for (var i = 0; i < rows.length - 1; i++) {
@@ -123,7 +125,14 @@ $(document).ready(function () {
             {
                 alert("vous avez sélectionné le même produit deux fois, nous le corrigerons pour vous!")
                 $(rows[i + 1]).remove();
-                status = false;
+                statue = false;
+            }
+        }
+        if ($("#type_client").val() != "Personne") {
+            //alert("Hola");
+            if (!ice_reg.test($("#numero").val())) {
+                alert("Veuillez entrer un ICE valide (15 chiffres)");
+                statue = false;
             }
         }
 
@@ -169,4 +178,12 @@ $(document).ready(function () {
             }
         }
     });
+
+    $("#type_client").on("change", function () {
+        if ($(this).val() == "Personne") {
+            $("#numero_div").addClass("d-none");
+        } else {
+            $("#numero_div").removeClass("d-none");
+        }
+    })
 });

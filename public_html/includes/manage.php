@@ -150,11 +150,11 @@ class Manage {
         }
     }
 
-    public function storeCustomerOrderInvoice($orderdate, $cust_name, $ar_tqty, $ar_qty, $ar_price, $ar_pro_name, $sub_total, $gst, $discount, $net_total, $paid, $due, $payment_type, $client_type) {
+    public function storeCustomerOrderInvoice($orderdate, $cust_name, $ar_tqty, $ar_qty, $ar_price, $ar_pro_name, $sub_total, $gst, $discount, $net_total, $paid, $due, $payment_type, $client_type, $ice) {
         $pre_stmt = $this->con->prepare("INSERT INTO 
 			`invoice`(`customer_name`, `order_date`, `sub_total`,
-			 `gst`, `discount`, `net_total`, `paid`, `due`, `payment_type`, `client_type`) VALUES (?,?,?,?,?,?,?,?,?,?)");
-        $pre_stmt->bind_param("ssddddddss", $cust_name, $orderdate, $sub_total, $gst, $discount, $net_total, $paid, $due, $payment_type, $client_type);
+			 `gst`, `discount`, `net_total`, `paid`, `due`, `payment_type`, `client_type`, `ice`) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+        $pre_stmt->bind_param("ssddddddsss", $cust_name, $orderdate, $sub_total, $gst, $discount, $net_total, $paid, $due, $payment_type, $client_type, $ice);
         $pre_stmt->execute() or die($this->con->error);
         $invoice_no = $pre_stmt->insert_id;
         if ($invoice_no != null) {

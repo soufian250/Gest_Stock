@@ -199,16 +199,42 @@ if (!isset($_SESSION["userid"])) {
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label" align="right">Nom de client</label>
-                                                    <div class="col-sm-3">
-                                                        <input type="text" id="cust_name" name="cust_name"class="form-control form-control-sm" placeholder="Entrer le nom de Client"/>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-7"></div>
+                                                                <div class="col-md-5">
+                                                                    <label class="col-form-label" style="text-align: right;">Nom de client</label>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <input type="text" id="cust_name" name="cust_name"class="form-control form-control-sm" placeholder="Entrer le nom de Client"/>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <label class="col-sm-2 col-form-label" align="right">Type de client</label>
-                                                    <div class="col-sm-3">
-                                                        <select class="form-control form-control-sm" id="type_client" name="type_client">
-                                                            <option value="Personne">Personne</option>
-                                                            <option value="Etablissement">Etablissement</option>
-                                                        </select>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group d-none" id="numero_div">
+                                                            <div class="row">
+                                                                <div class="row mx-auto">
+                                                                    <label class="col-form-label" title="IDENTIFIANT COMMUN DE L'ENTREPRISE">ICE</label>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <input type="text" id="numero" name="numero"class="form-control form-control-sm" placeholder="Entrer le Numero"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-groupe">
+                                                            <label class="col-form-label" align="right">Type de client</label>
+                                                            <div>
+                                                                <select class="form-control form-control-sm" id="type_client" name="type_client">
+                                                                    <option value="Personne">Personne</option>
+                                                                    <option value="Etablissement">Etablissement</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
 
