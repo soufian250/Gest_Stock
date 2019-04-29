@@ -159,6 +159,7 @@ $(document).ready(function () {
                             alert(data);
                         } else {
                             $("#get_order_data").trigger("reset");
+                            $("#numero_div").addClass("d-none");
 
                             alert("Facture bien Enregistrer");
 

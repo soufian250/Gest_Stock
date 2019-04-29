@@ -59,7 +59,7 @@ if (!isset($_SESSION["userid"])) {
                 <li class="nav-item active">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                         <i class="far fa-newspaper"></i>
-                        <span>Facture</span>
+                        <span>Commandes</span>
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
@@ -337,7 +337,7 @@ if (!isset($_SESSION["userid"])) {
                                                 </div>
 
                                                 <center>
-                                                    <input type="submit" id="order_form" style="width:160px;" class="btn btn-info" value="Facturer" title="Passer une Facture">
+                                                    <input type="submit" id="order_form" style="width:160px;" class="btn btn-info" value="Commander" title="Passer une Commande">
                                                     <button id="print_invoice" style="width:160px;" class="btn btn-success d-none"><i class="fas fa-print">&nbsp;</i>Imprimer Devis</button>
                                                 </center>
 
