@@ -715,7 +715,6 @@ if (isset($_POST["statTop"])) {
                         </div>
                         <?php
                     }
-
                     if ($n == 3) {
                         ?>
                         <h4 class = "small font-weight-bold"><?php echo $row["product_name"]; ?> <span class = "float-right"><?php echo $row["top"]; ?>%</span></h4>
