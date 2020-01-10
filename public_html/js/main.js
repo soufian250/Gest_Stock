@@ -426,6 +426,4 @@ $(document).ready(function () {
             }
         })
     })
-
-
 })

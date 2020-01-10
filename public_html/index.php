@@ -1,8 +1,8 @@
 <?php
 include_once("./database/constants.php");
-if (isset($_SESSION["userid"])) {
-    header("location:" . DOMAIN . "/dashboard.php");
-}
+//if (isset($_SESSION["userid"])) {
+//    header("location:" . DOMAIN . "/dashboard.php");
+//}
 ?>
 <!DOCTYPE html>
 <html>

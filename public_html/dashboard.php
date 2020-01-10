@@ -1,11 +1,11 @@
 <?php
 include_once("./database/constants.php");
 
-if (!isset($_SESSION["userid"])) {
-    header("location:" . DOMAIN . "/");
-} else if ($_SESSION["role"] == "Employe") {
-    header("location:" . DOMAIN . "/employeField.php");
-}
+//if (!isset($_SESSION["userid"])) {
+//    header("location:" . DOMAIN . "/");
+//} else if ($_SESSION["role"] == "Employe") {
+//    header("location:" . DOMAIN . "/employeField.php");
+//}
 ?>
 <!DOCTYPE html>
 <html>
@@ -463,6 +463,7 @@ if (!isset($_SESSION["userid"])) {
                     <br>
                     <!-- End of Main Content -->
 
+                    
                     <!-- Footer -->
                     <footer class="sticky-footer bg-white">
                         <div class="container my-auto">

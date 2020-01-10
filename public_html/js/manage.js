@@ -789,7 +789,7 @@ $(document).ready(function () {
         }
         if (!t_patt.test(tele.val())) {
             tele.addClass("border-danger");
-            $("#ft_error").html("<span class='text-danger'>Veuillez entrer un numero de telephone valide</span>");
+            $("#ft_error").html("<span class='text-danger'>Veuillez entrer un numéro de téléphone valide</span>");
             status3 = false;
         } else {
             tele.removeClass("border-danger");

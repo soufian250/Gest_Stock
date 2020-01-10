@@ -56,14 +56,10 @@ class Manage {
     private function pagination($con, $table, $pno, $n) {
         $query = $con->query("SELECT COUNT(*) as rows FROM " . $table);
         $row = mysqli_fetch_assoc($query);
-        //$totalRecords = 100000;
         $pageno = $pno;
         $numberOfRecordsPerPage = $n;
-
         $last = ceil($row["rows"] / $numberOfRecordsPerPage);
-
         $pagination = "<ul class='pagination'>";
-
         if ($last != 1) {
             if ($pageno > 1) {
                 $previous = "";
@@ -87,10 +83,7 @@ class Manage {
                 $pagination .= "<li class='page-item'><a class='page-link' pn='" . $next . "' href='#' style='color:#333;'> Suivante </a></li></ul>";
             }
         }
-        //LIMIT 0,10
-        //LIMIT 20,10
         $limit = "LIMIT " . ($pageno - 1) * $numberOfRecordsPerPage . "," . $numberOfRecordsPerPage;
-
         return ["pagination" => $pagination, "limit" => $limit];
     }
 
@@ -192,8 +185,8 @@ class Manage {
         }
         return ["rows" => $rows];
     }
-    
-        public function consulterProduit() {
+
+    public function consulterProduit() {
         $sql = "SELECT p.pid,p.product_name,c.category_name,p.description,p.product_price,p.product_stock,p.added_date,p.p_status FROM products p,categories c WHERE p.cid = c.cid ";
         $result = $this->con->query($sql) or die($this->con->error);
         $rows = array();
@@ -204,18 +197,17 @@ class Manage {
         }
         return ["rows" => $rows];
     }
-    
+
     public function getCatProStat($id) {
-        $pre_stmt = $this->con->prepare("SELECT  C.cid FROM categories C inner JOIN products P on C.cid = P.cid WHERE C.cid = ".$id."");
+        $pre_stmt = $this->con->prepare("SELECT  C.cid FROM categories C inner JOIN products P on C.cid = P.cid WHERE C.cid = " . $id . "");
         $pre_stmt->execute() or die($this->con->error);
         $result = $pre_stmt->get_result();
         if ($result->num_rows > 0) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
-    
 
 }
 

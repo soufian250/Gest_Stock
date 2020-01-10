@@ -189,7 +189,7 @@ if (!isset($_SESSION["userid"])) {
                         </div>
                         <br>
                         <br>
-                        <div class="container text-center" style="max-width: 1340px;">
+                        <div class="container text-center" style="max-width: 1500px;">
                             <table class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
